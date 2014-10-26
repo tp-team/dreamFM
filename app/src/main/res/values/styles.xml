@@ -5,4 +5,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="BtnEnable">
+        <item name="android:background">#D51007</item>
+        <item name="android:color">#FFFFFF</item>
+    </style>
+
+    <style name="BtnDisable">
+        <item name="android:background">#E1E1E1</item>
+        <item name="android:color">#ACACAC</item>
+    </style>
+
+
 </resources>
