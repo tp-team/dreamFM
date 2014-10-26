@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="#FFFFFF">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/img_login_logo" />
+
+    <TextView
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Discover more music"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:textSize="32dp"
+        android:gravity="center_horizontal"
+        android:textColor="#333333" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="true"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/username"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:hint="Username"
+                android:textColorHint="#C1C1C1"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:paddingBottom="18dp"
+                android:paddingTop="18dp"
+                android:textColor="#333333"
+                android:singleLine="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/password"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:hint="Password"
+                android:textColorHint="#C1C1C1"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:paddingBottom="18dp"
+                android:layout_marginBottom="18dp"
+                android:paddingTop="18dp"
+                android:textColor="#333333"
+                android:textIsSelectable="true"
+                android:singleLine="true" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:text="COME ON IN"
+                android:id="@+id/comeOnInBtn"
+                android:layout_gravity="center_horizontal"
+                android:background="#E1E1E1"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:textSize="18dp"
+                android:textColor="#ACACAC"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Don't have a profile?"
+                android:id="@+id/dontHaveProfile"
+                android:textSize="14dp"
+                android:textColor="#D51007"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Forgot password"
+                android:id="@+id/forgotPassword"
+                android:textSize="14dp"
+                android:textColor="#333333"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
