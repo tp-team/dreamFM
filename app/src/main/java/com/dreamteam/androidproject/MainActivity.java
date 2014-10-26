@@ -58,14 +58,23 @@ public class MainActivity extends Activity
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 2:
                 mTitle = getString(R.string.nav_music);
                 break;
-            case 2:
+            case 3:
                 mTitle = getString(R.string.nav_albums);
                 break;
-            case 3:
+            case 4:
                 mTitle = getString(R.string.nav_releases);
+                break;
+            case 6:
+                mTitle = getString(R.string.nav_my_events);
+                break;
+            case 7:
+                mTitle = getString(R.string.nav_your_recs);
+                break;
+            case 8:
+                mTitle = getString(R.string.nav_events_near_me);
                 break;
         }
     }

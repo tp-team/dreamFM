@@ -22,6 +22,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.dreamteam.androidproject.components.EntryAdapter;
+import com.dreamteam.androidproject.components.EntryItem;
+import com.dreamteam.androidproject.components.Item;
+import com.dreamteam.androidproject.components.SectionItem;
+
+import java.util.ArrayList;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -52,6 +59,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
+    private View mNavigationDrawerView;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
@@ -89,25 +97,37 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.recommendations_list, container, false);
+        mNavigationDrawerView = inflater.inflate(
+                R.layout.fragment_navigation_drawer, container, false);
+
+        ArrayList<Item> items = new ArrayList<Item>();
+
+        mDrawerListView = (ListView) mNavigationDrawerView.findViewById(R.id.recommendations_list);
+
+        items.add(new SectionItem(getString(R.string.nav_recommendations)));
+        items.add(new EntryItem(getString(R.string.nav_music)));
+        items.add(new EntryItem(getString(R.string.nav_albums)));
+        items.add(new EntryItem(getString(R.string.nav_releases)));
+
+        items.add(new SectionItem(getString(R.string.nav_events)));
+        items.add(new EntryItem(getString(R.string.nav_my_events)));
+        items.add(new EntryItem(getString(R.string.nav_your_recs)));
+        items.add(new EntryItem(getString(R.string.nav_events_near_me)));
+
+        EntryAdapter adapter = new EntryAdapter(getActionBar().getThemedContext(), items);
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                R.layout.list_item,
-                new String[]{
-                        getString(R.string.nav_music),
-                        getString(R.string.nav_albums),
-                        getString(R.string.nav_releases),
-                }));
+        mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+        return mNavigationDrawerView;
     }
+
+
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
