@@ -19,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamteam.androidproject.components.EntryAdapter;
@@ -100,6 +102,18 @@ public class NavigationDrawerFragment extends Fragment {
         mNavigationDrawerView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
 
+        ImageView backgroundImage = (ImageView) mNavigationDrawerView.findViewById(R.id.user_bd_image);
+        backgroundImage.setImageResource(R.drawable.mail2);
+
+        ImageView userPhoto = (ImageView) mNavigationDrawerView.findViewById(R.id.user_photo);
+        userPhoto.setImageResource(R.drawable.user);
+
+        TextView userName = (TextView) mNavigationDrawerView.findViewById(R.id.user_name);
+        userName.setText("Egor Susekov");
+
+        TextView playsCount = (TextView) mNavigationDrawerView.findViewById(R.id.plays_count);
+        playsCount.setText("666 plays since 13 Jun 2013");
+
         ArrayList<Item> items = new ArrayList<Item>();
 
         mDrawerListView = (ListView) mNavigationDrawerView.findViewById(R.id.recommendations_list);
@@ -124,6 +138,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
         mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        mDrawerListView.setScrollContainer(false);
         return mNavigationDrawerView;
     }
 
@@ -150,6 +165,7 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
@@ -282,7 +298,7 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     private ActionBar getActionBar() {
