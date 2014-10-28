@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_height="212dp"
+        android:layout_width="212dp">
+
+        <ImageView
+            android:id="@+id/album_card_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="false"
+            android:src="@drawable/hydra"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="#B3000000">
+
+            <TextView
+                android:id="@+id/album_card_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hydra 2014"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"/>
+
+            <TextView
+                android:id="@+id/album_card_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Within Temptation"
+                android:textColor="#CCFFFFFF"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/album_card_creator_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/withintemptation"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="48dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
