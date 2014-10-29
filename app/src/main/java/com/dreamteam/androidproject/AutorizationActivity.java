@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.test.suitebuilder.annotation.LargeTest;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class AutorizationActivity extends Activity {
     private final String colorBackgroundBtn      = "#D51007";
     private final String colorTextBtnEmpty       = "#ACACAC";
     private final String colorTextBtn            = "#FFFFFF";
+
+    private final String TAG = "___AUTORIZATION___";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,23 @@ public class AutorizationActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        DontHaveProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "click Dont have a profile");
+            }
+        });
+
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "click Forgot password");
+            }
+        });
+
+
+
     }
 
     @Override
@@ -73,7 +93,6 @@ public class AutorizationActivity extends Activity {
         super.onPause();
         this.finish();
     }
-
 
     public boolean isEmpty() {
         return Username.getText().toString().equals("") || Password.getText().toString().equals("");
