@@ -67,6 +67,7 @@ public class AutorizationActivity extends Activity {
                 }
                 Intent intent = new Intent(AutorizationActivity.this, MainActivity.class);
                 startActivity(intent);
+                AutorizationActivity.this.finish();
             }
         });
 
@@ -84,14 +85,11 @@ public class AutorizationActivity extends Activity {
             }
         });
 
-
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        this.finish();
     }
 
     public boolean isEmpty() {
