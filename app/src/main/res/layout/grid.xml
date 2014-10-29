@@ -6,8 +6,6 @@
     android:scaleType="centerCrop"
     android:background="#262626"
     android:numColumns="auto_fit"
-    android:columnWidth="179dp"
-    android:stretchMode="columnWidth"
     android:verticalSpacing="2dp"
     android:horizontalSpacing="2dp"
     />

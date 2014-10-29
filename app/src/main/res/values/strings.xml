@@ -12,6 +12,8 @@
     <string name="nav_your_recs">Your Recommendations</string>
     <string name="nav_events_near_me">Events Near Me</string>
     <string name="feed_music">Recommended Music</string>
+    <string name="feed_new_releases">New Releases</string>
+    <string name="feed_upcoming_events">Upcoming Events Near You</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
