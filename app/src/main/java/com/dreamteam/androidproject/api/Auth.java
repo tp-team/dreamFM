@@ -13,11 +13,7 @@ public class Auth extends ApiParent {
     public Auth(String username, String password) {
         ApiParent.USERNAME = username;
         this.password = password;
-        setSign();
-    }
-
-    private void setSign() {
-       this.sign = DigestUtils.md5Hex("api_key" + SecretData.KEY + "methodauth.getMobileSession" + "password" + this.password + "username" + ApiParent.USERNAME + SecretData.SECRET);
+        this.sign = DigestUtils.md5Hex("api_key" + SecretData.KEY + "methodauth.getMobileSession" + "password" + this.password + "username" + ApiParent.USERNAME + SecretData.SECRET);
     }
 
     @Override
