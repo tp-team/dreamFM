@@ -1,12 +1,10 @@
 package com.dreamteam.androidproject.api;
-
 /**
  * Created by nap on 10/30/2014.
  */
 import org.json.JSONObject;
-import java.sql.Timestamp;
 
-public abstract class ApiParent {
+public abstract class User {
     protected static String USERNAME;
     protected static String USERKEY;
     protected static String IMAGESMALL;
@@ -16,17 +14,18 @@ public abstract class ApiParent {
     protected static String REALNAME;
     protected static String URL;
     protected static String ID;
+    protected static String COUNTRY;
     protected static String AGE;
     protected static String GENDER;
-    protected static String SUBSCRIBER;
-    protected static String PLAYCOUNT;
-    protected static String PLAYLISTS;
-    protected static String BOOTSTRAP;
-    protected static Timestamp REGISTERED;
+    protected static int SUBSCRIBER;
+    protected static int PLAYCOUNT;
+    protected static int PLAYLISTS;
+    protected static int BOOTSTRAP;
+    protected static String REGISTERED;
 
     protected abstract String parse(String str) throws Exception;
 
-    protected String getError(JSONObject obj) throws Exception {
+    protected String getStatus(JSONObject obj) throws Exception {
         if (!obj.has("error")) {
             return "ok";
         }

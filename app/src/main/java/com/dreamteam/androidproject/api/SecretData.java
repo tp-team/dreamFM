@@ -1,5 +1,4 @@
 package com.dreamteam.androidproject.api;
-
 /**
  * Created by nap on 10/27/2014.
  */

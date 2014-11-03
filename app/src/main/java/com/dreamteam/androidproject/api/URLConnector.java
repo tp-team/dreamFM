@@ -1,11 +1,9 @@
 package com.dreamteam.androidproject.api;
-
 /**
  * Created by nap on 10/26/2014.
  */
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,10 +17,12 @@ public class URLConnector {
 
         con.setRequestMethod("GET");
 
+        int responseCode = con.getResponseCode();
+
         BufferedReader in;
-        try {
+        if (responseCode == 200) {
             in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        } catch (IOException e) {
+        } else {
             in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
         }
         String inputLine;
@@ -48,10 +48,12 @@ public class URLConnector {
         wr.flush();
         wr.close();
 
+        int responseCode = con.getResponseCode();
+
         BufferedReader in;
-        try {
+        if (responseCode == 200) {
             in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        } catch (IOException e) {
+        } else {
             in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
         }
         String inputLine;
