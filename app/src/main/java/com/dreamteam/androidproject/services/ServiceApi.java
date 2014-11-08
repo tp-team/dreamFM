@@ -10,6 +10,8 @@ import com.dreamteam.androidproject.messagesSystem.AuthorizationMessage;
 import com.dreamteam.androidproject.messagesSystem.BusProvider;
 import com.squareup.otto.Bus;
 
+import java.security.NoSuchAlgorithmException;
+
 public class ServiceApi extends Service {
     private Bus BUS = new BusProvider().getInstance();
     private String USERNAME;
@@ -39,14 +41,16 @@ public class ServiceApi extends Service {
     public void isAuthorisation() {
         new Thread(new Runnable() {
             public void run() {
-                Auth auth = new Auth(USERNAME, PASSWORD);
-                Log.d("TAG", "IN SERVICE2");
                 try {
+                    Auth auth = new Auth(USERNAME, PASSWORD);
+                    Log.d("TAG", "IN SERVICE2");
                     result = auth.auth();
+                    Log.d("TAG", result);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.d("TAG", result);
 
                 stopSelf();
             }

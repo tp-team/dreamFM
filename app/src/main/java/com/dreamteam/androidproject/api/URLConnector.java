@@ -1,7 +1,9 @@
 package com.dreamteam.androidproject.api;
+
 /**
  * Created by nap on 10/26/2014.
  */
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;

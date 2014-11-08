@@ -1,17 +1,20 @@
-package com.dreamteam.androidproject.api; /**
+package com.dreamteam.androidproject.api;
+
+/**
  * Created by nap on 10/27/2014.
  */
-import org.apache.commons.codec.digest.DigestUtils;
+
 import org.json.JSONObject;
+import java.security.NoSuchAlgorithmException;
 
 public class Auth extends User {
     private String password;
     private String sign;
 
-    public Auth(String username, String password) {
+    public Auth(String username, String password) throws NoSuchAlgorithmException {
         User.USERNAME = username;
         this.password = password;
-        this.sign = DigestUtils.md5Hex("api_key" + SecretData.KEY + "methodauth.getMobileSession" + "password" + this.password + "username" + User.USERNAME + SecretData.SECRET);
+        this.sign = strToMD5("api_key" + SecretData.KEY + "methodauth.getMobileSession" + "password" + this.password + "username" + User.USERNAME + SecretData.SECRET);
     }
 
     @Override

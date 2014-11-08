@@ -1,7 +1,9 @@
 package com.dreamteam.androidproject.api;
+
 /**
  * Created by nap on 10/30/2014.
  */
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
