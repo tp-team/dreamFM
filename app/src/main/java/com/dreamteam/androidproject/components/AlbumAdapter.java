@@ -32,9 +32,10 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
 
         final Album i = items.get(position);
         if (i != null) {
-            Album si = (Album) i;
-            v = vi.inflate(R.layout.album_card, null);
-
+            Album si = i;
+            if (v == null) {
+                v = vi.inflate(R.layout.album_card, null);
+            }
             v.setOnClickListener(null);
             v.setOnLongClickListener(null);
             v.setLongClickable(false);

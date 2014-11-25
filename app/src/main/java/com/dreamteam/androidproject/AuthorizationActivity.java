@@ -64,14 +64,14 @@ public class AuthorizationActivity extends Activity {
                 if (isEmpty()) {
                     return;
                 }
-                Intent intent = new Intent(AuthorizationActivity.this, ServiceApi.class);
-                intent.putExtra("USERNAME", Username.getText().toString());
-                intent.putExtra("PASSWORD", Password.getText().toString());
-                Log.d(TAG, "IN CLICK");
-                startService(intent);
-//                Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                AuthorizationActivity.this.finish();
+//                Intent intent = new Intent(AuthorizationActivity.this, ServiceApi.class);
+//                intent.putExtra("USERNAME", Username.getText().toString());
+//                intent.putExtra("PASSWORD", Password.getText().toString());
+//                Log.d(TAG, "IN CLICK");
+//                startService(intent);
+                Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
+                startActivity(intent);
+                AuthorizationActivity.this.finish();
             }
         });
 

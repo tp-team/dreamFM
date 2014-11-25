@@ -20,6 +20,8 @@ public class MainActivity extends Activity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static String userFeedTag = "USER_FEED_TAG";
 
+    public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
+
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */

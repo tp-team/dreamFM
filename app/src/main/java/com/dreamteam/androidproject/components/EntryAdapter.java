@@ -35,7 +35,9 @@ public class EntryAdapter extends ArrayAdapter<Item> {
         if (i != null) {
             if(i.isSection()){
                 SectionItem si = (SectionItem)i;
-                v = vi.inflate(R.layout.section_item, null);
+                if (v == null) {
+                    v = vi.inflate(R.layout.section_item, null);
+                }
 
                 v.setOnClickListener(null);
                 v.setOnLongClickListener(null);
@@ -46,7 +48,9 @@ public class EntryAdapter extends ArrayAdapter<Item> {
 
             }else{
                 EntryItem ei = (EntryItem)i;
-                v = vi.inflate(R.layout.entry_item, null);
+                if (v == null) {
+                    v = vi.inflate(R.layout.entry_item, null);
+                }
 
                 v.setOnLongClickListener(null);
                 v.setLongClickable(false);
