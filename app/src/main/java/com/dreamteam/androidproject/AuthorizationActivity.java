@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.dreamteam.androidproject.messagesSystem.AuthorizationMessage;
 import com.dreamteam.androidproject.services.ServiceApi;
-import com.squareup.otto.Subscribe;
+
 
 public class AuthorizationActivity extends Activity {
 
@@ -89,12 +89,6 @@ public class AuthorizationActivity extends Activity {
             }
         });
     }
-
-    @Subscribe
-    public void onAutorizationMessage(AuthorizationMessage event) {
-        Log.d(TAG, event.response);
-    }
-
 
     @Override
     protected void onPause() {
