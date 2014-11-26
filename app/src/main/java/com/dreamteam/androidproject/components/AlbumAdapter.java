@@ -3,6 +3,7 @@ package com.dreamteam.androidproject.components;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dreamteam.androidproject.AlbumActivity;
 import com.dreamteam.androidproject.R;
 
 public class AlbumAdapter extends ArrayAdapter<Album> {
@@ -32,11 +34,19 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
 
         final Album i = items.get(position);
         if (i != null) {
-            Album si = i;
+            final Album si = i;
             if (v == null) {
                 v = vi.inflate(R.layout.album_card, null);
             }
-            v.setOnClickListener(null);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(AlbumAdapter.this.context, AlbumActivity.class);
+
+                    intent.putExtra("album", si);
+                    AlbumAdapter.this.context.startActivity(intent);
+                }
+            });
             v.setOnLongClickListener(null);
             v.setLongClickable(false);
 

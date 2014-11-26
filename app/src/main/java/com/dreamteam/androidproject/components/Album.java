@@ -1,6 +1,8 @@
 package com.dreamteam.androidproject.components;
 
-public class Album {
+import java.io.Serializable;
+
+public class Album implements Serializable{
 
     private final String title;
     private final int releaseYear;
