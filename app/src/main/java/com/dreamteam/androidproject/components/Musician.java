@@ -1,8 +1,9 @@
 package com.dreamteam.androidproject.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Musician {
+public class Musician implements Serializable{
 
     private final String musicianName;
     private int musicianImageRes;

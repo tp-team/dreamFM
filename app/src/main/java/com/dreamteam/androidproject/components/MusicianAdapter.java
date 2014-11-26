@@ -1,8 +1,10 @@
 package com.dreamteam.androidproject.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dreamteam.androidproject.MainActivity;
+import com.dreamteam.androidproject.MusicianActivity;
 import com.dreamteam.androidproject.R;
 
 public class MusicianAdapter extends ArrayAdapter<Musician> {
@@ -29,13 +33,21 @@ public class MusicianAdapter extends ArrayAdapter<Musician> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-
         final Musician i = items.get(position);
         if (i != null) {
-            Musician si = (Musician)i;
-            v = vi.inflate(R.layout.musician_card, null);
+            final Musician si = i;
+            if (v == null) {
+                v = vi.inflate(R.layout.musician_card, null);
+            }
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MusicianAdapter.this.context, MusicianActivity.class);
 
-            v.setOnClickListener(null);
+                    intent.putExtra("musician", si);
+                    MusicianAdapter.this.context.startActivity(intent);
+                }
+            });
             v.setOnLongClickListener(null);
             v.setLongClickable(false);
 

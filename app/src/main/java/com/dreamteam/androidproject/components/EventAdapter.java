@@ -33,9 +33,10 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         final Event i = items.get(position);
         if (i != null) {
-            Event si = (Event)i;
-            v = vi.inflate(R.layout.event_card, null);
-
+            Event si = i;
+            if (v == null) {
+                v = vi.inflate(R.layout.event_card, null);
+            }
             v.setOnClickListener(null);
             v.setOnLongClickListener(null);
             v.setLongClickable(false);

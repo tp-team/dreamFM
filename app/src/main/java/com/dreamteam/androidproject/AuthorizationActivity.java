@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.dreamteam.androidproject.messagesSystem.AuthorizationMessage;
 import com.dreamteam.androidproject.services.ServiceApi;
-import com.squareup.otto.Subscribe;
+
 
 public class AuthorizationActivity extends Activity {
 
@@ -64,14 +64,14 @@ public class AuthorizationActivity extends Activity {
                 if (isEmpty()) {
                     return;
                 }
-                Intent intent = new Intent(AuthorizationActivity.this, ServiceApi.class);
-                intent.putExtra("USERNAME", Username.getText().toString());
-                intent.putExtra("PASSWORD", Password.getText().toString());
-                Log.d(TAG, "IN CLICK");
-                startService(intent);
-//                Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                AuthorizationActivity.this.finish();
+//                Intent intent = new Intent(AuthorizationActivity.this, ServiceApi.class);
+//                intent.putExtra("USERNAME", Username.getText().toString());
+//                intent.putExtra("PASSWORD", Password.getText().toString());
+//                Log.d(TAG, "IN CLICK");
+//                startService(intent);
+                Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
+                startActivity(intent);
+                AuthorizationActivity.this.finish();
             }
         });
 
@@ -89,12 +89,6 @@ public class AuthorizationActivity extends Activity {
             }
         });
     }
-
-    @Subscribe
-    public void onAutorizationMessage(AuthorizationMessage event) {
-        Log.d(TAG, event.response);
-    }
-
 
     @Override
     protected void onPause() {
