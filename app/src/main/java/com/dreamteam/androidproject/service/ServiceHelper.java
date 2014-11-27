@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.dreamteam.androidproject.Handlers.Authorization;
@@ -77,6 +78,7 @@ public class ServiceHelper {
     }
 
     private Intent createIntent(final Context context, BaseCommand command, final int requestId) {
+        Log.d("TAG_SERVICE_HELPER", "IN SERVICE_HELPER");
         Intent i = new Intent(context, ServiceApi.class);
         i.setAction(ServiceApi.ACTION_EXECUTE_COMMAND);
         i.putExtra(ServiceApi.EXTRA_COMMAND, command);
@@ -86,10 +88,6 @@ public class ServiceHelper {
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 Intent originalIntent = pendingActivities.get(requestId);
                 if (isPending(requestId)) {
-                    if (resultCode != BaseCommand.RESPONSE_PROGRESS) {
-                        pendingActivities.remove(requestId);
-                    }
-
                     for (ServiceCallbackListener currentListener : currentListeners) {
                         if (currentListener != null) {
                             currentListener.onServiceCallback(requestId, originalIntent, resultCode, resultData);

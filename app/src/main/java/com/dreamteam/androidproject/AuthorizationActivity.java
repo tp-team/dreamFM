@@ -10,11 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.dreamteam.androidproject.messagesSystem.AuthorizationMessage;
+import com.dreamteam.androidproject.Handlers.Authorization;
 
 
-public class AuthorizationActivity extends Activity {
+public class AuthorizationActivity extends BaseActivity {
 
     private EditText Username;
     private EditText Password;
@@ -28,17 +29,19 @@ public class AuthorizationActivity extends Activity {
 
     private final String TAG = "___AUTORIZATION___";
 
+    private int requestId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().hide();
         setContentView(R.layout.autorization_main);
 
-        Username = (EditText) findViewById(R.id.username);
-        Password = (EditText) findViewById(R.id.password);
-        ComeOnInBtn = (Button) findViewById(R.id.comeOnInBtn);
+        Username        = (EditText) findViewById(R.id.username);
+        Password        = (EditText) findViewById(R.id.password);
+        ComeOnInBtn     = (Button) findViewById(R.id.comeOnInBtn);
         DontHaveProfile = (TextView) findViewById(R.id.dontHaveProfile);
-        ForgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        ForgotPassword  = (TextView) findViewById(R.id.forgotPassword);
 
         View.OnKeyListener onKey = new View.OnKeyListener() {
             @Override
@@ -63,14 +66,7 @@ public class AuthorizationActivity extends Activity {
                 if (isEmpty()) {
                     return;
                 }
-//                Intent intent = new Intent(AuthorizationActivity.this, ServiceApi.class);
-//                intent.putExtra("USERNAME", Username.getText().toString());
-//                intent.putExtra("PASSWORD", Password.getText().toString());
-//                Log.d(TAG, "IN CLICK");
-//                startService(intent);
-                Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
-                startActivity(intent);
-                AuthorizationActivity.this.finish();
+                requestId = getServiceHelper().getAuthorization(Username.getText().toString(), Password.getText().toString());
             }
         });
 
@@ -87,7 +83,27 @@ public class AuthorizationActivity extends Activity {
                 Log.d(TAG, "click Forgot password");
             }
         });
+
     }
+
+    @Override
+    public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {
+        super.onServiceCallback(requestId, requestIntent, resultCode, resultData);
+
+        if (resultCode == Authorization.RESPONSE_SUCCESS) {
+            Log.d("TAGGG", resultData.getString(Authorization.SUCCESS));
+            Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
+                startActivity(intent);
+                AuthorizationActivity.this.finish();
+        }
+        else if (resultCode == Authorization.RESPONSE_FAILURE) {
+            Log.d("TAGGG", resultData.getString(Authorization.FAILURE));
+            Password.setText("");
+            Toast.makeText(this, "Failure, incorrect login or password", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
     @Override
     protected void onPause() {

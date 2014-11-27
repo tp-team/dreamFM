@@ -2,23 +2,20 @@ package com.dreamteam.androidproject.service;
 
 import android.content.Context;
 
-/**
- * Created by Pavel on 27.11.2014.
- */
 public class FMApplication extends android.app.Application {
 
     public static final String PACKAGE = "com.dreamteam.androidproject";
 
-    private ServiceHelper helperService;
+    private ServiceHelper serviceHelper;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        helperService = new ServiceHelper(this);
+        serviceHelper = new ServiceHelper(this);
     }
 
     public ServiceHelper getServiceHelper() {
-        return helperService;
+        return serviceHelper;
     }
 
     public static FMApplication getApplication(Context context) {

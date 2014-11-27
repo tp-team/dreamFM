@@ -8,9 +8,9 @@ import com.dreamteam.androidproject.service.FMApplication;
 import com.dreamteam.androidproject.service.ServiceCallbackListener;
 import com.dreamteam.androidproject.service.ServiceHelper;
 
-public abstract class BaseAuthorizationActivity extends Activity implements ServiceCallbackListener {
+public abstract class BaseActivity extends Activity implements ServiceCallbackListener {
 
-    private ServiceHelper helperService;
+    private ServiceHelper serviceHelper;
 
     protected FMApplication getApp() {
         return (FMApplication) getApplication();
@@ -19,23 +19,23 @@ public abstract class BaseAuthorizationActivity extends Activity implements Serv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        helperService = getApp().getServiceHelper();
+        serviceHelper = getApp().getServiceHelper();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        helperService.addListener(this);
+        serviceHelper.addListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        helperService.removeListener(this);
+        serviceHelper.removeListener(this);
     }
 
     public ServiceHelper getServiceHelper() {
-        return helperService;
+        return serviceHelper;
     }
 
     public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {
