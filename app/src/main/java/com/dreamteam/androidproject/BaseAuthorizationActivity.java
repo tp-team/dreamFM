@@ -1,38 +1,41 @@
 package com.dreamteam.androidproject;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 
+import com.dreamteam.androidproject.service.FMApplication;
+import com.dreamteam.androidproject.service.ServiceCallbackListener;
+import com.dreamteam.androidproject.service.ServiceHelper;
+
 public abstract class BaseAuthorizationActivity extends Activity implements ServiceCallbackListener {
 
-    private ServiceHelper serviceHelper;
+    private ServiceHelper helperService;
 
-    protected Application getApp() {
-        return (Application) getApplication();
+    protected FMApplication getApp() {
+        return (FMApplication) getApplication();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        serviceHelper = getApp().getServiceHelper();
+        helperService = getApp().getServiceHelper();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        serviceHelper.addListener(this);
+        helperService.addListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        serviceHelper.removeListener(this);
+        helperService.removeListener(this);
     }
 
     public ServiceHelper getServiceHelper() {
-        return serviceHelper;
+        return helperService;
     }
 
     public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {

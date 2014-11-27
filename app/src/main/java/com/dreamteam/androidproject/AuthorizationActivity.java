@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dreamteam.androidproject.messagesSystem.AuthorizationMessage;
-import com.dreamteam.androidproject.services.ServiceApi;
 
 
 public class AuthorizationActivity extends Activity {

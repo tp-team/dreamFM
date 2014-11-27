@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.ResultReceiver;
 
-/**
- * Created by Pavel on 27.11.2014.
- */
 public class Authorization extends BaseCommand {
+    private String password;
+    private String login;
 
     @Override
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
@@ -24,4 +23,10 @@ public class Authorization extends BaseCommand {
     public void writeToParcel(Parcel parcel, int i) {
 
     }
+
+    public Authorization(String login, String password) {
+        this.password = password;
+        this.login    = login;
+    }
+
 }

@@ -3,7 +3,8 @@ package com.dreamteam.androidproject.Handlers;
 /**
  * Created by Pavel on 27.11.2014.
  */
-import com.dreamteam.androidproject.services.Application;
+import com.dreamteam.androidproject.service.FMApplication;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +15,7 @@ import android.os.ResultReceiver;
 @SuppressLint("ParcelCreator")
 public abstract class BaseCommand implements Parcelable {
 
-    public static String EXTRA_PROGRESS = Application.PACKAGE.concat(".EXTRA_PROGRESS");
+    public static String EXTRA_PROGRESS = FMApplication.PACKAGE.concat(".EXTRA_PROGRESS");
 
     public static final int RESPONSE_SUCCESS = 0;
 
