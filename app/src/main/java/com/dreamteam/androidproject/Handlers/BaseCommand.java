@@ -1,8 +1,5 @@
 package com.dreamteam.androidproject.Handlers;
 
-/**
- * Created by Pavel on 27.11.2014.
- */
 import com.dreamteam.androidproject.service.FMApplication;
 
 import android.annotation.SuppressLint;
@@ -15,20 +12,16 @@ import android.os.ResultReceiver;
 @SuppressLint("ParcelCreator")
 public abstract class BaseCommand implements Parcelable {
 
-    public static String EXTRA_PROGRESS = FMApplication.PACKAGE.concat(".EXTRA_PROGRESS");
-
     public static final int RESPONSE_SUCCESS = 0;
 
     public static final int RESPONSE_FAILURE = 1;
 
-    public static final int RESPONSE_PROGRESS = 2;
-
-    private ResultReceiver sfCallback;
+    private ResultReceiver Callback;
 
     protected volatile boolean cancelled = false;
 
     public final void execute(Intent intent, Context context, ResultReceiver callback) {
-        this.sfCallback = callback;
+        this.Callback = callback;
         doExecute(intent, context, callback);
     }
 
@@ -42,16 +35,9 @@ public abstract class BaseCommand implements Parcelable {
         sendUpdate(RESPONSE_FAILURE, data);
     }
 
-    protected void sendProgress(int progress) {
-        Bundle b = new Bundle();
-        b.putInt(EXTRA_PROGRESS, progress);
-
-        sendUpdate(RESPONSE_PROGRESS, b);
-    }
-
     private void sendUpdate(int resultCode, Bundle data) {
-        if (sfCallback != null) {
-            sfCallback.send(resultCode, data);
+        if (Callback != null) {
+            Callback.send(resultCode, data);
         }
     }
 
