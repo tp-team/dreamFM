@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dreamteam.androidproject.components.Musician;
+import com.dreamteam.androidproject.components.MusicianAdapter;
+import com.dreamteam.androidproject.customViews.ExpandableHeightGridView;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class MusicianActivity extends Activity {
 
     public Musician mMusician;
+    public View mMusicianView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,12 @@ public class MusicianActivity extends Activity {
 
         renderActionBar();
         setContentView(R.layout.activity_musician);
-        View v = this.findViewById(R.id.musician_page);
+        mMusicianView = this.findViewById(R.id.musician_page);
 
-        ImageView musicianImage = (ImageView) v.findViewById(R.id.musician_image);
+        ImageView musicianImage = (ImageView) mMusicianView.findViewById(R.id.musician_image);
         musicianImage.setImageResource(mMusician.getMusicianImageRes());
+
+        setSimilarsGrid();
 
     }
 
@@ -56,6 +61,39 @@ public class MusicianActivity extends Activity {
                 onBackPressed();
             }
         });
+    }
+
+    private void setSimilarsGrid() {//пример создания сетки с элементами
+
+        ArrayList<Musician> items = new ArrayList<Musician>();
+
+        View similarsView = mMusicianView.findViewById(R.id.musician_similars);
+        ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) similarsView.findViewById(R.id.feed_grid);
+
+        Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
+        Musician child2 = new Musician("Epica", R.drawable.epica, null);
+        ArrayList<Musician> children = new ArrayList<Musician>();
+        children.add(child1);
+        children.add(child2);
+        Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
+        ArrayList<Musician> children2 = new ArrayList<Musician>();
+        children2.add(parent);
+        children2.add(child1);
+        Musician parent2 = new Musician("Epica", R.drawable.epica, children2);
+
+        items.add(parent);
+        items.add(parent2);
+        items.add(parent2);
+        items.add(parent);
+        items.add(parent);
+        items.add(parent2);
+        items.add(parent2);
+        items.add(parent);
+
+        MusicianAdapter adapter = new MusicianAdapter(MusicianActivity.this.getActionBar().getThemedContext(), items);
+        musiciansGrid.setAdapter(adapter);
+        musiciansGrid.setExpanded(true);
+
     }
 
     public View getActionBarView() {
