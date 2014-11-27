@@ -29,7 +29,7 @@
             android:name=".AlbumActivity"
             android:label="@string/app_name" >
         </activity>
-        <service android:name=".services.ServiceApi">
+        <service android:name=".service.ServiceApi">
 
         </service>
 
