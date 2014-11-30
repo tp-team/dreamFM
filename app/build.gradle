@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         applicationId "com.dreamteam.androidproject"
@@ -25,4 +25,5 @@ dependencies {
     compile 'com.squareup:otto:1.3.5'
     compile 'javax.inject:javax.inject:1@jar'
     compile 'org.json:json:20140107'
+    compile 'de.hdodenhof:circleimageview:1.2.1'
 }

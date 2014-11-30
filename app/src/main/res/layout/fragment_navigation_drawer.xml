@@ -15,7 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp">
+            android:layout_height="160dp"
+            android:focusableInTouchMode="true">
 
             <ImageView
                 android:id="@+id/user_bd_image"
@@ -28,11 +29,13 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"/>
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/user_photo"
                 android:layout_height="64dp"
                 android:layout_width="64dp"
-                android:scaleType="matrix"
+                app:border_width="1.5dp"
+                app:border_color="#f2f2f2"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="16dp"
                 android:layout_alignParentLeft="true"
@@ -76,7 +79,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/recommendations_list"
             android:layout_width="match_parent"
-            android:layout_height="407dp"
+            android:layout_height="550dp"
             android:choiceMode="singleChoice"
             android:textColor="#ffffff"
             android:dividerHeight="0dp"

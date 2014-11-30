@@ -17,39 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:background="#262626">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp"
-                    android:text="@string/feed_music"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"/>
-                
-                <Button
-                    android:id="@+id/more_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:background="#D51007"
-                    android:text="MORE"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="expandMusic"
-                    />
-
-            </RelativeLayout>
+            <include layout="@layout/feed_section"/>
 
             <include layout="@layout/grid"/>
 
@@ -61,36 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:background="#262626">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp"
-                    android:text="@string/feed_new_releases"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:background="#D51007"
-                    android:text="MORE"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginEnd="8dp"
-                    />
-
-            </RelativeLayout>
+            <include layout="@layout/feed_section"/>
 
             <include layout="@layout/grid"/>
 
@@ -102,36 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:background="#262626">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp"
-                    android:text="@string/feed_upcoming_events"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:background="#D51007"
-                    android:text="MORE"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginEnd="8dp"
-                    />
-
-            </RelativeLayout>
+            <include layout="@layout/feed_section"/>
 
             <include layout="@layout/grid"/>
 

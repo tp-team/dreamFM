@@ -51,4 +51,10 @@ public abstract class User {
         }
         return hashText;
     }
+
+    public User(String userName) {
+        USERNAME = userName;
+    }
+
+    public User() {}
 }

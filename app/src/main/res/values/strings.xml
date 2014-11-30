@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AndroidProject</string>
+    <string name="app_name">DreamFM</string>
     <string name="user_bd_image">User Background Image</string>
     <string name="nav_recommendations">RECOMMENDATIONS</string>
     <string name="nav_music">Music</string>
@@ -11,6 +11,8 @@
     <string name="nav_my_events">My Events</string>
     <string name="nav_your_recs">Your Recommendations</string>
     <string name="nav_events_near_me">Events Near Me</string>
+    <string name="nav_other">OTHER</string>
+    <string name="nav_preferences">Preferences</string>
     <string name="feed_music">Recommended Music</string>
     <string name="feed_new_releases">New Releases</string>
     <string name="feed_upcoming_events">Upcoming Events Near You</string>
@@ -22,6 +24,9 @@
     <string name="musician_biography">Biography</string>
     <string name="musician_full_bio">FULL BIO</string>
     <string name="musician_similars">Similar Artists</string>
+    <string name="musician_events">Upcoming events</string>
     <string name="big_text">sgrlighsfl;jjs gnrghrhgsdgkdg dshghdf grdsg dfg sfkjgsdghs skjfghsdfshd hsd jflkgh sfu hsf hgsdhhhfgs hdfgsjh hfs hgsf ghsdgdjhgshfgshfkh gskghdsjfgshdf  sfhsfd g jgsd hg hshf sdjh ghs rjhsgdssf  hs  fghsjh s dhfg sfhgsdfgsf s</string>
+    <string name="menu_search">Menu search</string>
+    <string name="menu_add_to_library">Menu add to library</string>
 
 </resources>

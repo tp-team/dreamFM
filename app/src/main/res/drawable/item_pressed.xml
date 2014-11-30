@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true" android:state_pressed="true">
-        <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:alpha="0.8"/>
-        </shape>
+    <item
+        android:state_focused="true"
+        android:state_pressed="true"
+        android:drawable="@color/dark_red">
     </item>
-    <item android:state_focused="false" android:state_pressed="true">
-        <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:alpha="0.8"/>
-        </shape>
+    <item
+        android:state_focused="false"
+        android:state_pressed="true"
+        android:drawable="@color/dark_red">
     </item>
-    <item>
-        <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:alpha="1.0"/>
-        </shape>
+    <item
+        android:drawable="@color/main_red">
     </item>
 </selector>

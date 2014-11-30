@@ -4,11 +4,17 @@ import android.app.Activity;
 
 import android.app.ActionBar;
 import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.SearchView;
 
 
 public class MainActivity extends Activity
@@ -19,9 +25,11 @@ public class MainActivity extends Activity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static String userFeedTag = "USER_FEED_TAG";
+    private SharedPreferences mSharedPreferences;
 
     public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
 
+    public String mUserName = "esusekov";
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -30,6 +38,10 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Log.d("ADDRESS", mSharedPreferences.getString("address", ""));
+
         FragmentManager fragmentManager = getFragmentManager();
 
         UserFeedFragment userFeedFragment = (UserFeedFragment) fragmentManager.findFragmentByTag(userFeedTag);
@@ -39,9 +51,7 @@ public class MainActivity extends Activity
                     .commit();
         }
 
-        Log.d("Before set content", "omg");
         setContentView(R.layout.activity_main);
-        Log.d("After set content", "omg");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 fragmentManager.findFragmentById(R.id.navigation_drawer);
@@ -57,9 +67,9 @@ public class MainActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         Log.d("IN ITEm SELECTED", "OMG");
-//
-//        int id = 0;
-//        switch (position) {
+
+        int id = 0;
+        switch (position) {
 //            case 1:
 //                id = R.id.feed_music;
 //                break;
@@ -78,7 +88,10 @@ public class MainActivity extends Activity
 //            case 7:
 //                id = R.id.feed_events_near_me;
 //                break;
-//        }
+            case 9:
+                Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
+                startActivity(intent);
+        }
 //
 //        UserFeedFragment userFeedFragment = (UserFeedFragment) getFragmentManager().findFragmentByTag(userFeedTag);
 //
@@ -98,14 +111,27 @@ public class MainActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
+
+            // Get the SearchView and set the searchable configuration
+            //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            //SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+            // Assumes current activity is the searchable activity
+            //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            //searchView.setIconifiedByDefault(false);
+
+            MenuItem mi = menu.add(0, 1, 0, "Preferences");
+            mi.setIntent(new Intent(this, PreferencesActivity.class));
             restoreActionBar();
             return true;
         }
+
         return super.onCreateOptionsMenu(menu);
     }
 

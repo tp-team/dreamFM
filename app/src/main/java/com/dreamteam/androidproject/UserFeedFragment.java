@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.dreamteam.androidproject.components.Album;
 import com.dreamteam.androidproject.components.AlbumAdapter;
@@ -41,7 +42,19 @@ public class UserFeedFragment extends Fragment {
         setAlbumsGrid();
         setEventsGrid();
 
-        final Button musicButton = (Button) musicView.findViewById(R.id.more_button);
+        return mUserFeed;
+    }
+
+    private void setMusiciansGrid() {//пример создания сетки с элементами
+
+        ArrayList<Musician> items = new ArrayList<Musician>();
+
+        musicView = mUserFeed.findViewById(R.id.feed_music);
+
+        TextView sectionTitle = (TextView) musicView.findViewById(R.id.feed_section_title);
+        sectionTitle.setText(R.string.feed_music);
+
+        final Button musicButton = (Button) musicView.findViewById(R.id.action_button);
         musicButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) { //пример добавления элементов
                 ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
@@ -63,14 +76,6 @@ public class UserFeedFragment extends Fragment {
             }
         });
 
-        return mUserFeed;
-    }
-
-    private void setMusiciansGrid() {//пример создания сетки с элементами
-
-        ArrayList<Musician> items = new ArrayList<Musician>();
-
-        musicView = mUserFeed.findViewById(R.id.feed_music);
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
         Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
@@ -104,6 +109,10 @@ public class UserFeedFragment extends Fragment {
         ArrayList<Album> items = new ArrayList<Album>();
 
         View albumsView = mUserFeed.findViewById(R.id.feed_albums);
+
+        TextView sectionTitle = (TextView) albumsView.findViewById(R.id.feed_section_title);
+        sectionTitle.setText(R.string.feed_new_releases);
+
         ExpandableHeightGridView albumsGrid = (ExpandableHeightGridView) albumsView.findViewById(R.id.feed_grid);
 
         Musician creator = new Musician("Within Temptation", R.drawable.withintemptation, null);
@@ -125,6 +134,10 @@ public class UserFeedFragment extends Fragment {
         ArrayList<Event> items = new ArrayList<Event>();
 
         View eventsView = mUserFeed.findViewById(R.id.feed_events_near_me);
+
+        TextView sectionTitle = (TextView) eventsView.findViewById(R.id.feed_section_title);
+        sectionTitle.setText(R.string.feed_upcoming_events);
+
         ExpandableHeightGridView eventsGrid = (ExpandableHeightGridView) eventsView.findViewById(R.id.feed_grid);
 
         ArrayList<Integer> fans = new ArrayList<Integer>();

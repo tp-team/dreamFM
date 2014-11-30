@@ -3,19 +3,28 @@ package com.dreamteam.androidproject;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dreamteam.androidproject.components.Event;
+import com.dreamteam.androidproject.components.EventAdapter;
 import com.dreamteam.androidproject.components.Musician;
 import com.dreamteam.androidproject.components.MusicianAdapter;
 import com.dreamteam.androidproject.customViews.ExpandableHeightGridView;
+import com.dreamteam.androidproject.customViews.NotifyingScrollView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Egor on 26.11.2014.
@@ -23,7 +32,9 @@ import java.util.ArrayList;
 public class MusicianActivity extends Activity {
 
     public Musician mMusician;
-    public View mMusicianView;
+    public NotifyingScrollView mMusicianView;
+
+    private Drawable mActionBarBackgroundDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,35 +43,63 @@ public class MusicianActivity extends Activity {
         Intent intent = getIntent();
         mMusician = (Musician) intent.getSerializableExtra("musician");
 
-        renderActionBar();
         setContentView(R.layout.activity_musician);
-        mMusicianView = this.findViewById(R.id.musician_page);
+        mMusicianView = (NotifyingScrollView) this.findViewById(R.id.musician_page);
+
+        renderActionBar();
 
         ImageView musicianImage = (ImageView) mMusicianView.findViewById(R.id.musician_image);
         musicianImage.setImageResource(mMusician.getMusicianImageRes());
 
+        setBioSection();
+
         setSimilarsGrid();
+
+        setEventsGrid();
 
     }
 
     public void renderActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setCustomView(R.layout.action_bar);
+        actionBar.setTitle(mMusician.getMusicianName());
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        View actionBarView = getActionBarView();
+        mActionBarBackgroundDrawable = getResources().getDrawable(R.drawable.action_bar_border);
+        mActionBarBackgroundDrawable.setAlpha(0);
 
-        TextView actionBarTitle = (TextView) actionBarView .findViewById(R.id.action_bar_title);
-        actionBarTitle.setText(mMusician.getMusicianName());
+        actionBar.setBackgroundDrawable(mActionBarBackgroundDrawable);
 
-        final Button backButton = (Button) actionBarView.findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) { //пример добавления элементов
-                onBackPressed();
+        mMusicianView.setOnScrollChangedListener(mOnScrollChangedListener);
+    }
+
+    private NotifyingScrollView.OnScrollChangedListener mOnScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
+        private int headerHeight = 0;
+
+        public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+            if (headerHeight == 0) {
+                headerHeight = findViewById(R.id.musician_image).getHeight() - getActionBar().getHeight();
             }
-        });
+            final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
+            final int newAlpha = (int) (ratio * 255);
+            mActionBarBackgroundDrawable.setAlpha(newAlpha);
+        }
+    };
+
+    private void setBioSection() {
+        View bioSection = mMusicianView.findViewById(R.id.musician_bio);
+        View bioHeader = bioSection.findViewById(R.id.feed_section);
+        bioHeader.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        TextView sectionTitle = (TextView) bioHeader.findViewById(R.id.feed_section_title);
+        sectionTitle.setText(R.string.musician_biography);
+        sectionTitle.setTextColor(getResources().getColor(R.color.main_red));
+
+        Button fullBioButton = (Button) bioHeader.findViewById(R.id.action_button);
+        fullBioButton.setText(R.string.musician_full_bio);
+
+        TextView bioText = (TextView) bioSection.findViewById(R.id.musician_bio_text);
+        bioText.setText(R.string.big_text);
     }
 
     private void setSimilarsGrid() {//пример создания сетки с элементами
@@ -68,6 +107,14 @@ public class MusicianActivity extends Activity {
         ArrayList<Musician> items = new ArrayList<Musician>();
 
         View similarsView = mMusicianView.findViewById(R.id.musician_similars);
+
+        View similarsHeader = similarsView.findViewById(R.id.feed_section);
+        similarsHeader.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        TextView sectionTitle = (TextView) similarsHeader.findViewById(R.id.feed_section_title);
+        sectionTitle.setText(R.string.musician_similars);
+        sectionTitle.setTextColor(getResources().getColor(R.color.main_red));
+
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) similarsView.findViewById(R.id.feed_grid);
 
         Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
@@ -83,12 +130,6 @@ public class MusicianActivity extends Activity {
 
         items.add(parent);
         items.add(parent2);
-        items.add(parent2);
-        items.add(parent);
-        items.add(parent);
-        items.add(parent2);
-        items.add(parent2);
-        items.add(parent);
 
         MusicianAdapter adapter = new MusicianAdapter(MusicianActivity.this.getActionBar().getThemedContext(), items);
         musiciansGrid.setAdapter(adapter);
@@ -96,9 +137,59 @@ public class MusicianActivity extends Activity {
 
     }
 
-    public View getActionBarView() {
-        Window window = getWindow();
-        View v = window.getDecorView();
-        return v.findViewById(R.id.action_bar);
+    private void setEventsGrid() {
+        ArrayList<Event> items = new ArrayList<Event>();
+
+        View eventsView = mMusicianView.findViewById(R.id.musician_events);
+
+        View eventsHeader = eventsView.findViewById(R.id.feed_section);
+        eventsHeader.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        TextView sectionTitle = (TextView) eventsHeader.findViewById(R.id.feed_section_title);
+        sectionTitle.setText(R.string.musician_events);
+        sectionTitle.setTextColor(getResources().getColor(R.color.main_red));
+
+        ExpandableHeightGridView eventsGrid = (ExpandableHeightGridView) eventsView.findViewById(R.id.feed_grid);
+
+        ArrayList<Integer> fans = new ArrayList<Integer>();
+        fans.add(R.drawable.fan1);
+        fans.add(R.drawable.fan2);
+        fans.add(R.drawable.fan3);
+        Calendar date = Calendar.getInstance();
+        date.set(2014, Calendar.NOVEMBER, 1);
+
+        Musician musician = new Musician("Hollywood Undead", R.drawable.hollyundead, null);
+        Event event = new Event("Hollywood Undead", "Ray Just Arena, Moscow, Russia",
+                R.drawable.hollyundead, date.getTime(), musician, fans);
+
+        items.add(event);
+        items.add(event);
+
+        EventAdapter adapter = new EventAdapter(this.getActionBar().getThemedContext(), items);
+
+        eventsGrid.setAdapter(adapter);
+        eventsGrid.setExpanded(true);
+        eventsGrid.setNumColumns(1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.menu_add_to_library).setVisible(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.menu_add_to_library:
+                Toast.makeText(this, "Adding to library!", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
