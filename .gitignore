@@ -3,5 +3,4 @@
 /.idea
 .DS_Store
 /build
-/app/build.gradle
 /app/app.iml
