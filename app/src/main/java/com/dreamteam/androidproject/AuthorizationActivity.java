@@ -51,7 +51,7 @@ public class AuthorizationActivity extends BaseActivity {
                     ComeOnInBtn.setTextColor(Color.parseColor(colorTextBtnEmpty));
                     return false;
                 }
-                ComeOnInBtn.setBackgroundColor(Color.parseColor(colorBackgroundBtn));
+                ComeOnInBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.item_pressed));
                 ComeOnInBtn.setTextColor(Color.parseColor(colorTextBtn));
                 return false;
             }

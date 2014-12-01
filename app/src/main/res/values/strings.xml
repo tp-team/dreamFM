@@ -3,6 +3,8 @@
 
     <string name="app_name">DreamFM</string>
     <string name="user_bd_image">User Background Image</string>
+    <string name="user_recent_tracks">Recent Tracks</string>
+    <string name="user_library">s Library</string>
     <string name="nav_recommendations">RECOMMENDATIONS</string>
     <string name="nav_music">Music</string>
     <string name="nav_albums">Albums</string>
@@ -24,7 +26,7 @@
     <string name="musician_biography">Biography</string>
     <string name="musician_full_bio">FULL BIO</string>
     <string name="musician_similars">Similar Artists</string>
-    <string name="musician_events">Upcoming events</string>
+    <string name="musician_events">Upcoming Events</string>
     <string name="big_text">sgrlighsfl;jjs gnrghrhgsdgkdg dshghdf grdsg dfg sfkjgsdghs skjfghsdfshd hsd jflkgh sfu hsf hgsdhhhfgs hdfgsjh hfs hgsf ghsdgdjhgshfgshfkh gskghdsjfgshdf  sfhsfd g jgsd hg hshf sdjh ghs rjhsgdssf  hs  fghsjh s dhfg sfhgsdfgsf s</string>
     <string name="menu_search">Menu search</string>
     <string name="menu_add_to_library">Menu add to library</string>

@@ -116,6 +116,7 @@ public class MusicianActivity extends Activity {
         sectionTitle.setTextColor(getResources().getColor(R.color.main_red));
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) similarsView.findViewById(R.id.feed_grid);
+        musiciansGrid.setBackgroundColor(getResources().getColor(R.color.white));
 
         Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
         Musician child2 = new Musician("Epica", R.drawable.epica, null);
@@ -150,6 +151,7 @@ public class MusicianActivity extends Activity {
         sectionTitle.setTextColor(getResources().getColor(R.color.main_red));
 
         ExpandableHeightGridView eventsGrid = (ExpandableHeightGridView) eventsView.findViewById(R.id.feed_grid);
+        eventsGrid.setBackgroundColor(getResources().getColor(R.color.white));
 
         ArrayList<Integer> fans = new ArrayList<Integer>();
         fans.add(R.drawable.fan1);

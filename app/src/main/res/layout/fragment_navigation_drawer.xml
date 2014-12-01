@@ -9,6 +9,7 @@
     tools:context=".NavigationDrawerFragment">
 
     <LinearLayout
+        android:id="@+id/user_info"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -60,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="18sp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     />
 
                 <TextView
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="14sp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     />
 
             </LinearLayout>
@@ -81,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="550dp"
             android:choiceMode="singleChoice"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:dividerHeight="0dp"
             android:divider="@null"
             android:background="#262626"

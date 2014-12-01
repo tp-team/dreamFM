@@ -4,6 +4,7 @@ package com.dreamteam.androidproject;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +29,7 @@ import com.dreamteam.androidproject.components.EntryAdapter;
 import com.dreamteam.androidproject.components.EntryItem;
 import com.dreamteam.androidproject.components.Item;
 import com.dreamteam.androidproject.components.SectionItem;
+import com.dreamteam.androidproject.components.User;
 
 import java.util.ArrayList;
 
@@ -102,17 +104,30 @@ public class NavigationDrawerFragment extends Fragment {
         mNavigationDrawerView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
 
-        ImageView backgroundImage = (ImageView) mNavigationDrawerView.findViewById(R.id.user_bd_image);
-        backgroundImage.setImageResource(R.drawable.mail2);
+        final User user = new User("Egor Susekov", R.drawable.user, R.drawable.mail2, "666 plays since 13 Jun 2013");
 
-        ImageView userPhoto = (ImageView) mNavigationDrawerView.findViewById(R.id.user_photo);
-        userPhoto.setImageResource(R.drawable.user);
+        View userInfo = mNavigationDrawerView.findViewById(R.id.user_info);
+        userInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UserProfileActivity.class);
 
-        TextView userName = (TextView) mNavigationDrawerView.findViewById(R.id.user_name);
-        userName.setText("Egor Susekov");
+                intent.putExtra("user", user);
+                getActivity().startActivity(intent);
+            }
+        });
 
-        TextView playsCount = (TextView) mNavigationDrawerView.findViewById(R.id.plays_count);
-        playsCount.setText("666 plays since 13 Jun 2013");
+        ImageView backgroundImage = (ImageView) userInfo.findViewById(R.id.user_bd_image);
+        backgroundImage.setImageResource(user.getUserBgImageRes());
+
+        ImageView userPhoto = (ImageView) userInfo.findViewById(R.id.user_photo);
+        userPhoto.setImageResource(user.getUserPhotoRes());
+
+        TextView userName = (TextView) userInfo.findViewById(R.id.user_name);
+        userName.setText(user.getUserName());
+
+        TextView playsCount = (TextView) userInfo.findViewById(R.id.plays_count);
+        playsCount.setText(user.getPlaysCount());
 
         ArrayList<Item> items = new ArrayList<Item>();
 
