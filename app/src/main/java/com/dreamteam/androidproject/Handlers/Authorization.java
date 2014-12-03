@@ -21,6 +21,7 @@ public class Authorization extends BaseCommand {
         if (TestLogin.equals(login) && TestPassword.equals(password)) {
             b.putString(SUCCESS, SUCCESS);
             notifySuccess(b);
+            
         } else {
             b.putString(FAILURE, FAILURE);
             notifyFailure(b);
