@@ -1,5 +1,6 @@
 package com.dreamteam.androidproject.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import android.app.Service;
@@ -22,7 +23,7 @@ public class ServiceApi extends Service {
     private ExecutorService executor                    = Executors.newFixedThreadPool(NUM_THREADS);
     private SparseArray<RunningCommand> runningCommands = new SparseArray<RunningCommand>();
 
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent(Intent intent) throws NoSuchAlgorithmException {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
         String action = intent.getAction();
@@ -84,7 +85,6 @@ public class ServiceApi extends Service {
         public void run() {
             Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
             command.execute(intent, getApplicationContext(), getReceiver(intent));
-
             shutdown();
         }
 

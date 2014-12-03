@@ -7,24 +7,26 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ResultReceiver;
 
+import com.dreamteam.androidproject.api.answer.AuthAnswer;
+import com.dreamteam.androidproject.api.query.Auth;
+
+import java.security.NoSuchAlgorithmException;
+
 public class Authorization extends BaseCommand {
     private String password;
     private String login;
-    private String TestPassword  = "admin";
-    private String TestLogin     = "admin";
-    public static String SUCCESS = "SUCCESS";
-    public static String FAILURE = "FAILURE";
 
     @Override
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
-        Bundle b = new Bundle();
-        if (TestLogin.equals(login) && TestPassword.equals(password)) {
-            b.putString(SUCCESS, SUCCESS);
-            notifySuccess(b);
-            
-        } else {
-            b.putString(FAILURE, FAILURE);
-            notifyFailure(b);
+        Bundle bun;
+        try {
+            Auth auth = new Auth(login, password);
+            bun = auth.auth().getBundelObject();
+            notifySuccess(bun);
+        } catch (Exception e) {
+            bun = new Bundle();
+            bun.putString(AuthAnswer.STATUS, "Error request");
+            notifyFailure(bun);
         }
     }
 

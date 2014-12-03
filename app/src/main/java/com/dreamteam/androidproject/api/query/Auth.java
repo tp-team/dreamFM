@@ -4,6 +4,8 @@ package com.dreamteam.androidproject.api.query;
  * Created by nap on 10/27/2014.
  */
 
+import android.util.Log;
+
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.connection.SecretData;
 import com.dreamteam.androidproject.api.connection.URLConnector;
@@ -47,12 +49,14 @@ public class Auth extends Common {
             answer.setStatus(EMPTY_STRING);
             return answer;
         }
+        Log.d("TAG AUTH", "!!!!!!!!!!1111111");
         String response;
         try {
             response = http.sendPost(SecretData.ROOT, "method=auth.getMobileSession&format=json" + "&api_key=" + SecretData.KEY + "&username=" + this.username + "&password=" + this.password + "&api_sig=" + this.sign);
         } catch (UnknownHostException e) {
             response = CONNECTION_ERROR;
         }
+        Log.d("TAG AUTH", "!!!!!!!!!!222222222");
         return parse(response);
     }
 }

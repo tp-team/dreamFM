@@ -1,10 +1,11 @@
 package com.dreamteam.androidproject.api.answer;
 
-/**
- * Created by nap on 12/2/2014.
- */
+
+import android.os.Bundle;
 
 public class AuthAnswer {
+    public static String STATUS = "STATUS";
+    public static String KEY    = "KEY";
     private String status;
     private String name;
     private String key;
@@ -41,4 +42,12 @@ public class AuthAnswer {
     public void setSubscriber(String subscriber) {
         this.subscriber = subscriber;
     }
+
+    public Bundle getBundelObject() {
+        Bundle bun = new Bundle();
+        bun.putString(STATUS, status);
+        bun.putString(KEY, key);
+        return bun;
+    }
+
 }

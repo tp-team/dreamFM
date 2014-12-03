@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamteam.androidproject.Handlers.Authorization;
+import com.dreamteam.androidproject.api.answer.AuthAnswer;
+import com.dreamteam.androidproject.api.query.Auth;
 
 
 public class AuthorizationActivity extends BaseActivity {
@@ -90,16 +92,15 @@ public class AuthorizationActivity extends BaseActivity {
     public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {
         super.onServiceCallback(requestId, requestIntent, resultCode, resultData);
 
-        if (resultCode == Authorization.RESPONSE_SUCCESS) {
-            Log.d("TAGGG", resultData.getString(Authorization.SUCCESS));
-            Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
-                startActivity(intent);
-                AuthorizationActivity.this.finish();
-        }
-        else if (resultCode == Authorization.RESPONSE_FAILURE) {
-            Log.d("TAGGG", resultData.getString(Authorization.FAILURE));
-            Password.setText("");
-            Toast.makeText(this, "Failure, incorrect login or password", Toast.LENGTH_LONG).show();
+        switch (resultCode) {
+            case Authorization.RESPONSE_SUCCESS: {
+                Toast.makeText(this, resultData.getString(AuthAnswer.STATUS) + "_____", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case Authorization.RESPONSE_FAILURE: {
+                Toast.makeText(this, resultData.getString(AuthAnswer.STATUS), Toast.LENGTH_SHORT).show();
+                break;
+            }
         }
 
     }
