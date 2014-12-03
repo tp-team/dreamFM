@@ -6,12 +6,9 @@ package com.dreamteam.androidproject.api.query;
 
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
 import com.dreamteam.androidproject.api.connection.SecretData;
-import com.dreamteam.androidproject.api.connection.URLConnector;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.dreamteam.androidproject.api.template.Common;
-
-import java.net.UnknownHostException;
 
 public class UserInfo extends Common {
     private String username;
@@ -23,9 +20,14 @@ public class UserInfo extends Common {
     @Override
     protected UserInfoAnswer parse(String str) throws Exception {
         JSONObject obj = new JSONObject(str);
-        String status = getStatus(obj);
+        String status = null;
+        try {
+            status = getStatus(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         UserInfoAnswer answer = new UserInfoAnswer();
-        answer.setStatus(status);
+        answer.setStatus(errorToCode(status));
         if (!status.equals("ok")) {
             return answer;
         }
@@ -56,19 +58,18 @@ public class UserInfo extends Common {
         return answer;
     }
 
-    public UserInfoAnswer info() throws Exception {
-        URLConnector http = new URLConnector();
+    public UserInfoAnswer info() {
         if (this.username.length() == 0) {
             UserInfoAnswer answer = new UserInfoAnswer();
-            answer.setStatus(EMPTY_STRING);
+            answer.setStatus(errorToCode(EMPTY_STRING));
             return answer;
         }
-        String response;
+        String query = "method=user.getInfo&format=json" + "&api_key=" + SecretData.KEY + "&user=" + this.username;
         try {
-            response = http.sendPost(SecretData.ROOT, "method=user.getInfo&format=json" + "&api_key=" + SecretData.KEY + "&user=" + this.username);
-        } catch (UnknownHostException e) {
-            response = CONNECTION_ERROR;
+            return parse(sendQuery(query));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        return parse(response);
     }
 }

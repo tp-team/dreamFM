@@ -6,11 +6,9 @@ package com.dreamteam.androidproject.api.query;
 
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.connection.SecretData;
-import com.dreamteam.androidproject.api.connection.URLConnector;
 import org.json.JSONObject;
 import com.dreamteam.androidproject.api.template.Common;
 
-import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 
 public class Auth extends Common {
@@ -27,9 +25,14 @@ public class Auth extends Common {
     @Override
     protected AuthAnswer parse(String str) throws Exception {
         JSONObject obj = new JSONObject(str);
-        String status = getStatus(obj);
+        String status = null;
+        try {
+            status = getStatus(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         AuthAnswer answer = new AuthAnswer();
-        answer.setStatus(status);
+        answer.setStatus(errorToCode(status));
         if (!status.equals("ok")) {
             return answer;
         }
@@ -40,19 +43,18 @@ public class Auth extends Common {
         return answer;
     }
 
-    public AuthAnswer auth() throws Exception {
-        URLConnector http = new URLConnector();
+    public AuthAnswer auth() {
         if (this.username.length() == 0 || this.password.length() == 0) {
             AuthAnswer answer = new AuthAnswer();
-            answer.setStatus(EMPTY_STRING);
+            answer.setStatus(errorToCode(EMPTY_STRING));
             return answer;
         }
-        String response;
+        String query = "method=auth.getMobileSession&format=json" + "&api_key=" + SecretData.KEY + "&username=" + this.username + "&password=" + this.password + "&api_sig=" + this.sign;
         try {
-            response = http.sendPost(SecretData.ROOT, "method=auth.getMobileSession&format=json" + "&api_key=" + SecretData.KEY + "&username=" + this.username + "&password=" + this.password + "&api_sig=" + this.sign);
-        } catch (UnknownHostException e) {
-            response = CONNECTION_ERROR;
+            return parse(sendQuery(query));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        return parse(response);
     }
 }
