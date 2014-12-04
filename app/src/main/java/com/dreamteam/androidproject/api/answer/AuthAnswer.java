@@ -4,9 +4,12 @@ package com.dreamteam.androidproject.api.answer;
 import android.os.Bundle;
 
 public class AuthAnswer {
-    public static String STATUS = "STATUS";
-    public static String KEY    = "KEY";
+    public static String STATUS      = "STATUS";
+    public static String KEY         = "KEY";
+    public static String TEXT_STATUS = "TEXT_STATUS";
+
     private String status;
+    private String textStatus;
     private String name;
     private String key;
     private String subscriber;
@@ -43,10 +46,19 @@ public class AuthAnswer {
         this.subscriber = subscriber;
     }
 
+    public void setTextStatus(String text) {
+        this.textStatus = text;
+    }
+
+    public String getTextStatus() {
+        return this.textStatus;
+    }
+
     public Bundle getBundelObject() {
         Bundle bun = new Bundle();
         bun.putString(STATUS, status);
         bun.putString(KEY, key);
+        bun.putString(TEXT_STATUS, textStatus);
         return bun;
     }
 

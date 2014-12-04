@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.dreamteam.androidproject.Handlers.Authorization;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
-import com.dreamteam.androidproject.api.query.Auth;
+import com.dreamteam.androidproject.api.template.Common;
 
 
 public class AuthorizationActivity extends BaseActivity {
@@ -94,17 +94,23 @@ public class AuthorizationActivity extends BaseActivity {
 
         switch (resultCode) {
             case Authorization.RESPONSE_SUCCESS: {
-                Toast.makeText(this, resultData.getString(AuthAnswer.STATUS) + "_____", Toast.LENGTH_SHORT).show();
+                String status = resultData.getString(AuthAnswer.STATUS);
+                if (status.equals(Common.STATUS_OK)) {
+                    Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    AuthorizationActivity.this.finish();
+                }
+                else {
+                    Toast.makeText(this, resultData.getString(AuthAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
+                }
                 break;
             }
             case Authorization.RESPONSE_FAILURE: {
-                Toast.makeText(this, resultData.getString(AuthAnswer.STATUS), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, resultData.getString(AuthAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
                 break;
             }
         }
-
     }
-
 
     @Override
     protected void onPause() {

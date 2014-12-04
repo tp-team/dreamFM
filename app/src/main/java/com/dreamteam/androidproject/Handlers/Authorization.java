@@ -25,7 +25,7 @@ public class Authorization extends BaseCommand {
             notifySuccess(bun);
         } catch (Exception e) {
             bun = new Bundle();
-            bun.putString(AuthAnswer.STATUS, "Error request");
+            bun.putString(AuthAnswer.TEXT_STATUS, "Error request");
             notifyFailure(bun);
         }
     }
