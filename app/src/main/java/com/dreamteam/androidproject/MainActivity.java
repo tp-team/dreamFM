@@ -78,7 +78,6 @@ public class MainActivity extends Activity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        Log.d("IN ITEm SELECTED", "OMG");
 
         int id = 0;
         switch (position) {

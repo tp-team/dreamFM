@@ -37,6 +37,7 @@
                 android:layout_width="64dp"
                 app:border_width="1.5dp"
                 app:border_color="#f2f2f2"
+                android:src="@drawable/question"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="16dp"
                 android:layout_alignParentLeft="true"

@@ -21,7 +21,6 @@ public class UserInfo extends Common {
 
     @Override
     protected UserInfoAnswer parse(String str) throws Exception {
-        Log.d("WWWWW", str);
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {
