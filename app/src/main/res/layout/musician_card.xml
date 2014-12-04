@@ -15,6 +15,8 @@
             android:layout_height="fill_parent"
             android:scaleType="centerCrop"
             android:adjustViewBounds="false"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
             android:src="@drawable/evanescence"/>
 
         <LinearLayout

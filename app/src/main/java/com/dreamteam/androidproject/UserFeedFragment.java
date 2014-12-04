@@ -2,6 +2,7 @@ package com.dreamteam.androidproject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -54,27 +55,30 @@ public class UserFeedFragment extends Fragment {
         TextView sectionTitle = (TextView) musicView.findViewById(R.id.feed_section_title);
         sectionTitle.setText(R.string.feed_music);
 
-        final Button musicButton = (Button) musicView.findViewById(R.id.action_button);
-        musicButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) { //пример добавления элементов
-                ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
-
-                Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
-                Musician child2 = new Musician("Epica", R.drawable.epica, null);
-                ArrayList<Musician> children = new ArrayList<Musician>();
-                children.add(child1);
-                children.add(child2);
-                Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
-                musicList.add(parent);
-                musicList.add(parent);
-                musicList.add(parent);
-
-                MusicianAdapter adapter = new MusicianAdapter(getActivity().getActionBar().getThemedContext(), musicList);
-
-                musiciansGrid.setAdapter(adapter);
-                musiciansGrid.setExpanded(true);
-            }
-        });
+        setMoreButtonClickListener(musicView, "musician", getResources().getString(R.string.feed_music));
+//        final Button musicButton = (Button) musicView.findViewById(R.id.action_button);
+//        musicButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) { //пример добавления элементов
+//
+//                buttonAction("musician", );
+//                ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
+//
+//                Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
+//                Musician child2 = new Musician("Epica", R.drawable.epica, null);
+//                ArrayList<Musician> children = new ArrayList<Musician>();
+//                children.add(child1);
+//                children.add(child2);
+//                Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
+//                musicList.add(parent);
+//                musicList.add(parent);
+//                musicList.add(parent);
+//
+//                MusicianAdapter adapter = new MusicianAdapter(getActivity().getActionBar().getThemedContext(), musicList);
+//
+//                musiciansGrid.setAdapter(adapter);
+//                musiciansGrid.setExpanded(true);
+//            }
+//        });
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
@@ -110,6 +114,8 @@ public class UserFeedFragment extends Fragment {
 
         View albumsView = mUserFeed.findViewById(R.id.feed_albums);
 
+        setMoreButtonClickListener(albumsView, "album", getResources().getString(R.string.feed_new_releases));
+
         TextView sectionTitle = (TextView) albumsView.findViewById(R.id.feed_section_title);
         sectionTitle.setText(R.string.feed_new_releases);
 
@@ -134,6 +140,8 @@ public class UserFeedFragment extends Fragment {
         ArrayList<Event> items = new ArrayList<Event>();
 
         View eventsView = mUserFeed.findViewById(R.id.feed_events_near_me);
+
+        setMoreButtonClickListener(eventsView, "event", getResources().getString(R.string.feed_upcoming_events));
 
         TextView sectionTitle = (TextView) eventsView.findViewById(R.id.feed_section_title);
         sectionTitle.setText(R.string.feed_upcoming_events);
@@ -160,6 +168,21 @@ public class UserFeedFragment extends Fragment {
         eventsGrid.setAdapter(adapter);
         eventsGrid.setExpanded(true);
         eventsGrid.setNumColumns(1);
+    }
+
+    private void setMoreButtonClickListener(View v, String type, String title) {
+        final Button moreButton = (Button) v.findViewById(R.id.action_button);
+        final String gridType = type;
+        final String activityTitle = title;
+        moreButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), GridActivity.class);
+
+                intent.putExtra("type", gridType);
+                intent.putExtra("title", activityTitle);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     public void getFocusOn(int id) {

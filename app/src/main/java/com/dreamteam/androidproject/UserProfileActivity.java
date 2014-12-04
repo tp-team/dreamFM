@@ -53,6 +53,15 @@ public class UserProfileActivity extends Activity {
         ImageView userBgImage = (ImageView) mUserView.findViewById(R.id.user_bg_image);
         userBgImage.setImageResource(mUser.getUserBgImageRes());
 
+        ImageView userPhoto = (ImageView) mUserView.findViewById(R.id.user_photo);
+        userPhoto.setImageResource(mUser.getUserPhotoRes());
+
+        TextView userName = (TextView) mUserView.findViewById(R.id.user_name);
+        userName.setText(mUser.getUserName());
+
+        TextView playsCount = (TextView) mUserView.findViewById(R.id.plays_count);
+        playsCount.setText(mUser.getPlaysCount());
+
         setRecentTracks();
 
         setLibraryGrid();
