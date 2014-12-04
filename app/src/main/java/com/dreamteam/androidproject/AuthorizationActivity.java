@@ -1,6 +1,5 @@
 package com.dreamteam.androidproject;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,9 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dreamteam.androidproject.Handlers.Authorization;
+import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
+import com.dreamteam.androidproject.api.query.Auth;
+import com.dreamteam.androidproject.api.query.UserInfo;
+import com.dreamteam.androidproject.handlers.AuthorizationHandler;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.template.Common;
+import com.dreamteam.androidproject.storages.PreferencesSystem;
+
+import java.net.Authenticator;
 
 
 public class AuthorizationActivity extends BaseActivity {
@@ -31,12 +36,15 @@ public class AuthorizationActivity extends BaseActivity {
 
     private final String TAG = "___AUTORIZATION___";
 
-    private int requestId = -1;
+    private int authId     = -1;
+    private int userInfoId = -1;
+    private PreferencesSystem prefSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().hide();
+        prefSystem = new PreferencesSystem(getApplicationContext());
         setContentView(R.layout.autorization_main);
 
         Username        = (EditText) findViewById(R.id.username);
@@ -68,7 +76,7 @@ public class AuthorizationActivity extends BaseActivity {
                 if (isEmpty()) {
                     return;
                 }
-                requestId = getServiceHelper().getAuthorization(Username.getText().toString(), Password.getText().toString());
+                authId = getServiceHelper().getAuthorization(Username.getText().toString(), Password.getText().toString());
             }
         });
 
@@ -92,10 +100,46 @@ public class AuthorizationActivity extends BaseActivity {
     public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {
         super.onServiceCallback(requestId, requestIntent, resultCode, resultData);
 
+        if (AuthorizationActivity.this.authId == requestId) {
+            callbackAuth(requestIntent, resultCode, resultData);
+        }
+        else if (AuthorizationActivity.this.userInfoId == requestId) {
+            callbackUserInfo(requestIntent, resultCode, resultData);
+        }
+
+    }
+
+
+    public void callbackAuth(Intent requestIntent, int resultCode, Bundle resultData) {
         switch (resultCode) {
-            case Authorization.RESPONSE_SUCCESS: {
+            case AuthorizationHandler.RESPONSE_SUCCESS: {
                 String status = resultData.getString(AuthAnswer.STATUS);
                 if (status.equals(Common.STATUS_OK)) {
+                    prefSystem.setText(AuthAnswer.NAME, resultData.getString(AuthAnswer.NAME));
+                    prefSystem.setText(AuthAnswer.KEY, resultData.getString(AuthAnswer.KEY));
+                    userInfoId = getServiceHelper().getUserInfo(resultData.getString(AuthAnswer.NAME));
+                }
+                else {
+                    Toast.makeText(this, resultData.getString(AuthAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case AuthorizationHandler.RESPONSE_FAILURE: {
+                Toast.makeText(this, resultData.getString(AuthAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+    }
+
+    public void callbackUserInfo(Intent requestIntent, int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case AuthorizationHandler.RESPONSE_SUCCESS: {
+                String status = resultData.getString(AuthAnswer.STATUS);
+                if (status.equals(Common.STATUS_OK)) {
+                    prefSystem.setText(UserInfoAnswer.USERNAME, resultData.getString(UserInfoAnswer.USERNAME));
+                    prefSystem.setText(UserInfoAnswer.PLAYS_COUNT, resultData.getString(UserInfoAnswer.PLAYS_COUNT));
+                    prefSystem.setText(UserInfoAnswer.USER_RHOTO_RES, resultData.getString(UserInfoAnswer.USER_RHOTO_RES));
+                    prefSystem.setText(UserInfoAnswer.USER_BIG_IMAGE_RES, resultData.getString(UserInfoAnswer.USER_BIG_IMAGE_RES));
                     Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
                     startActivity(intent);
                     AuthorizationActivity.this.finish();
@@ -105,12 +149,13 @@ public class AuthorizationActivity extends BaseActivity {
                 }
                 break;
             }
-            case Authorization.RESPONSE_FAILURE: {
+            case AuthorizationHandler.RESPONSE_FAILURE: {
                 Toast.makeText(this, resultData.getString(AuthAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
                 break;
             }
         }
     }
+
 
     @Override
     protected void onPause() {

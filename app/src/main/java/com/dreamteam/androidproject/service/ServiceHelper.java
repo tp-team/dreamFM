@@ -13,8 +13,9 @@ import android.os.ResultReceiver;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.dreamteam.androidproject.Handlers.Authorization;
-import com.dreamteam.androidproject.Handlers.BaseCommand;
+import com.dreamteam.androidproject.handlers.AuthorizationHandler;
+import com.dreamteam.androidproject.handlers.BaseCommand;
+import com.dreamteam.androidproject.handlers.UserInfoHandler;
 
 public class ServiceHelper {
 
@@ -40,10 +41,16 @@ public class ServiceHelper {
 
     // =========================================
 
-    public int getAuthorization(String login, String password) {
+    public int getAuthorization(String username, String password) {
         final int requestId = createId();
 
-        Intent i = createIntent(application, new Authorization(login, password), requestId);
+        Intent i = createIntent(application, new AuthorizationHandler(username, password), requestId);
+        return runRequest(requestId, i);
+    }
+
+    public int getUserInfo(String username) {
+        final int requestId = createId();
+        Intent i = createIntent(application, new UserInfoHandler(username), requestId);
         return runRequest(requestId, i);
     }
 

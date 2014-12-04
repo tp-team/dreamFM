@@ -1,10 +1,15 @@
 package com.dreamteam.androidproject.api.answer;
 
-/**
- * Created by nap on 12/2/2014.
- */
+import android.os.Bundle;
+
+import com.dreamteam.androidproject.api.query.Auth;
 
 public class UserInfoAnswer {
+    public static String USERNAME           = "USERNAME";
+    public static String PLAYS_COUNT        = "PLAY_COUNT";
+    public static String USER_RHOTO_RES     = "USER_RHOTO_RES";
+    public static String USER_BIG_IMAGE_RES = "USER_RHOTO_RES";
+
     private String status;
     private String username;
     private String imagesmall;
@@ -158,4 +163,13 @@ public class UserInfoAnswer {
     public void setRegistered(String registered) {
         this.registered = registered;
     }
+
+    public Bundle getBundleObject() {
+        Bundle bun = new Bundle();
+        bun.putString(USERNAME, username);
+        bun.putString(PLAYS_COUNT, playcount);
+        bun.putString(USER_RHOTO_RES, imagesmall);
+        return bun;
+    }
+
 }

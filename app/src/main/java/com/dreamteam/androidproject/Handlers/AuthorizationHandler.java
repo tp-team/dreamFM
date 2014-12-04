@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject.Handlers;
+package com.dreamteam.androidproject.handlers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,22 +6,19 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ResultReceiver;
-
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.query.Auth;
 
-import java.security.NoSuchAlgorithmException;
-
-public class Authorization extends BaseCommand {
+public class AuthorizationHandler extends BaseCommand {
     private String password;
-    private String login;
+    private String username;
 
     @Override
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
         Bundle bun;
         try {
-            Auth auth = new Auth(login, password);
-            bun = auth.auth().getBundelObject();
+            Auth auth = new Auth(username, password);
+            bun = auth.auth().getBundleObject();
             notifySuccess(bun);
         } catch (Exception e) {
             bun = new Bundle();
@@ -37,28 +34,28 @@ public class Authorization extends BaseCommand {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(login);
+        parcel.writeString(username);
         parcel.writeString(password);
     }
 
-    public static final Parcelable.Creator<Authorization> CREATOR = new Parcelable.Creator<Authorization>() {
-        public Authorization createFromParcel(Parcel in) {
-            return new Authorization(in);
+    public static final Parcelable.Creator<AuthorizationHandler> CREATOR = new Parcelable.Creator<AuthorizationHandler>() {
+        public AuthorizationHandler createFromParcel(Parcel in) {
+            return new AuthorizationHandler(in);
         }
 
-        public Authorization[] newArray(int size) {
-            return new Authorization[size];
+        public AuthorizationHandler[] newArray(int size) {
+            return new AuthorizationHandler[size];
         }
     };
 
-    private Authorization(Parcel in) {
-        login = in.readString();
+    private AuthorizationHandler(Parcel in) {
+        username = in.readString();
         password = in.readString();
     }
 
-    public Authorization(String login, String password) {
+    public AuthorizationHandler(String username, String password) {
         this.password = password;
-        this.login    = login;
+        this.username = username;
     }
 
 }

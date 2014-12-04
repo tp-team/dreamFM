@@ -11,7 +11,7 @@ import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
-import com.dreamteam.androidproject.Handlers.BaseCommand;
+import com.dreamteam.androidproject.handlers.BaseCommand;
 
 public class ServiceApi extends Service {
     private static final int NUM_THREADS = 4;

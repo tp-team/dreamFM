@@ -1,6 +1,4 @@
-package com.dreamteam.androidproject.Handlers;
-
-import com.dreamteam.androidproject.service.FMApplication;
+package com.dreamteam.androidproject.handlers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

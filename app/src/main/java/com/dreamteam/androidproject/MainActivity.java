@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.SearchView;
 
+import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
+import com.dreamteam.androidproject.storages.PreferencesSystem;
+
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -30,6 +33,8 @@ public class MainActivity extends Activity
     public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
 
     public String mUserName = "esusekov";
+
+    private PreferencesSystem prefSystem;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -38,6 +43,12 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USERNAME));
+        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
+        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_BIG_IMAGE_RES));
+        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_RHOTO_RES));
+
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Log.d("ADDRESS", mSharedPreferences.getString("address", ""));

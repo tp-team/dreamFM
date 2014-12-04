@@ -7,6 +7,7 @@ public class AuthAnswer {
     public static String STATUS      = "STATUS";
     public static String KEY         = "KEY";
     public static String TEXT_STATUS = "TEXT_STATUS";
+    public static String NAME        = "NAME";
 
     private String status;
     private String textStatus;
@@ -54,11 +55,12 @@ public class AuthAnswer {
         return this.textStatus;
     }
 
-    public Bundle getBundelObject() {
+    public Bundle getBundleObject() {
         Bundle bun = new Bundle();
         bun.putString(STATUS, status);
         bun.putString(KEY, key);
         bun.putString(TEXT_STATUS, textStatus);
+        bun.putString(NAME, name);
         return bun;
     }
 
