@@ -4,6 +4,8 @@ package com.dreamteam.androidproject.api.query;
  * Created by nap on 10/30/2014.
  */
 
+import android.util.Log;
+
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
 import com.dreamteam.androidproject.api.connection.SecretData;
 import org.json.JSONArray;
@@ -19,6 +21,7 @@ public class UserInfo extends Common {
 
     @Override
     protected UserInfoAnswer parse(String str) throws Exception {
+        Log.d("WWWWW", str);
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {

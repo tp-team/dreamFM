@@ -173,7 +173,7 @@ public class UserInfoAnswer {
         Log.d("TAG_USER_INFO", imagesmall);
         Log.d("TAG_USER_INFO", imagelarge);
         Log.d("TAG_USER_INFO", imagemedium);
-        bun.putString(USER_PHOTO_RES, imagesmall);
+        bun.putString(USER_PHOTO_RES, imagelarge);
         bun.putString(STATUS_USER_INFO, status);
         return bun;
     }
