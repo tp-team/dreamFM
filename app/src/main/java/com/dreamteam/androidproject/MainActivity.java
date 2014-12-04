@@ -48,7 +48,8 @@ public class MainActivity extends Activity
 
 
         prefSystem = new PreferencesSystem(getApplicationContext());
-        mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES), R.drawable.mail2, prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
+        mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES),
+                R.drawable.mail2, prefSystem.getText(UserInfoAnswer.PLAYS_COUNT), prefSystem.getText(UserInfoAnswer.REGISTERED));
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Log.d("ADDRESS", mSharedPreferences.getString("address", ""));

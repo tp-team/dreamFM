@@ -8,12 +8,14 @@ public class User implements Serializable{
     private String userPhotoRes;
     private String playsCount;
     private int userBgImageRes;
+    private String registered;
 
-    public User(String userName, String userPhotoRes, int userBgImageRes, String playsCount) {
+    public User(String userName, String userPhotoRes, int userBgImageRes, String playsCount, String registered) {
         this.userName = userName;
         this.userPhotoRes = userPhotoRes;
         this.playsCount = playsCount;
         this.userBgImageRes = userBgImageRes;
+        this.registered = registered;
     }
 
     public String getUserName() {
@@ -30,5 +32,9 @@ public class User implements Serializable{
 
     public int getUserBgImageRes() {
         return userBgImageRes;
+    }
+
+    public String getRegistered() {
+        return registered;
     }
 }

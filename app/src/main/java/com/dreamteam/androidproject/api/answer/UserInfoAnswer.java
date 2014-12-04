@@ -11,6 +11,7 @@ public class UserInfoAnswer {
     public static String USER_PHOTO_RES     = "USER_RHOTO_RES";
     public static String USER_BIG_IMAGE_RES = "USER_RHOTO_RES";
     public static String STATUS_USER_INFO   = "STATUS_USER_INFO";
+    public static String REGISTERED         = "REGISTERED";
 
     private String status;
     private String username;
@@ -170,11 +171,9 @@ public class UserInfoAnswer {
         Bundle bun = new Bundle();
         bun.putString(REALNAME , realname);
         bun.putString(PLAYS_COUNT, playcount);
-        Log.d("TAG_USER_INFO", imagesmall);
-        Log.d("TAG_USER_INFO", imagelarge);
-        Log.d("TAG_USER_INFO", imagemedium);
         bun.putString(USER_PHOTO_RES, imagelarge);
         bun.putString(STATUS_USER_INFO, status);
+        bun.putString(REGISTERED, registered);
         return bun;
     }
 

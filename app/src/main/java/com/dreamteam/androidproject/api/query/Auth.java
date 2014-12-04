@@ -39,7 +39,6 @@ public class Auth extends Common {
         answer.setName(session.getString("name"));
         answer.setKey(session.getString("key"));
         answer.setSubscriber(session.getString("subscriber"));
-        answer.setPassword(this.password);
         return answer;
     }
 
@@ -53,7 +52,9 @@ public class Auth extends Common {
         String query = "method=auth.getMobileSession&format=json" + "&api_key=" + SecretData.KEY + "&username=" + this.username + "&password=" + this.password + "&api_sig=" + this.sign;
 
         try {
-            return parse(sendQuery(query));
+            AuthAnswer answer = parse(sendQuery(query));
+            answer.setPassword(this.password);
+            return answer;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
