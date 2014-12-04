@@ -47,7 +47,7 @@ public class MainActivity extends Activity
         Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USERNAME));
         Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
         Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_BIG_IMAGE_RES));
-        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_RHOTO_RES));
+        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES));
 
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);

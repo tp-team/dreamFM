@@ -134,11 +134,11 @@ public class AuthorizationActivity extends BaseActivity {
     public void callbackUserInfo(Intent requestIntent, int resultCode, Bundle resultData) {
         switch (resultCode) {
             case AuthorizationHandler.RESPONSE_SUCCESS: {
-                String status = resultData.getString(AuthAnswer.STATUS);
+                String status = resultData.getString(UserInfoAnswer.STATUS_USER_INFO);
                 if (status.equals(Common.STATUS_OK)) {
                     prefSystem.setText(UserInfoAnswer.USERNAME, resultData.getString(UserInfoAnswer.USERNAME));
                     prefSystem.setText(UserInfoAnswer.PLAYS_COUNT, resultData.getString(UserInfoAnswer.PLAYS_COUNT));
-                    prefSystem.setText(UserInfoAnswer.USER_RHOTO_RES, resultData.getString(UserInfoAnswer.USER_RHOTO_RES));
+                    prefSystem.setText(UserInfoAnswer.USER_PHOTO_RES, resultData.getString(UserInfoAnswer.USER_PHOTO_RES));
                     prefSystem.setText(UserInfoAnswer.USER_BIG_IMAGE_RES, resultData.getString(UserInfoAnswer.USER_BIG_IMAGE_RES));
                     Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
                     startActivity(intent);

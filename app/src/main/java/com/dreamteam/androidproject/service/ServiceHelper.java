@@ -2,7 +2,6 @@ package com.dreamteam.androidproject.service;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +11,10 @@ import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.util.SparseArray;
-
 import com.dreamteam.androidproject.handlers.AuthorizationHandler;
 import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.handlers.UserInfoHandler;
+
 
 public class ServiceHelper {
 
@@ -43,7 +42,6 @@ public class ServiceHelper {
 
     public int getAuthorization(String username, String password) {
         final int requestId = createId();
-
         Intent i = createIntent(application, new AuthorizationHandler(username, password), requestId);
         return runRequest(requestId, i);
     }

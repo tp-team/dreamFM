@@ -1,14 +1,16 @@
 package com.dreamteam.androidproject.api.answer;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.dreamteam.androidproject.api.query.Auth;
 
 public class UserInfoAnswer {
     public static String USERNAME           = "USERNAME";
     public static String PLAYS_COUNT        = "PLAY_COUNT";
-    public static String USER_RHOTO_RES     = "USER_RHOTO_RES";
+    public static String USER_PHOTO_RES     = "USER_RHOTO_RES";
     public static String USER_BIG_IMAGE_RES = "USER_RHOTO_RES";
+    public static String STATUS_USER_INFO   = "STATUS_USER_INFO";
 
     private String status;
     private String username;
@@ -168,7 +170,11 @@ public class UserInfoAnswer {
         Bundle bun = new Bundle();
         bun.putString(USERNAME, username);
         bun.putString(PLAYS_COUNT, playcount);
-        bun.putString(USER_RHOTO_RES, imagesmall);
+        Log.d("TAG_USER_INFO", imagesmall);
+        Log.d("TAG_USER_INFO", imagelarge);
+        Log.d("TAG_USER_INFO", imagemedium);
+        bun.putString(USER_PHOTO_RES, imagesmall);
+        bun.putString(STATUS_USER_INFO, status);
         return bun;
     }
 

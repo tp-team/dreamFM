@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.os.ResultReceiver;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.query.UserInfo;
-import com.dreamteam.androidproject.components.User;
 
 
 public class UserInfoHandler extends BaseCommand {
