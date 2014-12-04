@@ -1,9 +1,5 @@
 package com.dreamteam.androidproject.api.query;
 
-/**
- * Created by nap on 10/27/2014.
- */
-
 import android.util.Log;
 
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
@@ -43,6 +39,7 @@ public class Auth extends Common {
         answer.setName(session.getString("name"));
         answer.setKey(session.getString("key"));
         answer.setSubscriber(session.getString("subscriber"));
+        answer.setPassword(this.password);
         return answer;
     }
 

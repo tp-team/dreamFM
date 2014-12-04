@@ -6,7 +6,7 @@ import android.util.Log;
 import com.dreamteam.androidproject.api.query.Auth;
 
 public class UserInfoAnswer {
-    public static String USERNAME           = "USERNAME";
+    public static String REALNAME           = "REALNAME";
     public static String PLAYS_COUNT        = "PLAY_COUNT";
     public static String USER_PHOTO_RES     = "USER_RHOTO_RES";
     public static String USER_BIG_IMAGE_RES = "USER_RHOTO_RES";
@@ -168,7 +168,7 @@ public class UserInfoAnswer {
 
     public Bundle getBundleObject() {
         Bundle bun = new Bundle();
-        bun.putString(USERNAME, username);
+        bun.putString(REALNAME , realname);
         bun.putString(PLAYS_COUNT, playcount);
         Log.d("TAG_USER_INFO", imagesmall);
         Log.d("TAG_USER_INFO", imagelarge);

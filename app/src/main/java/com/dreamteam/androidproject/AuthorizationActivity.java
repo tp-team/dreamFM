@@ -116,6 +116,7 @@ public class AuthorizationActivity extends BaseActivity {
                 String status = resultData.getString(AuthAnswer.STATUS);
                 if (status.equals(Common.STATUS_OK)) {
                     prefSystem.setText(AuthAnswer.NAME, resultData.getString(AuthAnswer.NAME));
+                    prefSystem.setText(AuthAnswer.PASSWORD, resultData.getString(AuthAnswer.PASSWORD));
                     prefSystem.setText(AuthAnswer.KEY, resultData.getString(AuthAnswer.KEY));
                     userInfoId = getServiceHelper().getUserInfo(resultData.getString(AuthAnswer.NAME));
                 }
@@ -136,7 +137,7 @@ public class AuthorizationActivity extends BaseActivity {
             case AuthorizationHandler.RESPONSE_SUCCESS: {
                 String status = resultData.getString(UserInfoAnswer.STATUS_USER_INFO);
                 if (status.equals(Common.STATUS_OK)) {
-                    prefSystem.setText(UserInfoAnswer.USERNAME, resultData.getString(UserInfoAnswer.USERNAME));
+                    prefSystem.setText(UserInfoAnswer.REALNAME, resultData.getString(UserInfoAnswer.REALNAME));
                     prefSystem.setText(UserInfoAnswer.PLAYS_COUNT, resultData.getString(UserInfoAnswer.PLAYS_COUNT));
                     prefSystem.setText(UserInfoAnswer.USER_PHOTO_RES, resultData.getString(UserInfoAnswer.USER_PHOTO_RES));
                     prefSystem.setText(UserInfoAnswer.USER_BIG_IMAGE_RES, resultData.getString(UserInfoAnswer.USER_BIG_IMAGE_RES));

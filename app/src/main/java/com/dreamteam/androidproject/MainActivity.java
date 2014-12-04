@@ -43,8 +43,9 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefSystem = new PreferencesSystem(getApplicationContext());
 
-        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USERNAME));
+        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.REALNAME));
         Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
         Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_BIG_IMAGE_RES));
         Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES));
