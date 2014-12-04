@@ -5,11 +5,11 @@ import java.io.Serializable;
 
 public class User implements Serializable{
     private final String userName;
-    private int userPhotoRes;
+    private String userPhotoRes;
     private String playsCount;
     private int userBgImageRes;
 
-    public User(String userName, int userPhotoRes, int userBgImageRes, String playsCount) {
+    public User(String userName, String userPhotoRes, int userBgImageRes, String playsCount) {
         this.userName = userName;
         this.userPhotoRes = userPhotoRes;
         this.playsCount = playsCount;
@@ -20,7 +20,7 @@ public class User implements Serializable{
         return userName;
     }
 
-    public int getUserPhotoRes() {
+    public String getUserPhotoRes() {
         return userPhotoRes;
     }
 

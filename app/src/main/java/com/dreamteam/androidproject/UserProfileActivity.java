@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.components.Event;
 import com.dreamteam.androidproject.components.EventAdapter;
 import com.dreamteam.androidproject.components.Musician;
@@ -53,8 +54,8 @@ public class UserProfileActivity extends Activity {
         ImageView userBgImage = (ImageView) mUserView.findViewById(R.id.user_bg_image);
         userBgImage.setImageResource(mUser.getUserBgImageRes());
 
-        ImageView userPhoto = (ImageView) mUserView.findViewById(R.id.user_photo);
-        userPhoto.setImageResource(mUser.getUserPhotoRes());
+        new DownloadImageTask((ImageView) mUserView.findViewById(R.id.user_photo)).execute(mUser.getUserPhotoRes());
+        //userPhoto.setImageResource(mUser.getUserPhotoRes());
 
         TextView userName = (TextView) mUserView.findViewById(R.id.user_name);
         userName.setText(mUser.getUserName());

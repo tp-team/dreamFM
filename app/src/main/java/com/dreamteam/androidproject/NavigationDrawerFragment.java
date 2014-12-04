@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.components.EntryAdapter;
 import com.dreamteam.androidproject.components.EntryItem;
 import com.dreamteam.androidproject.components.Item;
@@ -104,7 +105,7 @@ public class NavigationDrawerFragment extends Fragment {
         mNavigationDrawerView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
 
-        final User user = new User("Egor Susekov", R.drawable.user, R.drawable.mail2, "666 plays since 13 Jun 2013");
+        final User user = ((MainActivity)getActivity()).getmUser();
 
         View userInfo = mNavigationDrawerView.findViewById(R.id.user_info);
         userInfo.setOnClickListener(new View.OnClickListener() {
@@ -117,11 +118,14 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
+//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+//                .execute(MY_URL_STRING);
+
         ImageView backgroundImage = (ImageView) userInfo.findViewById(R.id.user_bd_image);
         backgroundImage.setImageResource(user.getUserBgImageRes());
 
-        ImageView userPhoto = (ImageView) userInfo.findViewById(R.id.user_photo);
-        userPhoto.setImageResource(user.getUserPhotoRes());
+        new DownloadImageTask((ImageView) userInfo.findViewById(R.id.user_photo)).execute(user.getUserPhotoRes());
+        //userPhoto.setImageResource(user.getUserPhotoRes());
 
         TextView userName = (TextView) userInfo.findViewById(R.id.user_name);
         userName.setText(user.getUserName());

@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.SearchView;
 
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
+import com.dreamteam.androidproject.components.User;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
 
 
@@ -32,7 +33,7 @@ public class MainActivity extends Activity
 
     public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
 
-    public String mUserName = "esusekov";
+    private User mUser;
 
     private PreferencesSystem prefSystem;
     /**
@@ -44,10 +45,12 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USERNAME));
-        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
-        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_BIG_IMAGE_RES));
-        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES));
+        prefSystem = new PreferencesSystem(getApplicationContext());
+        mUser = new User(prefSystem.getText(UserInfoAnswer.USERNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES), R.drawable.mail2, prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
+//        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USERNAME));
+//        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.PLAYS_COUNT));
+//        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_BIG_IMAGE_RES));
+//        Log.d("TAG_MAIN_ACTIVITY", prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES));
 
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -158,4 +161,7 @@ public class MainActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
+    public User getmUser() {
+        return mUser;
+    }
 }
