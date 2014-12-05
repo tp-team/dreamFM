@@ -12,14 +12,14 @@ import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.api.query.UserGetRecommendedArtists;
 import com.dreamteam.androidproject.api.template.ObjectList;
-import com.dreamteam.androidproject.newapi.query.ArtistGetInfo;
-import com.dreamteam.androidproject.storages.database.querys.ReccomendedArtistsQuery;
+
+import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
 public class RecommendedArtistsHandler extends BaseCommand {
     private String key;
     private String page;
     private String limit;
-    private ReccomendedArtistsQuery queryDB;
+    private RecommendedArtistsQuery queryDB;
 
     @Override
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
@@ -29,7 +29,7 @@ public class RecommendedArtistsHandler extends BaseCommand {
             UserGetRecommendedArtistsAnswer recommendAnswer = recommend.getRecomArtists();
             bun = recommendAnswer.getBundleObject();
 
-            queryDB = new ReccomendedArtistsQuery(context);
+            queryDB = new RecommendedArtistsQuery(context);
             queryDB.open();
             ObjectList<ArtistGetInfoAnswer> list = recommendAnswer.getRecommendations();
             for (int i = 0; i < list.getLength(); ++i) {
