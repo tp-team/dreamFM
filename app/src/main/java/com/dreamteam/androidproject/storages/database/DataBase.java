@@ -8,5 +8,5 @@ import android.database.sqlite.SQLiteDatabase;
 public class DataBase {
     protected final String DATABASE_NAME = "MY_DATABASE";
     protected final int DATABASE_VERSION = 1;
-    protected SQLiteDatabase database;
+    protected SQLiteDatabase db;
 }
