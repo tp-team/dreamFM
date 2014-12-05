@@ -4,8 +4,8 @@ package com.dreamteam.androidproject.newapi.template;
  * Created by nap on 10/30/2014.
  */
 
-import connection.SecretData;
-import connection.URLConnector;
+import com.dreamteam.androidproject.api.connection.SecretData;
+import com.dreamteam.androidproject.api.connection.URLConnector;
 import org.json.JSONObject;
 import java.math.BigInteger;
 import java.net.UnknownHostException;

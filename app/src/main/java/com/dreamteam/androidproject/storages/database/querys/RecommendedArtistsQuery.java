@@ -8,12 +8,12 @@ import com.dreamteam.androidproject.storages.database.DataBase;
 import com.dreamteam.androidproject.storages.database.tables.RecommendedArtistsTable;
 
 
-public class ReccomendedArtistsQuery extends DataBase {
+public class RecommendedArtistsQuery extends DataBase {
 
     private RecommendedArtistsTable table;
     private final Context ctx;
 
-    public ReccomendedArtistsQuery(Context ctx) {
+    public RecommendedArtistsQuery(Context ctx) {
         this.ctx = ctx;
     }
 

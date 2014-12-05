@@ -1,10 +1,7 @@
 package com.dreamteam.androidproject;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
 import android.app.FragmentManager;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,19 +15,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.SearchView;
 import android.widget.Toast;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 
-import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
 import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.components.User;
-import com.dreamteam.androidproject.handlers.AuthorizationHandler;
 import com.dreamteam.androidproject.handlers.BaseCommand;
-import com.dreamteam.androidproject.handlers.RecommendedArtistsHandler;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
+import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
 import java.util.concurrent.TimeUnit;
 
