@@ -141,6 +141,7 @@ public class AuthorizationActivity extends BaseActivity {
                     prefSystem.setText(UserInfoAnswer.PLAYS_COUNT, resultData.getString(UserInfoAnswer.PLAYS_COUNT));
                     prefSystem.setText(UserInfoAnswer.USER_PHOTO_RES, resultData.getString(UserInfoAnswer.USER_PHOTO_RES));
                     prefSystem.setText(UserInfoAnswer.USER_BIG_IMAGE_RES, resultData.getString(UserInfoAnswer.USER_BIG_IMAGE_RES));
+                    prefSystem.setText(UserInfoAnswer.REGISTERED, resultData.getString(UserInfoAnswer.REGISTERED));
                     Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
                     startActivity(intent);
                     AuthorizationActivity.this.finish();

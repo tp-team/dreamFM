@@ -56,36 +56,6 @@ public class MusicianAdapter extends ArrayAdapter<Musician> {
             ImageView musicianImage = (ImageView) v.findViewById(R.id.musician_card_image);
             musicianImage.setImageResource(si.getMusicianImageRes());
 
-//            musicianImage.setOnTouchListener(new View.OnTouchListener() {
-//
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//
-//                    switch (event.getAction()) {
-//                        case MotionEvent.ACTION_DOWN: {
-//                            ImageView view = (ImageView) v;
-//                            view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-//                            view.invalidate();
-//
-//                            Intent intent = new Intent(MusicianAdapter.this.context, MusicianActivity.class);
-//
-//                            intent.putExtra("musician", si);
-//                            MusicianAdapter.this.context.startActivity(intent);
-//                            break;
-//                        }
-//                        case MotionEvent.ACTION_UP:
-//                        case MotionEvent.ACTION_CANCEL: {
-//                            ImageView view = (ImageView) v;
-//                            view.getDrawable().clearColorFilter();
-//                            view.invalidate();
-//                            break;
-//                        }
-//                    }
-//
-//                    return true;
-//                }
-//            });
-
             TextView musicianName = (TextView) v.findViewById(R.id.musician_card_name);
             musicianName.setText(si.getMusicianName());
 

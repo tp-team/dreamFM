@@ -61,7 +61,7 @@ public class UserProfileActivity extends Activity {
         userName.setText(mUser.getUserName());
 
         TextView playsCount = (TextView) mUserView.findViewById(R.id.plays_count);
-        playsCount.setText(mUser.getPlaysCount());
+        playsCount.setText(mUser.getPlaysCountDesc());
 
         setRecentTracks();
 

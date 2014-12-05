@@ -37,7 +37,6 @@ public class UserFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mUserFeed = inflater.inflate(R.layout.user_feed, container, false);
-        Log.d("in uf create view", "omg");
 
         setMusiciansGrid();
         setAlbumsGrid();
@@ -56,29 +55,6 @@ public class UserFeedFragment extends Fragment {
         sectionTitle.setText(R.string.feed_music);
 
         setMoreButtonClickListener(musicView, "musician", getResources().getString(R.string.feed_music));
-//        final Button musicButton = (Button) musicView.findViewById(R.id.action_button);
-//        musicButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) { //пример добавления элементов
-//
-//                buttonAction("musician", );
-//                ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
-//
-//                Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
-//                Musician child2 = new Musician("Epica", R.drawable.epica, null);
-//                ArrayList<Musician> children = new ArrayList<Musician>();
-//                children.add(child1);
-//                children.add(child2);
-//                Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
-//                musicList.add(parent);
-//                musicList.add(parent);
-//                musicList.add(parent);
-//
-//                MusicianAdapter adapter = new MusicianAdapter(getActivity().getActionBar().getThemedContext(), musicList);
-//
-//                musiciansGrid.setAdapter(adapter);
-//                musiciansGrid.setExpanded(true);
-//            }
-//        });
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
@@ -186,7 +162,6 @@ public class UserFeedFragment extends Fragment {
     }
 
     public void getFocusOn(int id) {
-        Log.d("ID IN GET FOCUS ON", " " + id);
         final View targetView = mUserFeed.findViewById(id);
         final ScrollView scrollView = (ScrollView) mUserFeed.findViewById(R.id.scroll_feed);
 

@@ -37,4 +37,8 @@ public class User implements Serializable{
     public String getRegistered() {
         return registered;
     }
+
+    public String getPlaysCountDesc() {
+        return playsCount + " plays since " + registered;
+    }
 }

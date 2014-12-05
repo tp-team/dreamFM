@@ -37,7 +37,6 @@ public class GridActivity extends Activity {
         Intent intent = getIntent();
         mType = intent.getStringExtra("type");
         String title = intent.getStringExtra("title");
-        Log.d("ZZZZZZZZ", title);
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(title);
         actionBar.setDisplayShowHomeEnabled(true);

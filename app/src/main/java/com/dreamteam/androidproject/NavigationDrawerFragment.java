@@ -131,7 +131,7 @@ public class NavigationDrawerFragment extends Fragment {
         userName.setText(user.getUserName());
 
         TextView playsCount = (TextView) userInfo.findViewById(R.id.plays_count);
-        playsCount.setText(user.getPlaysCount());
+        playsCount.setText(user.getPlaysCountDesc());
 
         ArrayList<Item> items = new ArrayList<Item>();
 
