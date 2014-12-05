@@ -6,7 +6,7 @@ import com.dreamteam.androidproject.api.template.ObjectList;
 
 public class UserGetRecommendedArtistsAnswer {
     public static String STATUS_RECOMMENDED_ARTISTS = "RECOMMENDED_ARTISTS_STATUS";
-    public static String TEXT_STATUS = "TEXT_STATUS";
+    public static String TEXT_STATUS                = "TEXT_STATUS";
 
     private String status;
     private String textStatus;
