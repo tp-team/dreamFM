@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject.newapi.template;
+package com.dreamteam.androidproject.api.template;
 
 import java.util.ArrayList;
 

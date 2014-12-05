@@ -15,13 +15,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.dreamteam.androidproject.api.answer.AuthAnswer;
+import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
+import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.components.User;
+import com.dreamteam.androidproject.handlers.AuthorizationHandler;
+import com.dreamteam.androidproject.handlers.BaseCommand;
+import com.dreamteam.androidproject.handlers.RecommendedArtistsHandler;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -40,6 +47,7 @@ public class MainActivity extends Activity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private int recommendArtinsId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,4 +170,36 @@ public class MainActivity extends Activity
     public User getmUser() {
         return mUser;
     }
+
+
+    @Override
+    public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {
+        super.onServiceCallback(requestId, requestIntent, resultCode, resultData);
+
+        if (MainActivity.this.recommendArtinsId == requestId) {
+            callbackRecommendArtist(requestIntent, resultCode, resultData);
+        }
+
+    }
+
+    public void callbackRecommendArtist(Intent requestIntent, int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case BaseCommand.RESPONSE_SUCCESS: {
+                String status = resultData.getString(UserGetRecommendedArtistsAnswer.STATUS_RECOMMENDED_ARTISTS);
+                if (status.equals(Common.STATUS_OK)) {
+
+                }
+                else {
+                    Toast.makeText(this, resultData.getString(UserGetRecommendedArtistsAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case BaseCommand.RESPONSE_FAILURE: {
+                Toast.makeText(this, resultData.getString(UserGetRecommendedArtistsAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+
+    }
+
 }

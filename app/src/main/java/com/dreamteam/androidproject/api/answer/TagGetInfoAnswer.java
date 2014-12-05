@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject.newapi.answer;
+package com.dreamteam.androidproject.api.answer;
 
 /**
  * Created by nap on 12/4/2014.

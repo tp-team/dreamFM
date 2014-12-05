@@ -1,12 +1,13 @@
-package com.dreamteam.androidproject.newapi.query;
+package com.dreamteam.androidproject.api.query;
 
 import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
 import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import com.dreamteam.androidproject.newapi.template.Common;
 import com.dreamteam.androidproject.api.template.ObjectList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by nap on 12/4/2014.
