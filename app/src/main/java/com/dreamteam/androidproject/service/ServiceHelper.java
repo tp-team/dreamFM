@@ -61,23 +61,23 @@ public class ServiceHelper {
 
     // =========================================
 
-    public void cancelCommand(int requestId) {
-        Intent i = new Intent(application, ServiceApi.class);
-        i.setAction(ServiceApi.ACTION_CANCEL_COMMAND);
-        i.putExtra(ServiceApi.EXTRA_REQUEST_ID, requestId);
-
-        application.startService(i);
-        pendingActivities.remove(requestId);
-    }
+//    public void cancelCommand(int requestId) {
+//        Intent i = new Intent(application, ServiceApi.class);
+//        i.setAction(ServiceApi.ACTION_CANCEL_COMMAND);
+//        i.putExtra(ServiceApi.EXTRA_REQUEST_ID, requestId);
+//
+//        application.startService(i);
+//        pendingActivities.remove(requestId);
+//    }
 
     public boolean isPending(int requestId) {
         return pendingActivities.get(requestId) != null;
     }
 
-    public boolean check(Intent intent, Class<? extends BaseCommand> clazz) {
-        Parcelable commandExtra = intent.getParcelableExtra(ServiceApi.EXTRA_COMMAND);
-        return commandExtra != null && commandExtra.getClass().equals(clazz);
-    }
+//    public boolean check(Intent intent, Class<? extends BaseCommand> clazz) {
+//        Parcelable commandExtra = intent.getParcelableExtra(ServiceApi.EXTRA_COMMAND);
+//        return commandExtra != null && commandExtra.getClass().equals(clazz);
+//    }
 
     private int createId() {
         return idCounter.getAndIncrement();
