@@ -8,14 +8,19 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
@@ -27,9 +32,11 @@ import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.handlers.RecommendedArtistsHandler;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, LoaderCallbacks<Cursor> {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -37,6 +44,8 @@ public class MainActivity extends BaseActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static String userFeedTag = "USER_FEED_TAG";
     private SharedPreferences mSharedPreferences;
+    RecommendedArtistsQuery db;
+    SimpleCursorAdapter scAdapter;
 
     public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
 
@@ -197,6 +206,42 @@ public class MainActivity extends BaseActivity
                 Toast.makeText(this, resultData.getString(UserGetRecommendedArtistsAnswer.TEXT_STATUS), Toast.LENGTH_SHORT).show();
                 break;
             }
+        }
+
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle bndl) {
+        return new MyCursorLoader(this, db);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        scAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+    }
+
+    static class MyCursorLoader extends CursorLoader {
+
+        RecommendedArtistsQuery db;
+
+        public MyCursorLoader(Context context, RecommendedArtistsQuery db) {
+            super(context);
+            this.db = db;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = db.getTable();
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return cursor;
         }
 
     }
