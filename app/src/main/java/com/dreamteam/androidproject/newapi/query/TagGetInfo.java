@@ -1,6 +1,6 @@
 package com.dreamteam.androidproject.newapi.query;
 
-import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
+import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
 import com.dreamteam.androidproject.newapi.template.Common;
 
