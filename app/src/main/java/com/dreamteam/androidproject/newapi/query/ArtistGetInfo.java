@@ -1,12 +1,12 @@
 package com.dreamteam.androidproject.newapi.query;
 
-import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
-import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
+import com.dreamteam.androidproject.newapi.answer.ArtistGetInfoAnswer;
+import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.api.template.ObjectList;
+import com.dreamteam.androidproject.newapi.template.ObjectList;
 
 /**
  * Created by nap on 12/4/2014.
@@ -74,7 +74,7 @@ public class ArtistGetInfo extends Common {
         ObjectList<TagGetInfoAnswer> tagsList = new ObjectList<TagGetInfoAnswer>();
         for (int i = 0; i < tags.length(); i++) {
             tagAnswer.setName(tag.getJSONObject(i).getString("name"));
-            tagAnswer.setName(tag.getJSONObject(i).getString("url"));
+            tagAnswer.setUrl(tag.getJSONObject(i).getString("url"));
             tagsList.add(tagAnswer);
         }
         answer.setTags(tagsList);

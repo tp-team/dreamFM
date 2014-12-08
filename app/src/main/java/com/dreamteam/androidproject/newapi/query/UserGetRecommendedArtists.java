@@ -1,10 +1,10 @@
 package com.dreamteam.androidproject.newapi.query;
 
-import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
-import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
+import com.dreamteam.androidproject.newapi.answer.ArtistGetInfoAnswer;
+import com.dreamteam.androidproject.newapi.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
 import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.api.template.ObjectList;
+import com.dreamteam.androidproject.newapi.template.ObjectList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -79,5 +79,11 @@ public class UserGetRecommendedArtists extends Common {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        UserGetRecommendedArtists x = new UserGetRecommendedArtists("", "", "437a613726fe4ce7b7cdfb86fd608850");
+        UserGetRecommendedArtistsAnswer y = x.getRecomArtists();
+        System.out.println(y);
     }
 }
