@@ -39,6 +39,7 @@ public class UserGetRecommendedArtists extends Common {
         }
         UserGetRecommendedArtistsAnswer answer = new UserGetRecommendedArtistsAnswer();
         answer.setStatus(errorToCode(status));
+        answer.setTextStatus(status);
         if (!status.equals("ok")) {
             return answer;
         }

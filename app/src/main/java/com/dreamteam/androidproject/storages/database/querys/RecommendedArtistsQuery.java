@@ -15,10 +15,10 @@ public class RecommendedArtistsQuery extends DataBase {
 
     public RecommendedArtistsQuery(Context ctx) {
         this.ctx = ctx;
+        table = new RecommendedArtistsTable(this.ctx, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public void open() {
-        table = new RecommendedArtistsTable(ctx, DATABASE_NAME, null, DATABASE_VERSION);
         db = table.getWritableDatabase();
     }
 

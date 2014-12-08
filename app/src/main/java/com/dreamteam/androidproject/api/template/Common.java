@@ -85,6 +85,8 @@ public abstract class Common {
         if (error.equals(EMPTY_STRING)) {
             return STATUS_EMPTY_STRING;
         }
+
+
         return STATUS_UNKNOWN_ERROR;
     }
 }

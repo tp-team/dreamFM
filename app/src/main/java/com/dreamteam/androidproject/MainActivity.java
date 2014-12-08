@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.Toast;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 
+import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
 import com.dreamteam.androidproject.api.template.Common;
@@ -50,15 +51,18 @@ public class MainActivity extends BaseActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    private int recommendArtinsId = -1;
+    private int recommendArtistId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefSystem = new PreferencesSystem(getApplicationContext());
 
+        String key = prefSystem.getText(AuthAnswer.KEY);
+        Log.d("Tag_MAIN_ACTIVITY", key);
 
-        prefSystem = new PreferencesSystem(getApplicationContext());
+        recommendArtistId = getServiceHelper().getRecommendedArtists("", "10", key);
+
         mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES),
                 R.drawable.mail2, prefSystem.getText(UserInfoAnswer.PLAYS_COUNT), prefSystem.getText(UserInfoAnswer.REGISTERED));
 
@@ -178,7 +182,7 @@ public class MainActivity extends BaseActivity
     public void onServiceCallback(int requestId, Intent requestIntent, int resultCode, Bundle resultData) {
         super.onServiceCallback(requestId, requestIntent, resultCode, resultData);
 
-        if (MainActivity.this.recommendArtinsId == requestId) {
+        if (MainActivity.this.recommendArtistId == requestId) {
             callbackRecommendArtist(requestIntent, resultCode, resultData);
         }
 
