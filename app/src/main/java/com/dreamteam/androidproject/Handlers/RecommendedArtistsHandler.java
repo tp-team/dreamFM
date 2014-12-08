@@ -21,7 +21,6 @@ public class RecommendedArtistsHandler extends BaseCommand {
     private String key;
     private String page;
     private String limit;
-    private RecommendedArtistsQuery queryDB;
 
     @Override
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
@@ -29,32 +28,37 @@ public class RecommendedArtistsHandler extends BaseCommand {
         try {
 
             UserGetRecommendedArtists recommend = new UserGetRecommendedArtists("", "10", key);
-            UserGetRecommendedArtistsAnswer recommendAnswer = recommend.getRecomArtists();
-            bun = recommendAnswer.getBundleObject();
+            UserGetRecommendedArtistsAnswer answer = recommend.getRecomArtists();
+            bun = answer.getBundleObject();
 
             context.deleteDatabase("MY_DATABASE");
 
-            queryDB = new RecommendedArtistsQuery(context);
-            queryDB.open();
+            ObjectList<ArtistGetInfoAnswer> list = answer.getRecommendations();
 
-            ObjectList<ArtistGetInfoAnswer> list = recommendAnswer.getRecommendations();
+            this.setInDataBase(list, context);
 
-            Log.d("TAG_DATABASE", Integer.toString(list.getLength()));
-
-            for (int i = 0; i < list.getLength(); ++i) {
-                ArtistGetInfoAnswer info = list.get(i);
-                Log.d("TAAG_IIII", Integer.toString(i));
-                Log.d("TAG_DATABASE", info.getName());
-                Log.d("TAG_DATABASE", info.getImagelarge());
-                queryDB.insert(info.getName(), info.getImagelarge());
-            }
-            queryDB.close();
             notifySuccess(bun);
         } catch (Exception e) {
             bun = new Bundle();
             bun.putString(AuthAnswer.TEXT_STATUS, "Error request");
             notifyFailure(bun);
         }
+    }
+
+
+    public void setInDataBase(ObjectList<ArtistGetInfoAnswer> list, Context context) {
+        RecommendedArtistsQuery queryDB = new RecommendedArtistsQuery(context);
+        queryDB.open();
+
+        for (int i = 0; i < list.getLength(); ++i) {
+            ArtistGetInfoAnswer info = list.get(i);
+            Log.d("TAAG_IIII", Integer.toString(i));
+            Log.d("TAG_DATABASE", info.getName());
+            Log.d("TAG_DATABASE", info.getImagelarge());
+            queryDB.insert(info.getName(), info.getImagelarge());
+        }
+        queryDB.close();
+
     }
 
     @Override

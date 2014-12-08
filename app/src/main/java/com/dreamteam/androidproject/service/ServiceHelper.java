@@ -11,8 +11,11 @@ import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.util.SparseArray;
+
+import com.dreamteam.androidproject.api.query.UserGetNewReleases;
 import com.dreamteam.androidproject.handlers.AuthorizationHandler;
 import com.dreamteam.androidproject.handlers.BaseCommand;
+import com.dreamteam.androidproject.handlers.NewReleasesHandler;
 import com.dreamteam.androidproject.handlers.RecommendedArtistsHandler;
 import com.dreamteam.androidproject.handlers.UserInfoHandler;
 
@@ -42,20 +45,26 @@ public class ServiceHelper {
     // =========================================
 
     public int getAuthorization(String username, String password) {
-        final int requestId = createId();
+        int requestId = createId();
         Intent i = createIntent(application, new AuthorizationHandler(username, password), requestId);
         return runRequest(requestId, i);
     }
 
     public int getUserInfo(String username) {
-        final int requestId = createId();
+        int requestId = createId();
         Intent i = createIntent(application, new UserInfoHandler(username), requestId);
         return runRequest(requestId, i);
     }
 
     public int getRecommendedArtists(String page, String limit, String key) {
-        final int requestId = createId();
+        int requestId = createId();
         Intent i = createIntent(application, new RecommendedArtistsHandler(page, limit, key), requestId);
+        return runRequest(requestId, i);
+    }
+
+    public int getNewReleases(String username) {
+        int requestId = createId();
+        Intent i = createIntent(application, new NewReleasesHandler(username), requestId);
         return runRequest(requestId, i);
     }
 

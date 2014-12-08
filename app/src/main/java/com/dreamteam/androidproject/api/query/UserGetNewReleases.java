@@ -1,16 +1,13 @@
-package com.dreamteam.androidproject.newapi.query;
+package com.dreamteam.androidproject.api.query;
 
-import com.dreamteam.androidproject.newapi.answer.AlbumGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.answer.UserGetNewReleasesAnswer;
-import com.dreamteam.androidproject.newapi.connection.SecretData;
+import com.dreamteam.androidproject.api.answer.AlbumGetInfoAnswer;
+import com.dreamteam.androidproject.api.answer.UserGetNewReleasesAnswer;
+import com.dreamteam.androidproject.api.connection.SecretData;
+import com.dreamteam.androidproject.api.template.Common;
+import com.dreamteam.androidproject.api.template.ObjectList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.newapi.template.ObjectList;
-
-/**
- * Created by nap on 12/5/2014.
- */
 
 public class UserGetNewReleases extends Common {
     private String user;
@@ -30,6 +27,7 @@ public class UserGetNewReleases extends Common {
         }
         UserGetNewReleasesAnswer answer = new UserGetNewReleasesAnswer();
         answer.setStatus(errorToCode(status));
+        answer.setTextStatus(status);
         if (!status.equals("ok")) {
             return answer;
         }
