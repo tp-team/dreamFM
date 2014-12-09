@@ -3,11 +3,10 @@ package com.dreamteam.androidproject.newapi.query;
 import com.dreamteam.androidproject.newapi.answer.ArtistGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
-import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.newapi.template.ObjectList;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+import com.dreamteam.androidproject.newapi.template.Common;
+import com.dreamteam.androidproject.newapi.template.ObjectList;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -46,9 +45,9 @@ public class UserGetRecommendedArtists extends Common {
         JSONArray list = recommendations.getJSONArray("artist");
         JSONArray image;
         JSONObject typeImage;
-        ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
         ObjectList<ArtistGetInfoAnswer> artistsList = new ObjectList<ArtistGetInfoAnswer>();
         for (int i = 0; i < list.length(); i++) {
+            ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
             artistAnswer.setName(list.getJSONObject(i).getString("name"));
             artistAnswer.setMbid(list.getJSONObject(i).getString("mbid"));
             artistAnswer.setUrl(list.getJSONObject(i).getString("url"));
@@ -79,11 +78,5 @@ public class UserGetRecommendedArtists extends Common {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        UserGetRecommendedArtists x = new UserGetRecommendedArtists("", "", "437a613726fe4ce7b7cdfb86fd608850");
-        UserGetRecommendedArtistsAnswer y = x.getRecomArtists();
-        System.out.println(y);
     }
 }

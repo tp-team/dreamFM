@@ -2,9 +2,8 @@ package com.dreamteam.androidproject.newapi.query;
 
 import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
-import com.dreamteam.androidproject.newapi.template.Common;
-
 import org.json.JSONObject;
+import com.dreamteam.androidproject.newapi.template.Common;
 
 /**
  * Created by nap on 12/4/2014.
