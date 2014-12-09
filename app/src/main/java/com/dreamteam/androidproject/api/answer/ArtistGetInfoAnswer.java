@@ -14,6 +14,8 @@ public class ArtistGetInfoAnswer {
     private String imagesmall;
     private String imagemedium;
     private String imagelarge;
+    private String imageextralarge;
+    private String imagemega;
     private String streamable;
     private String listeners;
     private String playcount;
@@ -77,6 +79,22 @@ public class ArtistGetInfoAnswer {
 
     public void setImagelarge(String imagelarge) {
         this.imagelarge = imagelarge;
+    }
+
+    public String getImageextralarge() {
+        return imageextralarge;
+    }
+
+    public void setImageextralarge(String imageextralarge) {
+        this.imageextralarge = imageextralarge;
+    }
+
+    public String getImagemega() {
+        return imagemega;
+    }
+
+    public void setImagemega(String imagemega) {
+        this.imagemega = imagemega;
     }
 
     public String getStreamable() {

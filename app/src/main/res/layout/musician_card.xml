@@ -38,52 +38,52 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="3dp"/>
 
-            <TextView
-                android:id="@+id/musician_card_similars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="Similar to Nightwish and Epica"
-                android:textColor="#CCFFFFFF"
-                android:textSize="12sp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/musician_card_similars"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:singleLine="true"-->
+                <!--android:text="Similar to Nightwish and Epica"-->
+                <!--android:textColor="#CCFFFFFF"-->
+                <!--android:textSize="12sp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginStart="8dp"/>-->
 
         </LinearLayout>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/musician_card_similars_image2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/epica"
-            app:border_width="1dp"
-            app:border_color="@color/white"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="48dp"
-            />
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/musician_card_similars_image2"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:src="@drawable/epica"-->
+            <!--app:border_width="1dp"-->
+            <!--app:border_color="@color/white"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginRight="4dp"-->
+            <!--android:layout_marginEnd="4dp"-->
+            <!--android:layout_marginBottom="48dp"-->
+            <!--/>-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/musician_card_similars_image1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/nightwish"
-            app:border_width="1dp"
-            app:border_color="@color/white"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="36dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="48dp"
-            />
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/musician_card_similars_image1"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:src="@drawable/nightwish"-->
+            <!--app:border_width="1dp"-->
+            <!--app:border_color="@color/white"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginRight="36dp"-->
+            <!--android:layout_marginEnd="36dp"-->
+            <!--android:layout_marginBottom="48dp"-->
+            <!--/>-->
 
     </RelativeLayout>
 

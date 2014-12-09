@@ -25,6 +25,7 @@ import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.components.User;
 import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
+import com.dreamteam.androidproject.storages.database.querys.NewReleasesQuery;
 import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
 import java.util.ArrayList;
@@ -42,7 +43,8 @@ public class MainActivity extends BaseActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static String userFeedTag = "USER_FEED_TAG";
     private SharedPreferences mSharedPreferences;
-    RecommendedArtistsQuery db;
+    RecommendedArtistsQuery artistsDB;
+    NewReleasesQuery releasesDB;
     private Map<String, SimpleCursorAdapter> mAdapters;
 
     private User mUser;
@@ -68,14 +70,16 @@ public class MainActivity extends BaseActivity
 
         mAdapters = new HashMap<String, SimpleCursorAdapter>();
 
-        recommendArtistId = getServiceHelper().getRecommendedArtists("", "10", key);
+        recommendArtistId = getServiceHelper().getRecommendedArtists("1", "6", key);
         newReleasesId = getServiceHelper().getNewReleases(mUser.getNickName());
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Log.d("ADDRESS", mSharedPreferences.getString("address", ""));
 
-        db = new RecommendedArtistsQuery(this);
-        db.open();
+        artistsDB = new RecommendedArtistsQuery(this);
+        artistsDB.open();
+        releasesDB = new NewReleasesQuery(this);
+        releasesDB.open();
 
         FragmentManager fragmentManager = getFragmentManager();
 
@@ -98,7 +102,7 @@ public class MainActivity extends BaseActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         getSupportLoaderManager().initLoader(0, null, this);
-
+        getSupportLoaderManager().initLoader(1, null, this);
     }
 
     @Override
@@ -220,12 +224,25 @@ public class MainActivity extends BaseActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle bndl) {
-        return new MyCursorLoader(this, db);
+        switch (id) {
+            case 0:
+                return new ArtistsCursorLoader(this, artistsDB);
+            case 1:
+                //return new ReleasesCursorLoader(this, releasesDB);
+        }
+        return null;
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        mAdapters.get("artists").swapCursor(cursor);
+        switch (loader.getId()){
+            case 0:
+                mAdapters.get("artists").swapCursor(cursor);
+                break;
+            case 1:
+                //mAdapters.get("releases").swapCursor(cursor);
+                break;
+        }
     }
 
     @Override
@@ -240,11 +257,33 @@ public class MainActivity extends BaseActivity
         return mAdapters.get(type);
     }
 
-    static class MyCursorLoader extends CursorLoader {
+    static class ArtistsCursorLoader extends CursorLoader {
 
         RecommendedArtistsQuery db;
 
-        public MyCursorLoader(Context context, RecommendedArtistsQuery db) {
+        public ArtistsCursorLoader(Context context, RecommendedArtistsQuery db) {
+            super(context);
+            this.db = db;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = db.getTable();
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return cursor;
+        }
+
+    }
+
+    static class ReleasesCursorLoader extends CursorLoader {
+
+        NewReleasesQuery db;
+
+        public ReleasesCursorLoader(Context context, NewReleasesQuery db) {
             super(context);
             this.db = db;
         }

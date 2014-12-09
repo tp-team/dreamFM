@@ -63,6 +63,10 @@ public class UserGetRecommendedArtists extends Common {
             artistAnswer.setImagemedium(typeImage.getString("#text"));
             typeImage = image.getJSONObject(2);
             artistAnswer.setImagelarge(typeImage.getString("#text"));
+            typeImage = image.getJSONObject(3);
+            artistAnswer.setImageextralarge(typeImage.getString("#text"));
+            typeImage = image.getJSONObject(4);
+            artistAnswer.setImagemega(typeImage.getString("#text"));
             artistAnswer.setStreamable(list.getJSONObject(i).getString("streamable"));
             artistsList.add(artistAnswer);
         }
