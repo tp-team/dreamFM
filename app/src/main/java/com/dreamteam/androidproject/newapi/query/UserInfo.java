@@ -7,6 +7,7 @@ package com.dreamteam.androidproject.newapi.query;
 import com.dreamteam.androidproject.newapi.answer.UserInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import com.dreamteam.androidproject.newapi.template.Common;
 
@@ -18,7 +19,7 @@ public class UserInfo extends Common {
     }
 
     @Override
-    protected UserInfoAnswer parse(String str) throws Exception {
+    protected UserInfoAnswer parse(String str) throws JSONException {
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {

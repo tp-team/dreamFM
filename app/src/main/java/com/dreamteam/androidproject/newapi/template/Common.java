@@ -6,6 +6,7 @@ package com.dreamteam.androidproject.newapi.template;
 
 import com.dreamteam.androidproject.newapi.connection.SecretData;
 import com.dreamteam.androidproject.newapi.connection.URLConnector;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.math.BigInteger;
 import java.net.UnknownHostException;
@@ -23,19 +24,29 @@ public abstract class Common {
     protected final String NO_INTERNET = "No internet connection!";
     protected final String INVALID_SESSION_KEY = "";
 
-    protected abstract Object parse(String str) throws Exception;
+    protected abstract Object parse(String str) throws JSONException;
 
-    protected String getStatus(JSONObject obj) throws Exception {
+    protected String getStatus(JSONObject obj) {
         if (!obj.has("error")) {
             return "ok";
         }
         else {
-            return (String) obj.get("message");
+            try {
+                return (String) obj.get("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 
-    protected String strToMD5(String str) throws NoSuchAlgorithmException {
-        MessageDigest m = MessageDigest.getInstance("MD5");
+    protected String strToMD5(String str) {
+        MessageDigest m = null;
+        try {
+            m = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         m.reset();
         m.update(str.getBytes());
         byte[] digest = m.digest();
