@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.dreamteam.androidproject.components.EventAdapter;
 import com.dreamteam.androidproject.components.Musician;
 import com.dreamteam.androidproject.components.MusicianAdapter;
 import com.dreamteam.androidproject.customViews.ExpandableHeightGridView;
+import com.dreamteam.androidproject.storages.database.DataBase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +31,7 @@ public class UserFeedFragment extends Fragment {
     private View mUserFeed;
     private View musicView;
     private ArrayList<Musician> musicList;
+    //private MainActivity mActivity;
 
     public UserFeedFragment() {
     }
@@ -36,6 +39,7 @@ public class UserFeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //mActivity = (MainActivity) getActivity();
         mUserFeed = inflater.inflate(R.layout.user_feed, container, false);
 
         setMusiciansGrid();
@@ -58,29 +62,36 @@ public class UserFeedFragment extends Fragment {
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
-        Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
-        Musician child2 = new Musician("Epica", R.drawable.epica, null);
-        ArrayList<Musician> children = new ArrayList<Musician>();
-        children.add(child1);
-        children.add(child2);
-        Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
-        ArrayList<Musician> children2 = new ArrayList<Musician>();
-        children2.add(parent);
-        children2.add(child1);
-        Musician parent2 = new Musician("Epica", R.drawable.epica, children2);
+//        Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
+//        Musician child2 = new Musician("Epica", R.drawable.epica, null);
+//        ArrayList<Musician> children = new ArrayList<Musician>();
+//        children.add(child1);
+//        children.add(child2);
+//        Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
+//        ArrayList<Musician> children2 = new ArrayList<Musician>();
+//        children2.add(parent);
+//        children2.add(child1);
+//        Musician parent2 = new Musician("Epica", R.drawable.epica, children2);
+//
+//        items.add(parent);
+//        items.add(parent2);
+//        items.add(parent2);
+//        items.add(parent);
+//        items.add(parent);
+//        items.add(parent2);
+//        items.add(parent2);
+//        items.add(parent);
+//
+//        MusicianAdapter adapter = new MusicianAdapter(getActivity().getActionBar().getThemedContext(), items);
+//        musicList = items;
 
-        items.add(parent);
-        items.add(parent2);
-        items.add(parent2);
-        items.add(parent);
-        items.add(parent);
-        items.add(parent2);
-        items.add(parent2);
-        items.add(parent);
+        String[] from = new String[] { DataBase.RECOMMEND_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
+        int[] to = new int[] { R.id.musician_card_image, R.id.musician_card_name };
 
-        MusicianAdapter adapter = new MusicianAdapter(getActivity().getActionBar().getThemedContext(), items);
-        musicList = items;
-        musiciansGrid.setAdapter(adapter);
+        // создааем адаптер и настраиваем список
+        ((MainActivity) getActivity()).setCursorAdapter("artists", new SimpleCursorAdapter(getActivity(), R.layout.musician_card, null, from, to, 0));
+
+        musiciansGrid.setAdapter(((MainActivity) getActivity()).getCursorAdapter("artists"));
         musiciansGrid.setExpanded(true);
 
     }

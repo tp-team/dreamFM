@@ -1,14 +1,16 @@
 package com.dreamteam.androidproject;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 import com.dreamteam.androidproject.service.FMApplication;
 import com.dreamteam.androidproject.service.ServiceCallbackListener;
 import com.dreamteam.androidproject.service.ServiceHelper;
 
-public abstract class BaseActivity extends Activity implements ServiceCallbackListener {
+public abstract class BaseActivity extends FragmentActivity implements ServiceCallbackListener {
 
     private ServiceHelper serviceHelper;
 

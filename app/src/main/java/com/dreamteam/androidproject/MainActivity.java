@@ -27,6 +27,9 @@ import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
 import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -40,9 +43,7 @@ public class MainActivity extends BaseActivity
     static String userFeedTag = "USER_FEED_TAG";
     private SharedPreferences mSharedPreferences;
     RecommendedArtistsQuery db;
-    SimpleCursorAdapter scAdapter;
-
-    public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
+    private Map<String, SimpleCursorAdapter> mAdapters;
 
     private User mUser;
 
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity
      */
     private CharSequence mTitle;
     private int recommendArtistId = -1;
+    private int newReleasesId = -2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +63,19 @@ public class MainActivity extends BaseActivity
         String key = prefSystem.getText(AuthAnswer.KEY);
         Log.d("Tag_MAIN_ACTIVITY", key);
 
-        recommendArtistId = getServiceHelper().getRecommendedArtists("", "10", key);
-
-        mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES),
+        mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.NICKNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES),
                 R.drawable.mail2, prefSystem.getText(UserInfoAnswer.PLAYS_COUNT), prefSystem.getText(UserInfoAnswer.REGISTERED));
+
+        mAdapters = new HashMap<String, SimpleCursorAdapter>();
+
+        recommendArtistId = getServiceHelper().getRecommendedArtists("", "10", key);
+        newReleasesId = getServiceHelper().getNewReleases(mUser.getNickName());
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Log.d("ADDRESS", mSharedPreferences.getString("address", ""));
+
+        db = new RecommendedArtistsQuery(this);
+        db.open();
 
         FragmentManager fragmentManager = getFragmentManager();
 
@@ -88,6 +96,8 @@ public class MainActivity extends BaseActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        getSupportLoaderManager().initLoader(0, null, this);
 
     }
 
@@ -215,11 +225,19 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        scAdapter.swapCursor(cursor);
+        mAdapters.get("artists").swapCursor(cursor);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+    }
+
+    public void setCursorAdapter(String type, SimpleCursorAdapter adapter) {
+        mAdapters.put(type, adapter);
+    }
+
+    public SimpleCursorAdapter getCursorAdapter(String type) {
+        return mAdapters.get(type);
     }
 
     static class MyCursorLoader extends CursorLoader {

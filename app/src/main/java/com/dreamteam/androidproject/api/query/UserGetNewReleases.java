@@ -1,5 +1,7 @@
 package com.dreamteam.androidproject.api.query;
 
+import android.util.Log;
+
 import com.dreamteam.androidproject.api.answer.AlbumGetInfoAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetNewReleasesAnswer;
 import com.dreamteam.androidproject.api.connection.SecretData;
@@ -18,6 +20,7 @@ public class UserGetNewReleases extends Common {
 
     @Override
     protected UserGetNewReleasesAnswer parse(String str) throws Exception {
+        Log.d("NEW RELEASES", str);
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {
