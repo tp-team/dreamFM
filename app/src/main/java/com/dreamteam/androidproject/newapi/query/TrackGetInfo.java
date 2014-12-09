@@ -6,6 +6,7 @@ import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.answer.TrackGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import com.dreamteam.androidproject.newapi.template.Common;
 import com.dreamteam.androidproject.newapi.template.ObjectList;
@@ -26,7 +27,7 @@ public class TrackGetInfo extends Common {
     }
 
     @Override
-    protected TrackGetInfoAnswer parse(String str) throws Exception {
+    protected TrackGetInfoAnswer parse(String str) throws JSONException {
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {
