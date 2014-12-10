@@ -17,6 +17,7 @@ import com.dreamteam.androidproject.handlers.AlbumInfoHandler;
 import com.dreamteam.androidproject.handlers.ArtistInfoHandler;
 import com.dreamteam.androidproject.handlers.AuthorizationHandler;
 import com.dreamteam.androidproject.handlers.BaseCommand;
+import com.dreamteam.androidproject.handlers.EventInfoHandler;
 import com.dreamteam.androidproject.handlers.NewReleasesHandler;
 import com.dreamteam.androidproject.handlers.RecommendedArtistsHandler;
 import com.dreamteam.androidproject.handlers.TrackInfoHandler;
@@ -86,6 +87,12 @@ public class ServiceHelper {
     public int getTrackInfo(String track, String artist, String username) {
         int requestId = createId();
         Intent i = createIntent(application, new TrackInfoHandler(track, artist, username), requestId);
+        return runRequest(requestId, i);
+    }
+
+    public int getEventInfo(String event) {
+        int requestId = createId();
+        Intent i = createIntent(application, new EventInfoHandler(event), requestId);
         return runRequest(requestId, i);
     }
 
