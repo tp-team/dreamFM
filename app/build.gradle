@@ -26,4 +26,5 @@ dependencies {
     compile 'javax.inject:javax.inject:1@jar'
     compile 'org.json:json:20140107'
     compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'com.squareup.picasso:picasso:2.4.0'
 }
