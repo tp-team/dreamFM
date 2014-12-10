@@ -24,7 +24,7 @@ public abstract class Common {
     protected final String NO_INTERNET = "No internet connection!";
     protected final String INVALID_SESSION_KEY = "";
 
-    protected abstract Object parse(String str) throws JSONException;
+    protected abstract Object parse(String str) throws Exception;
 
     protected String getStatus(JSONObject obj) {
         if (!obj.has("error")) {

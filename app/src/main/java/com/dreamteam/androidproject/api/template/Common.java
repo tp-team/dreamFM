@@ -6,6 +6,8 @@ package com.dreamteam.androidproject.api.template;
 
 import com.dreamteam.androidproject.api.connection.SecretData;
 import com.dreamteam.androidproject.api.connection.URLConnector;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.math.BigInteger;
 import java.net.UnknownHostException;

@@ -68,20 +68,23 @@ public class UserFeedFragment extends Fragment {
         String[] from = new String[] { DataBase.RECOMMEND_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
         int[] to = new int[] { R.id.musician_card_image, R.id.musician_card_name };
 
-        // создааем адаптер и настраиваем список
-        mActivity.setCursorAdapter("artists", new SimpleCursorAdapter(getActivity(), R.layout.musician_card, null, from, to, 0));
+        if (mActivity.getCursorAdapter("artists") == null) {
+            Log.d("USER FEED FRAGMENT", "CREATING NEW ADAPTER");
+            // создааем адаптер и настраиваем список
+            mActivity.setCursorAdapter("artists", new SimpleCursorAdapter(getActivity(), R.layout.musician_card, null, from, to, 0));
 
-        mActivity.getCursorAdapter("artists").setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                if (view.getId() == R.id.musician_card_image) {
-                    ImageView v = (ImageView) view;
-                    new DownloadImageTask(v).execute(cursor.getString(columnIndex));
-                    return true;
+            mActivity.getCursorAdapter("artists").setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+                @Override
+                public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                    if (view.getId() == R.id.musician_card_image) {
+                        ImageView v = (ImageView) view;
+                        new DownloadImageTask(v).execute(cursor.getString(columnIndex));
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
         musiciansGrid.setAdapter(mActivity.getCursorAdapter("artists"));
         musiciansGrid.setExpanded(true);
 
@@ -99,17 +102,25 @@ public class UserFeedFragment extends Fragment {
 
         ExpandableHeightGridView albumsGrid = (ExpandableHeightGridView) albumsView.findViewById(R.id.feed_grid);
 
-        Musician creator = new Musician("Within Temptation", R.drawable.withintemptation, null);
-        Album album = new Album("Hydra", 2014, R.drawable.hydra, creator);
+        String[] from = new String[] { DataBase.NEW_RELEASES_COLUMN_URL_ULR, DataBase.NEW_RELEASES_COLUMN_NAME };
+        int[] to = new int[] { R.id.album_card_image, R.id.album_card_description };
 
-        items.add(album);
-        items.add(album);
-        items.add(album);
-        items.add(album);
+        // создааем адаптер и настраиваем список
+        mActivity.setCursorAdapter("releases", new SimpleCursorAdapter(getActivity(), R.layout.album_card, null, from, to, 0));
 
-        AlbumAdapter adapter = new AlbumAdapter(getActivity().getActionBar().getThemedContext(), items);
+        mActivity.getCursorAdapter("releases").setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (view.getId() == R.id.album_card_image) {
+                    ImageView v = (ImageView) view;
+                    new DownloadImageTask(v).execute(cursor.getString(columnIndex));
+                    return true;
+                }
+                return false;
+            }
+        });
 
-        albumsGrid.setAdapter(adapter);
+        albumsGrid.setAdapter(mActivity.getCursorAdapter("releases"));
         albumsGrid.setExpanded(true);
 
     }

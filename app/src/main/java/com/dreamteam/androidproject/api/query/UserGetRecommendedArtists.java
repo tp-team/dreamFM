@@ -50,9 +50,9 @@ public class UserGetRecommendedArtists extends Common {
         JSONArray list = recommendations.getJSONArray("artist");
         JSONArray image;
         JSONObject typeImage;
-        ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
         ObjectList<ArtistGetInfoAnswer> artistsList = new ObjectList<ArtistGetInfoAnswer>();
         for (int i = 0; i < list.length(); i++) {
+            ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
             artistAnswer.setName(list.getJSONObject(i).getString("name"));
             artistAnswer.setMbid(list.getJSONObject(i).getString("mbid"));
             artistAnswer.setUrl(list.getJSONObject(i).getString("url"));

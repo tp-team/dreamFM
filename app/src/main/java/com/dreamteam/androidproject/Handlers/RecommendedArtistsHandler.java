@@ -27,7 +27,7 @@ public class RecommendedArtistsHandler extends BaseCommand {
         Bundle bun;
         try {
 
-            UserGetRecommendedArtists recommend = new UserGetRecommendedArtists("", "10", key);
+            UserGetRecommendedArtists recommend = new UserGetRecommendedArtists(page, limit, key);
             UserGetRecommendedArtistsAnswer answer = recommend.getRecomArtists();
             bun = answer.getBundleObject();
 

@@ -9,6 +9,7 @@ import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.api.template.ObjectList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserGetNewReleases extends Common {
@@ -35,7 +36,14 @@ public class UserGetNewReleases extends Common {
             return answer;
         }
         JSONObject releases = obj.getJSONObject("albums");
-        JSONArray list = releases.getJSONArray("album");
+        JSONArray list;
+        try {
+            list = releases.getJSONArray("album");
+        } catch (JSONException e) {
+            list = new JSONArray();
+            Log.d("NEW RELEASES", "ZZZ");
+            list.put(0, releases.getJSONObject("album"));
+        }
         JSONArray image;
         JSONObject typeImage;
         AlbumGetInfoAnswer album = new AlbumGetInfoAnswer();
