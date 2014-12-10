@@ -7,12 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase extends SQLiteOpenHelper {
 
+    public static final String COLUMN_ID = "_id";
+
     public static final String RECOMMEND_NAME_TABLE     = "RECOMMENDED_ARTISTS";
     public static final String RECOMMEND_COLUMN_NAME    = "ARTIST_NAME";
     public static final String RECOMMEND_COLUMN_STREAMABLE = "RECOMMEND_COLUMN_STREAMABLE";
     public static final String RECOMMEND_COLUMN_URL_IMG = "URL_IMG";
     private String RECOMMEND_CREATE = "create table " + RECOMMEND_NAME_TABLE + " ("
-                                      + "id integer primary key autoincrement,"
+                                      + COLUMN_ID + " integer primary key autoincrement,"
                                       + RECOMMEND_COLUMN_NAME + " text,"
                                       + RECOMMEND_COLUMN_STREAMABLE + " text,"
                                       + RECOMMEND_COLUMN_URL_IMG + " text" + ");";
@@ -22,7 +24,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String NEW_RELEASES_COLUMN_MBID    = "NEW_RELEASES_MBID";
     public static final String NEW_RELEASES_COLUMN_URL_ULR = "NEW_RELEASES_URL_IMG";
     private String NEW_RELEASES_CREATE = "create table " + NEW_RELEASES_NAME_TABLE + " ("
-                                         + "id integer primary key autoincrement,"
+                                         + COLUMN_ID + " integer primary key autoincrement,"
                                          + NEW_RELEASES_COLUMN_NAME  + " text,"
                                          + NEW_RELEASES_COLUMN_MBID  + " text,"
                                          + NEW_RELEASES_COLUMN_URL_ULR + " text" + ");";

@@ -138,6 +138,7 @@ public class AuthorizationActivity extends BaseActivity {
                 String status = resultData.getString(UserInfoAnswer.STATUS_USER_INFO);
                 if (status.equals(Common.STATUS_OK)) {
                     prefSystem.setText(UserInfoAnswer.REALNAME, resultData.getString(UserInfoAnswer.REALNAME));
+                    prefSystem.setText(UserInfoAnswer.NICKNAME, resultData.getString(UserInfoAnswer.NICKNAME));
                     prefSystem.setText(UserInfoAnswer.PLAYS_COUNT, resultData.getString(UserInfoAnswer.PLAYS_COUNT));
                     prefSystem.setText(UserInfoAnswer.USER_PHOTO_RES, resultData.getString(UserInfoAnswer.USER_PHOTO_RES));
                     prefSystem.setText(UserInfoAnswer.USER_BIG_IMAGE_RES, resultData.getString(UserInfoAnswer.USER_BIG_IMAGE_RES));

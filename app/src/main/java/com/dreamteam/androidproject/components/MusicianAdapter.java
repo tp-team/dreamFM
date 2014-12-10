@@ -59,19 +59,19 @@ public class MusicianAdapter extends ArrayAdapter<Musician> {
             TextView musicianName = (TextView) v.findViewById(R.id.musician_card_name);
             musicianName.setText(si.getMusicianName());
 
-            ArrayList<Musician> similars = si.getSimilarMusicians();
-            Musician similar1 = similars.get(0);
-            Musician similar2 = similars.get(1);
-
-            TextView musicianSimilars = (TextView) v.findViewById(R.id.musician_card_similars);
-            musicianSimilars.setText("Similar to " + similar1.getMusicianName() + " and " +
-                similar2.getMusicianName());
-
-            ImageView similarImage1 = (ImageView) v.findViewById(R.id.musician_card_similars_image1);
-            similarImage1.setImageResource(similar1.getMusicianImageRes());
-
-            ImageView similarImage2 = (ImageView) v.findViewById(R.id.musician_card_similars_image2);
-            similarImage2.setImageResource(similar2.getMusicianImageRes());
+//            ArrayList<Musician> similars = si.getSimilarMusicians();
+//            Musician similar1 = similars.get(0);
+//            Musician similar2 = similars.get(1);
+//
+//            TextView musicianSimilars = (TextView) v.findViewById(R.id.musician_card_similars);
+//            musicianSimilars.setText("Similar to " + similar1.getMusicianName() + " and " +
+//                similar2.getMusicianName());
+//
+//            ImageView similarImage1 = (ImageView) v.findViewById(R.id.musician_card_similars_image1);
+//            similarImage1.setImageResource(similar1.getMusicianImageRes());
+//
+//            ImageView similarImage2 = (ImageView) v.findViewById(R.id.musician_card_similars_image2);
+//            similarImage2.setImageResource(similar2.getMusicianImageRes());
 
         }
         return v;

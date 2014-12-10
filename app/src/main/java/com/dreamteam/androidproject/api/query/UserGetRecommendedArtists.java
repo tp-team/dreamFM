@@ -1,5 +1,7 @@
 package com.dreamteam.androidproject.api.query;
 
+import android.util.Log;
+
 import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
@@ -7,6 +9,7 @@ import com.dreamteam.androidproject.newapi.template.Common;
 import com.dreamteam.androidproject.api.template.ObjectList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.NoSuchAlgorithmException;
@@ -21,15 +24,24 @@ public class UserGetRecommendedArtists extends Common {
     private String sign;
     private String sessionKey;
 
-    public UserGetRecommendedArtists(String page, String limit, String sessionKey) throws NoSuchAlgorithmException {
+    public UserGetRecommendedArtists(String page, String limit, String sessionKey) {
         this.page = page;
         this.limit = limit;
-        this.sign = strToMD5("api_key" + SecretData.KEY + "limit" + this.limit +"methoduser.getRecommendedArtists" + "page" + this.page + "sk" + sessionKey + SecretData.SECRET);
         this.sessionKey = sessionKey;
+        if (this.limit.equals("0") || this.limit.equals("1")) {
+            this.limit = "2";
+        }
+        if (this.page.equals("0")) {
+            this.page = "1";
+        }
+        this.sign = strToMD5("api_key" + SecretData.KEY + "limit" +
+                this.limit +"methoduser.getRecommendedArtists" + "page" +
+                        this.page + "sk" + sessionKey + SecretData.SECRET);
     }
 
     @Override
-    protected UserGetRecommendedArtistsAnswer parse(String str) throws Exception {
+    protected UserGetRecommendedArtistsAnswer parse(String str) throws JSONException {
+        Log.d("RECOMMENDATIONS", str);
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {
@@ -47,9 +59,9 @@ public class UserGetRecommendedArtists extends Common {
         JSONArray list = recommendations.getJSONArray("artist");
         JSONArray image;
         JSONObject typeImage;
-        ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
         ObjectList<ArtistGetInfoAnswer> artistsList = new ObjectList<ArtistGetInfoAnswer>();
         for (int i = 0; i < list.length(); i++) {
+            ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
             artistAnswer.setName(list.getJSONObject(i).getString("name"));
             artistAnswer.setMbid(list.getJSONObject(i).getString("mbid"));
             artistAnswer.setUrl(list.getJSONObject(i).getString("url"));
@@ -60,6 +72,10 @@ public class UserGetRecommendedArtists extends Common {
             artistAnswer.setImagemedium(typeImage.getString("#text"));
             typeImage = image.getJSONObject(2);
             artistAnswer.setImagelarge(typeImage.getString("#text"));
+            typeImage = image.getJSONObject(3);
+            artistAnswer.setImageextralarge(typeImage.getString("#text"));
+            typeImage = image.getJSONObject(4);
+            artistAnswer.setImagemega(typeImage.getString("#text"));
             artistAnswer.setStreamable(list.getJSONObject(i).getString("streamable"));
             artistsList.add(artistAnswer);
         }

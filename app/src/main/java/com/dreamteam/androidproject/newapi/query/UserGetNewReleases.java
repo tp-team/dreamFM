@@ -1,15 +1,17 @@
-package com.dreamteam.androidproject.api.query;
+package com.dreamteam.androidproject.newapi.query;
 
-import android.util.Log;
-
-import com.dreamteam.androidproject.api.answer.AlbumGetInfoAnswer;
-import com.dreamteam.androidproject.api.answer.UserGetNewReleasesAnswer;
-import com.dreamteam.androidproject.api.connection.SecretData;
-import com.dreamteam.androidproject.api.template.Common;
-import com.dreamteam.androidproject.api.template.ObjectList;
-
+import com.dreamteam.androidproject.newapi.answer.AlbumGetInfoAnswer;
+import com.dreamteam.androidproject.newapi.answer.UserGetNewReleasesAnswer;
+import com.dreamteam.androidproject.newapi.connection.SecretData;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import com.dreamteam.androidproject.newapi.template.Common;
+import com.dreamteam.androidproject.newapi.template.ObjectList;
+
+/**
+ * Created by nap on 12/5/2014.
+ */
 
 public class UserGetNewReleases extends Common {
     private String user;
@@ -19,8 +21,7 @@ public class UserGetNewReleases extends Common {
     }
 
     @Override
-    protected UserGetNewReleasesAnswer parse(String str) throws Exception {
-        Log.d("NEW RELEASES", str);
+    protected UserGetNewReleasesAnswer parse(String str) throws JSONException {
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {
@@ -30,7 +31,6 @@ public class UserGetNewReleases extends Common {
         }
         UserGetNewReleasesAnswer answer = new UserGetNewReleasesAnswer();
         answer.setStatus(errorToCode(status));
-        answer.setTextStatus(status);
         if (!status.equals("ok")) {
             return answer;
         }

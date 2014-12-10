@@ -1,14 +1,15 @@
-package com.dreamteam.androidproject.newapi.query;
+package com.dreamteam.androidproject.api.query;
 
 import com.dreamteam.androidproject.newapi.answer.AlbumGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.answer.TrackGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
+import com.dreamteam.androidproject.newapi.template.Common;
+import com.dreamteam.androidproject.newapi.template.ObjectList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.newapi.template.ObjectList;
 
 /**
  * Created by nap on 12/5/2014.
@@ -58,9 +59,9 @@ public class AlbumGetInfo extends Common {
         answer.setPlaycount(album.getString("playcount"));
         JSONObject tags = album.getJSONObject("toptags");
         JSONArray tag = tags.getJSONArray("tag");
-        TagGetInfoAnswer tagAnswer = new TagGetInfoAnswer();
         ObjectList<TagGetInfoAnswer> tagsList = new ObjectList<TagGetInfoAnswer>();
         for (int i = 0; i < tags.length(); i++) {
+            TagGetInfoAnswer tagAnswer = new TagGetInfoAnswer();
             tagAnswer.setName(tag.getJSONObject(i).getString("name"));
             tagAnswer.setUrl(tag.getJSONObject(i).getString("url"));
             tagsList.add(tagAnswer);
@@ -68,9 +69,10 @@ public class AlbumGetInfo extends Common {
         answer.setToptags(tagsList);
         JSONObject trackList = album.getJSONObject("tracks");
         JSONArray track = trackList.getJSONArray("track");
-        TrackGetInfoAnswer trackAnswer = new TrackGetInfoAnswer();
+
         ObjectList<TrackGetInfoAnswer> tracksList = new ObjectList<TrackGetInfoAnswer>();
         for (int i = 0; i < trackList.length(); i++) {
+            TrackGetInfoAnswer trackAnswer = new TrackGetInfoAnswer();
             trackAnswer.setName(track.getJSONObject(i).getString("name"));
             trackAnswer.setDuration(track.getJSONObject(i).getString("duration"));
             trackAnswer.setMbid(track.getJSONObject(i).getString("mbid"));

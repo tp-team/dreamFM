@@ -1,5 +1,7 @@
 package com.dreamteam.androidproject.api.query;
 
+import android.util.Log;
+
 import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
 import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
 import com.dreamteam.androidproject.newapi.connection.SecretData;
@@ -24,6 +26,7 @@ public class ArtistGetInfo extends Common {
 
     @Override
     protected ArtistGetInfoAnswer parse(String str) throws Exception {
+        Log.d("ARTIST", str);
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {

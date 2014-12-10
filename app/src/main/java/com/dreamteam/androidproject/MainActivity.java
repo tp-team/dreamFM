@@ -25,8 +25,12 @@ import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.components.User;
 import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
+import com.dreamteam.androidproject.storages.database.querys.NewReleasesQuery;
 import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -39,10 +43,9 @@ public class MainActivity extends BaseActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static String userFeedTag = "USER_FEED_TAG";
     private SharedPreferences mSharedPreferences;
-    RecommendedArtistsQuery db;
-    SimpleCursorAdapter scAdapter;
-
-    public final static String EXTRA_MESSAGE = "com.dreamteam.androidproject.MESSAGE";
+    RecommendedArtistsQuery artistsDB;
+    NewReleasesQuery releasesDB;
+    private Map<String, SimpleCursorAdapter> mAdapters;
 
     private User mUser;
 
@@ -52,6 +55,7 @@ public class MainActivity extends BaseActivity
      */
     private CharSequence mTitle;
     private int recommendArtistId = -1;
+    private int newReleasesId = -2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +65,21 @@ public class MainActivity extends BaseActivity
         String key = prefSystem.getText(AuthAnswer.KEY);
         Log.d("Tag_MAIN_ACTIVITY", key);
 
-        recommendArtistId = getServiceHelper().getRecommendedArtists("", "10", key);
-
-        mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES),
+        mUser = new User(prefSystem.getText(UserInfoAnswer.REALNAME), prefSystem.getText(UserInfoAnswer.NICKNAME), prefSystem.getText(UserInfoAnswer.USER_PHOTO_RES),
                 R.drawable.mail2, prefSystem.getText(UserInfoAnswer.PLAYS_COUNT), prefSystem.getText(UserInfoAnswer.REGISTERED));
+
+        mAdapters = new HashMap<String, SimpleCursorAdapter>();
+
+        recommendArtistId = getServiceHelper().getRecommendedArtists("1", "6", key);
+        newReleasesId = getServiceHelper().getNewReleases(mUser.getNickName());
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Log.d("ADDRESS", mSharedPreferences.getString("address", ""));
+
+        artistsDB = new RecommendedArtistsQuery(this);
+        artistsDB.open();
+        releasesDB = new NewReleasesQuery(this);
+        releasesDB.open();
 
         FragmentManager fragmentManager = getFragmentManager();
 
@@ -89,6 +101,8 @@ public class MainActivity extends BaseActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        getSupportLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(1, null, this);
     }
 
     @Override
@@ -210,23 +224,66 @@ public class MainActivity extends BaseActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle bndl) {
-        return new MyCursorLoader(this, db);
+        switch (id) {
+            case 0:
+                return new ArtistsCursorLoader(this, artistsDB);
+            case 1:
+                //return new ReleasesCursorLoader(this, releasesDB);
+        }
+        return null;
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        scAdapter.swapCursor(cursor);
+        switch (loader.getId()){
+            case 0:
+                mAdapters.get("artists").swapCursor(cursor);
+                break;
+            case 1:
+                //mAdapters.get("releases").swapCursor(cursor);
+                break;
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
     }
 
-    static class MyCursorLoader extends CursorLoader {
+    public void setCursorAdapter(String type, SimpleCursorAdapter adapter) {
+        mAdapters.put(type, adapter);
+    }
+
+    public SimpleCursorAdapter getCursorAdapter(String type) {
+        return mAdapters.get(type);
+    }
+
+    static class ArtistsCursorLoader extends CursorLoader {
 
         RecommendedArtistsQuery db;
 
-        public MyCursorLoader(Context context, RecommendedArtistsQuery db) {
+        public ArtistsCursorLoader(Context context, RecommendedArtistsQuery db) {
+            super(context);
+            this.db = db;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = db.getTable();
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return cursor;
+        }
+
+    }
+
+    static class ReleasesCursorLoader extends CursorLoader {
+
+        NewReleasesQuery db;
+
+        public ReleasesCursorLoader(Context context, NewReleasesQuery db) {
             super(context);
             this.db = db;
         }
