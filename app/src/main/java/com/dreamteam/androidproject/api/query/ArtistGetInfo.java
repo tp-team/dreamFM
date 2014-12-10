@@ -9,6 +9,7 @@ import com.dreamteam.androidproject.newapi.template.Common;
 import com.dreamteam.androidproject.api.template.ObjectList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -25,7 +26,7 @@ public class ArtistGetInfo extends Common {
     }
 
     @Override
-    protected ArtistGetInfoAnswer parse(String str) throws Exception {
+    protected ArtistGetInfoAnswer parse(String str) throws JSONException {
         Log.d("ARTIST", str);
         JSONObject obj = new JSONObject(str);
         String status = null;
@@ -36,6 +37,7 @@ public class ArtistGetInfo extends Common {
         }
         ArtistGetInfoAnswer answer = new ArtistGetInfoAnswer();
         answer.setStatus(errorToCode(status));
+        answer.setTextStatus(status);
         if (!status.equals("ok")) {
             return answer;
         }
@@ -57,9 +59,9 @@ public class ArtistGetInfo extends Common {
         answer.setPlays(stats.getString("playcount"));
         JSONObject similar = artist.getJSONObject("similar");
         JSONArray artistList = similar.getJSONArray("artist");
-        ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
         ObjectList<ArtistGetInfoAnswer> artistsList = new ObjectList<ArtistGetInfoAnswer>();
         for (int i = 0; i < artistList.length(); i++) {
+            ArtistGetInfoAnswer artistAnswer = new ArtistGetInfoAnswer();
             artistAnswer.setName(artistList.getJSONObject(i).getString("name"));
             artistAnswer.setUrl(artistList.getJSONObject(i).getString("url"));
             image = artistList.getJSONObject(i).getJSONArray("image");
@@ -74,9 +76,9 @@ public class ArtistGetInfo extends Common {
         answer.setSimilar(artistsList);
         JSONObject tags = artist.getJSONObject("tags");
         JSONArray tag = tags.getJSONArray("tag");
-        TagGetInfoAnswer tagAnswer = new TagGetInfoAnswer();
         ObjectList<TagGetInfoAnswer> tagsList = new ObjectList<TagGetInfoAnswer>();
         for (int i = 0; i < tags.length(); i++) {
+            TagGetInfoAnswer tagAnswer = new TagGetInfoAnswer();
             tagAnswer.setName(tag.getJSONObject(i).getString("name"));
             tagAnswer.setName(tag.getJSONObject(i).getString("url"));
             tagsList.add(tagAnswer);
