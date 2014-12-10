@@ -11,10 +11,12 @@ public class DataBase extends SQLiteOpenHelper {
 
     public static final String RECOMMEND_NAME_TABLE     = "RECOMMENDED_ARTISTS";
     public static final String RECOMMEND_COLUMN_NAME    = "ARTIST_NAME";
+    public static final String RECOMMEND_COLUMN_STREAMABLE = "RECOMMEND_COLUMN_STREAMABLE";
     public static final String RECOMMEND_COLUMN_URL_IMG = "URL_IMG";
     private String RECOMMEND_CREATE = "create table " + RECOMMEND_NAME_TABLE + " ("
                                       + COLUMN_ID + " integer primary key autoincrement,"
                                       + RECOMMEND_COLUMN_NAME + " text,"
+                                      + RECOMMEND_COLUMN_STREAMABLE + " text,"
                                       + RECOMMEND_COLUMN_URL_IMG + " text" + ");";
 
     public static final String NEW_RELEASES_NAME_TABLE     = "NEW_RELEASES";

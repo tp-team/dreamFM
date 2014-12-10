@@ -9,6 +9,7 @@ import com.dreamteam.androidproject.newapi.template.Common;
 import com.dreamteam.androidproject.api.template.ObjectList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.NoSuchAlgorithmException;
@@ -23,15 +24,23 @@ public class UserGetRecommendedArtists extends Common {
     private String sign;
     private String sessionKey;
 
-    public UserGetRecommendedArtists(String page, String limit, String sessionKey) throws NoSuchAlgorithmException {
+    public UserGetRecommendedArtists(String page, String limit, String sessionKey) {
         this.page = page;
         this.limit = limit;
-        this.sign = strToMD5("api_key" + SecretData.KEY + "limit" + this.limit +"methoduser.getRecommendedArtists" + "page" + this.page + "sk" + sessionKey + SecretData.SECRET);
         this.sessionKey = sessionKey;
+        if (this.limit.equals("0") || this.limit.equals("1")) {
+            this.limit = "2";
+        }
+        if (this.page.equals("0")) {
+            this.page = "1";
+        }
+        this.sign = strToMD5("api_key" + SecretData.KEY + "limit" +
+                this.limit +"methoduser.getRecommendedArtists" + "page" +
+                        this.page + "sk" + sessionKey + SecretData.SECRET);
     }
 
     @Override
-    protected UserGetRecommendedArtistsAnswer parse(String str) throws Exception {
+    protected UserGetRecommendedArtistsAnswer parse(String str) throws JSONException {
         Log.d("RECOMMENDATIONS", str);
         JSONObject obj = new JSONObject(str);
         String status = null;

@@ -26,10 +26,11 @@ public class RecommendedArtistsQuery extends InfoDB {
         if (table != null) table.close();
     }
 
-    public void insert(String name, String urlImg) {
+    public void insert(String name, String urlImg, String streamable) {
         ContentValues cv = new ContentValues();
         cv.put(DataBase.RECOMMEND_COLUMN_NAME, name);
         cv.put(DataBase.RECOMMEND_COLUMN_URL_IMG, urlImg);
+        cv.put(DataBase.RECOMMEND_COLUMN_STREAMABLE, streamable);
         db.insert(DataBase.RECOMMEND_NAME_TABLE, null, cv);
     }
 

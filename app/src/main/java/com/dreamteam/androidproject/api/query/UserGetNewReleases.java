@@ -46,10 +46,10 @@ public class UserGetNewReleases extends Common {
         }
         JSONArray image;
         JSONObject typeImage;
-        AlbumGetInfoAnswer album = new AlbumGetInfoAnswer();
         JSONObject artistObj;
         ObjectList<AlbumGetInfoAnswer> albumsList = new ObjectList<AlbumGetInfoAnswer>();
         for (int i = 0; i < list.length(); i++) {
+            AlbumGetInfoAnswer album = new AlbumGetInfoAnswer();
             album.setName(list.getJSONObject(i).getString("name"));
             album.setMbid(list.getJSONObject(i).getString("mbid"));
             album.setUrl(list.getJSONObject(i).getString("url"));

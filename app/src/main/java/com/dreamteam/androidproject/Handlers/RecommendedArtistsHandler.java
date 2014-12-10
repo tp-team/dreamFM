@@ -54,8 +54,9 @@ public class RecommendedArtistsHandler extends BaseCommand {
             ArtistGetInfoAnswer info = list.get(i);
             Log.d("TAAG_IIII", Integer.toString(i));
             Log.d("TAG_DATABASE", info.getName());
-            Log.d("TAG_DATABASE", info.getImageextralarge());
-            queryDB.insert(info.getName(), info.getImageextralarge());
+            Log.d("TAG_DATABASE", info.getImagelarge());
+            queryDB.insert(info.getName(), info.getImagelarge(), info.getStreamable());
+
         }
         queryDB.close();
 
