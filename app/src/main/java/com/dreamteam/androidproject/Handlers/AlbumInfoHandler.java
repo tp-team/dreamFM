@@ -7,22 +7,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ResultReceiver;
 
-import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
+import com.dreamteam.androidproject.api.answer.AlbumGetInfoAnswer;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
-import com.dreamteam.androidproject.api.query.ArtistGetInfo;
-import com.dreamteam.androidproject.api.query.Auth;
+import com.dreamteam.androidproject.api.query.AlbumGetInfo;
 
 
-public class ArtistInfoHandler extends BaseCommand {
+public class AlbumInfoHandler extends BaseCommand {
     private String artist;
+    private String album;
     private String username;
 
     @Override
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
         Bundle bun;
         try {
-            ArtistGetInfo artistGet = new ArtistGetInfo(username, artist);
-            ArtistGetInfoAnswer answer = artistGet.info();
+            AlbumGetInfo albumGet = new AlbumGetInfo(artist, album, username);
+            AlbumGetInfoAnswer answer = albumGet.info();
 
             /* база */
 
@@ -45,25 +45,29 @@ public class ArtistInfoHandler extends BaseCommand {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(username);
         parcel.writeString(artist);
+        parcel.writeString(album);
     }
 
-    public static final Parcelable.Creator<ArtistInfoHandler> CREATOR = new Parcelable.Creator<ArtistInfoHandler>() {
-        public ArtistInfoHandler createFromParcel(Parcel in) {
-            return new ArtistInfoHandler(in);
+    public static final Parcelable.Creator<AlbumInfoHandler> CREATOR = new Parcelable.Creator<AlbumInfoHandler>() {
+        public AlbumInfoHandler createFromParcel(Parcel in) {
+            return new AlbumInfoHandler(in);
         }
 
-        public ArtistInfoHandler[] newArray(int size) {
-            return new ArtistInfoHandler[size];
+        public AlbumInfoHandler[] newArray(int size) {
+            return new AlbumInfoHandler[size];
         }
     };
 
-    private ArtistInfoHandler(Parcel in) {
+    private AlbumInfoHandler(Parcel in) {
         username = in.readString();
         artist = in.readString();
+        album = in.readString();
     }
 
-    public ArtistInfoHandler(String username, String artist) {
+    public AlbumInfoHandler(String username, String artist, String album) {
+        this.album = album;
         this.artist = artist;
         this.username = username;
     }
+
 }

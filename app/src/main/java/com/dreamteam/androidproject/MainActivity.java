@@ -228,7 +228,7 @@ public class MainActivity extends BaseActivity
             case 0:
                 return new ArtistsCursorLoader(this, artistsDB);
             case 1:
-                //return new ReleasesCursorLoader(this, releasesDB);
+                return new ReleasesCursorLoader(this, releasesDB);
         }
         return null;
     }
@@ -240,7 +240,7 @@ public class MainActivity extends BaseActivity
                 mAdapters.get("artists").swapCursor(cursor);
                 break;
             case 1:
-                //mAdapters.get("releases").swapCursor(cursor);
+                mAdapters.get("releases").swapCursor(cursor);
                 break;
         }
     }

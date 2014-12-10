@@ -5,7 +5,8 @@
     android:id="@+id/scroll_feed"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/dark_grey">
 
     <LinearLayout
         android:orientation="vertical"

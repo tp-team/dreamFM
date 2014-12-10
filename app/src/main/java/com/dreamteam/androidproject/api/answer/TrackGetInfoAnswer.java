@@ -4,25 +4,25 @@ import android.os.Bundle;
 
 import com.dreamteam.androidproject.api.template.ObjectList;
 
-
-public class ArtistGetInfoAnswer {
-    public static String STATUS_ARTIST_INFO = "STATUS_ARTIST_INFO";
-    public static String TEXT_STATUS        = "TEXT_STATUS";
+/**
+ * Created by nap on 12/5/2014.
+ */
+public class TrackGetInfoAnswer {
+    public static String STATUS_TRACK_INFO = "STATUS_TRACK_INFO";
+    public static String TEXT_STATUS       = "TEXT_STATUS";
 
     private String status;
     private String textStatus;
+    private String id;
     private String name;
     private String mbid;
     private String url;
-    private String imagesmall;
-    private String imagemedium;
-    private String imagelarge;
-    private String imageextralarge;
-    private String imagemega;
+    private String duration;
     private String streamable;
     private String listeners;
     private String playcount;
-    private ObjectList<ArtistGetInfoAnswer> similar;
+    private ArtistGetInfoAnswer artist;
+    private AlbumGetInfoAnswer album;
     private ObjectList<TagGetInfoAnswer> tags;
     private String published;
     private String summary;
@@ -34,6 +34,14 @@ public class ArtistGetInfoAnswer {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,44 +68,12 @@ public class ArtistGetInfoAnswer {
         this.url = url;
     }
 
-    public String getImagesmall() {
-        return imagesmall;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setImagesmall(String imagesmall) {
-        this.imagesmall = imagesmall;
-    }
-
-    public String getImagemedium() {
-        return imagemedium;
-    }
-
-    public void setImagemedium(String imagemedium) {
-        this.imagemedium = imagemedium;
-    }
-
-    public String getImagelarge() {
-        return imagelarge;
-    }
-
-    public void setImagelarge(String imagelarge) {
-        this.imagelarge = imagelarge;
-    }
-
-    public String getImageextralarge() {
-        return imageextralarge;
-    }
-
-    public void setImageextralarge(String imageextralarge) {
-        this.imageextralarge = imageextralarge;
-    }
-
-    public String getImagemega() {
-        return imagemega;
-    }
-
-    public void setImagemega(String imagemega) {
-        this.imagemega = imagemega;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public String getStreamable() {
@@ -116,20 +92,28 @@ public class ArtistGetInfoAnswer {
         this.listeners = listeners;
     }
 
-    public String getPlays() {
+    public String getPlaycount() {
         return playcount;
     }
 
-    public void setPlays(String playcount) {
+    public void setPlaycount(String playcount) {
         this.playcount = playcount;
     }
 
-    public ObjectList<ArtistGetInfoAnswer> getSimilar() {
-        return similar;
+    public ArtistGetInfoAnswer getArtist() {
+        return artist;
     }
 
-    public void setSimilar(ObjectList<ArtistGetInfoAnswer> similar) {
-        this.similar = similar;
+    public void setArtist(ArtistGetInfoAnswer artist) {
+        this.artist = artist;
+    }
+
+    public AlbumGetInfoAnswer getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(AlbumGetInfoAnswer album) {
+        this.album = album;
     }
 
     public ObjectList<TagGetInfoAnswer> getTags() {
@@ -174,8 +158,10 @@ public class ArtistGetInfoAnswer {
 
     public Bundle getBundleObject() {
         Bundle bun = new Bundle();
-        bun.putString(STATUS_ARTIST_INFO, status);
+        bun.putString(STATUS_TRACK_INFO, status);
         bun.putString(TEXT_STATUS, textStatus);
         return bun;
     }
+
+
 }

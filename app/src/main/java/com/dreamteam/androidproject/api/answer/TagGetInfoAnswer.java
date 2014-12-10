@@ -1,11 +1,14 @@
 package com.dreamteam.androidproject.api.answer;
 
-/**
- * Created by nap on 12/4/2014.
- */
+import android.os.Bundle;
+
 
 public class TagGetInfoAnswer {
+    public static String STATUS_TAG_INFO = "STATUS_TAG_INFO";
+    public static String TEXT_STATUS     = "TEXT_STATUS";
+
     private String status;
+    private String textStatus;
     private String name;
     private String url;
     private String reach;
@@ -86,4 +89,21 @@ public class TagGetInfoAnswer {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getTextStatus() {
+        return textStatus;
+    }
+
+    public void setTextStatus(String textStatus) {
+        this.textStatus = textStatus;
+    }
+
+    public Bundle getBundleObject() {
+        Bundle bun = new Bundle();
+        bun.putString(STATUS_TAG_INFO, status);
+        bun.putString(TEXT_STATUS, textStatus);
+        return bun;
+    }
+
+
 }

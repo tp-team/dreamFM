@@ -1,14 +1,11 @@
 package com.dreamteam.androidproject.api.query;
 
 import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.connection.SecretData;
-import com.dreamteam.androidproject.newapi.template.Common;
-
+import com.dreamteam.androidproject.api.connection.SecretData;
+import com.dreamteam.androidproject.api.template.Common;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by nap on 12/4/2014.
- */
 
 public class TagGetInfo extends Common {
     private String tag;
@@ -18,7 +15,7 @@ public class TagGetInfo extends Common {
     }
 
     @Override
-    protected TagGetInfoAnswer parse(String str) throws Exception {
+    protected TagGetInfoAnswer parse(String str) throws JSONException {
         JSONObject obj = new JSONObject(str);
         String status = null;
         try {
@@ -28,6 +25,7 @@ public class TagGetInfo extends Common {
         }
         TagGetInfoAnswer answer = new TagGetInfoAnswer();
         answer.setStatus(errorToCode(status));
+        answer.setTextStatus(status);
         if (!status.equals("ok")) {
             return answer;
         }

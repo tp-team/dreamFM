@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ResultReceiver;
-
-import com.dreamteam.androidproject.api.answer.ArtistGetInfoAnswer;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
-import com.dreamteam.androidproject.api.query.ArtistGetInfo;
-import com.dreamteam.androidproject.api.query.Auth;
+import com.dreamteam.androidproject.api.answer.TrackGetInfoAnswer;
+import com.dreamteam.androidproject.api.query.TrackGetInfo;
 
 
-public class ArtistInfoHandler extends BaseCommand {
+public class TrackInfoHandler extends BaseCommand {
+    private String track;
     private String artist;
     private String username;
 
@@ -21,11 +20,10 @@ public class ArtistInfoHandler extends BaseCommand {
     protected void doExecute(Intent intent, Context context, ResultReceiver callback) {
         Bundle bun;
         try {
-            ArtistGetInfo artistGet = new ArtistGetInfo(username, artist);
-            ArtistGetInfoAnswer answer = artistGet.info();
+            TrackGetInfo trackGet = new TrackGetInfo(track, artist, username);
+            TrackGetInfoAnswer answer = trackGet.info();
 
             /* база */
-
 
             bun = answer.getBundleObject();
             notifySuccess(bun);
@@ -45,25 +43,29 @@ public class ArtistInfoHandler extends BaseCommand {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(username);
         parcel.writeString(artist);
+        parcel.writeString(track);
     }
 
-    public static final Parcelable.Creator<ArtistInfoHandler> CREATOR = new Parcelable.Creator<ArtistInfoHandler>() {
-        public ArtistInfoHandler createFromParcel(Parcel in) {
-            return new ArtistInfoHandler(in);
+    public static final Parcelable.Creator<TrackInfoHandler> CREATOR = new Parcelable.Creator<TrackInfoHandler>() {
+        public TrackInfoHandler createFromParcel(Parcel in) {
+            return new TrackInfoHandler(in);
         }
 
-        public ArtistInfoHandler[] newArray(int size) {
-            return new ArtistInfoHandler[size];
+        public TrackInfoHandler[] newArray(int size) {
+            return new TrackInfoHandler[size];
         }
     };
 
-    private ArtistInfoHandler(Parcel in) {
+    private TrackInfoHandler(Parcel in) {
         username = in.readString();
         artist = in.readString();
+        track = in.readString();
     }
 
-    public ArtistInfoHandler(String username, String artist) {
+    public TrackInfoHandler(String track, String artist, String username) {
         this.artist = artist;
+        this.track = track;
         this.username = username;
     }
+
 }

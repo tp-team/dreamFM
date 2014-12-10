@@ -1,11 +1,11 @@
 package com.dreamteam.androidproject.api.query;
 
-import com.dreamteam.androidproject.newapi.answer.AlbumGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.answer.TrackGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.connection.SecretData;
-import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.newapi.template.ObjectList;
+import com.dreamteam.androidproject.api.answer.AlbumGetInfoAnswer;
+import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
+import com.dreamteam.androidproject.api.answer.TrackGetInfoAnswer;
+import com.dreamteam.androidproject.api.connection.SecretData;
+import com.dreamteam.androidproject.api.template.Common;
+import com.dreamteam.androidproject.api.template.ObjectList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +37,7 @@ public class AlbumGetInfo extends Common {
         }
         AlbumGetInfoAnswer answer = new AlbumGetInfoAnswer();
         answer.setStatus(errorToCode(status));
+        answer.setTextStatus(status);
         if (!status.equals("ok")) {
             return answer;
         }

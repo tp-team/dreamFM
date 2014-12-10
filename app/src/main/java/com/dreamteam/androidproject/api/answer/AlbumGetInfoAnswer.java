@@ -1,12 +1,18 @@
 package com.dreamteam.androidproject.api.answer;
 
-import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.answer.TrackGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.template.ObjectList;
+import android.os.Bundle;
+
+import com.dreamteam.androidproject.api.answer.TagGetInfoAnswer;
+import com.dreamteam.androidproject.api.answer.TrackGetInfoAnswer;
+import com.dreamteam.androidproject.api.template.ObjectList;
 
 
 public class AlbumGetInfoAnswer {
+    public static String STATUS_ALBUM_INFO = "STATUS_ALBUM_INFO";
+    public static String TEXT_STATUS       = "TEXT_STATUS";
+
     private String status;
+    private String textStatus;
     private String name;
     private String artist;
     private String id;
@@ -18,7 +24,7 @@ public class AlbumGetInfoAnswer {
     private String imagelarge;
     private String listeners;
     private String playcount;
-    private ObjectList<com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer> toptags;
+    private ObjectList<TagGetInfoAnswer> toptags;
     private ObjectList<TrackGetInfoAnswer> tracks;
 
     public String getStatus() {
@@ -117,7 +123,7 @@ public class AlbumGetInfoAnswer {
         this.playcount = playcount;
     }
 
-    public ObjectList<com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer> getToptags() {
+    public ObjectList<TagGetInfoAnswer> getToptags() {
         return toptags;
     }
 
@@ -131,5 +137,20 @@ public class AlbumGetInfoAnswer {
 
     public void setTracks(ObjectList<TrackGetInfoAnswer> tracks) {
         this.tracks = tracks;
+    }
+
+    public String getTextStatus() {
+        return textStatus;
+    }
+
+    public void setTextStatus(String textStatus) {
+        this.textStatus = textStatus;
+    }
+
+    public Bundle getBundleObject() {
+        Bundle bun = new Bundle();
+        bun.putString(STATUS_ALBUM_INFO, status);
+        bun.putString(TEXT_STATUS, textStatus);
+        return bun;
     }
 }
