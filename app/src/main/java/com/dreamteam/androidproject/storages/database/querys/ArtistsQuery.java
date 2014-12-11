@@ -39,10 +39,11 @@ public class ArtistsQuery extends InfoDB {
     }
 
     public Cursor getRecommended() {
-        String [] columns = {DataBase.COLUMN_ID, DataBase.ARTISTS_COLUMN_NAME, DataBase.ARTISTS_COLUMN_URL_IMG};
-        String where = DataBase.ARTISTS_RECOMMENDED_FLAG + " = TRUE";
+        String[] columns = {DataBase.COLUMN_ID, DataBase.ARTISTS_COLUMN_NAME, DataBase.ARTISTS_COLUMN_URL_IMG};
+        String where = DataBase.ARTISTS_RECOMMENDED_FLAG + " = ?";
+        String[] selection_args = {"true"};
 
-        return db.query(DataBase.ARTISTS_NAME_TABLE, columns, where, null, null, null, null);
+        return db.query(DataBase.ARTISTS_NAME_TABLE, columns, where, selection_args, null, null, null);
     }
 
 }
