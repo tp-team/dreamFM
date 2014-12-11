@@ -23,8 +23,8 @@ public class UserGetRecommendedArtists extends Common {
         this.page = page;
         this.limit = limit;
         this.sessionKey = sessionKey;
-        if (this.limit.equals("0") || this.limit.equals("1")) {
-            this.limit = "2";
+        if (this.limit.equals("0")) {
+            this.limit = "1";
         }
         if (this.page.equals("0")) {
             this.page = "1";
@@ -47,7 +47,13 @@ public class UserGetRecommendedArtists extends Common {
             return answer;
         }
         JSONObject recommendations = obj.getJSONObject("recommendations");
-        JSONArray list = recommendations.getJSONArray("artist");
+        JSONArray list;
+        try {
+            list = recommendations.getJSONArray("artist");
+        } catch (JSONException e) {
+            list = new JSONArray();
+            list.put(0, recommendations.getJSONObject("artist"));
+        }
         JSONArray image;
         JSONObject typeImage;
         ObjectList<ArtistGetInfoAnswer> artistsList = new ObjectList<ArtistGetInfoAnswer>();

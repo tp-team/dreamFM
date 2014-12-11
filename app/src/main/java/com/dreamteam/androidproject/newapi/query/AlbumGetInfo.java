@@ -1,14 +1,14 @@
 package com.dreamteam.androidproject.newapi.query;
 
-import com.dreamteam.androidproject.newapi.answer.AlbumGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.answer.TagGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.answer.TrackGetInfoAnswer;
-import com.dreamteam.androidproject.newapi.connection.SecretData;
+import answer.AlbumGetInfoAnswer;
+import answer.TagGetInfoAnswer;
+import answer.TrackGetInfoAnswer;
+import connection.SecretData;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.dreamteam.androidproject.newapi.template.Common;
-import com.dreamteam.androidproject.newapi.template.ObjectList;
+import template.Common;
+import template.ObjectList;
 
 /**
  * Created by nap on 12/5/2014.
