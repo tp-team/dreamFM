@@ -36,7 +36,7 @@ public class MusicianCursorAdapter extends CursorAdapter {
         //musicianImage.setImageResource(si.getMusicianImageRes());
 
         TextView musicianName = (TextView) view.findViewById(R.id.musician_card_name);
-        musicianName.setText(cursor.getString(cursor.getColumnIndex(DataBase.RECOMMEND_COLUMN_NAME)));
+        musicianName.setText(cursor.getString(cursor.getColumnIndex(DataBase.ARTISTS_COLUMN_NAME)));
 
 //        ArrayList<Musician> similars = si.getSimilarMusicians();
 //        Musician similar1 = similars.get(0);

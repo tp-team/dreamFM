@@ -23,7 +23,7 @@ import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
 import com.dreamteam.androidproject.storages.database.DataBase;
-import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
+import com.dreamteam.androidproject.storages.database.querys.ArtistsQuery;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 public class ArtistsActivity extends GridActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private int recommendArtistId = -1;
-    private RecommendedArtistsQuery artistsDB;
+    private ArtistsQuery artistsDB;
     private SimpleCursorAdapter mAdapter;
     private PreferencesSystem mPrefSystem;
     private int myLastVisiblePos;
@@ -43,7 +43,7 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
         String key = mPrefSystem.getText(AuthAnswer.KEY);
 
         recommendArtistId = getServiceHelper().getRecommendedArtists("1", "10", key);
-        artistsDB = new RecommendedArtistsQuery(this);
+        artistsDB = new ArtistsQuery(this);
         artistsDB.open();
 
         getSupportLoaderManager().initLoader(0, null, this);
@@ -51,7 +51,7 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
 
     @Override
     protected void setGrid() {
-        String[] from = new String[] { DataBase.RECOMMEND_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
+        String[] from = new String[] { DataBase.ARTISTS_COLUMN_URL_IMG, DataBase.ARTISTS_COLUMN_NAME };
         int[] to = new int[] { R.id.musician_card_image, R.id.musician_card_name };
 
         if (mAdapter == null) {
@@ -142,16 +142,16 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
 
     static class ArtistsCursorLoader extends CursorLoader {
 
-        RecommendedArtistsQuery db;
+        ArtistsQuery db;
 
-        public ArtistsCursorLoader(Context context, RecommendedArtistsQuery db) {
+        public ArtistsCursorLoader(Context context, ArtistsQuery db) {
             super(context);
             this.db = db;
         }
 
         @Override
         public Cursor loadInBackground() {
-            Cursor cursor = db.getTable();
+            Cursor cursor = db.getRecommended();
             try {
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {

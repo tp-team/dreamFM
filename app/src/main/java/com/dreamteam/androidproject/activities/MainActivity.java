@@ -270,7 +270,7 @@ public class MainActivity extends BaseActivity
 
         @Override
         public Cursor loadInBackground() {
-            Cursor cursor = db.getTable();
+            Cursor cursor = db.getRecommended();
             try {
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
