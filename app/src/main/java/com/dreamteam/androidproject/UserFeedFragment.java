@@ -16,13 +16,14 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.dreamteam.androidproject.activities.GridActivity;
+import com.dreamteam.androidproject.activities.MainActivity;
+import com.dreamteam.androidproject.activities.gridActivities.ArtistsActivity;
 import com.dreamteam.androidproject.components.Album;
-import com.dreamteam.androidproject.components.AlbumAdapter;
 import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.components.Event;
 import com.dreamteam.androidproject.components.EventAdapter;
 import com.dreamteam.androidproject.components.Musician;
-import com.dreamteam.androidproject.components.MusicianAdapter;
 import com.dreamteam.androidproject.customViews.ExpandableHeightGridView;
 import com.dreamteam.androidproject.storages.database.DataBase;
 
@@ -61,7 +62,7 @@ public class UserFeedFragment extends Fragment {
         TextView sectionTitle = (TextView) musicView.findViewById(R.id.feed_section_title);
         sectionTitle.setText(R.string.feed_music);
 
-        setMoreButtonClickListener(musicView, "musician", getResources().getString(R.string.feed_music));
+        setMoreButtonClickListener(musicView, ArtistsActivity.class, getResources().getString(R.string.feed_music));
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
@@ -95,7 +96,7 @@ public class UserFeedFragment extends Fragment {
 
         View albumsView = mUserFeed.findViewById(R.id.feed_albums);
 
-        setMoreButtonClickListener(albumsView, "album", getResources().getString(R.string.feed_new_releases));
+        setMoreButtonClickListener(albumsView, ArtistsActivity.class, getResources().getString(R.string.feed_new_releases));
 
         TextView sectionTitle = (TextView) albumsView.findViewById(R.id.feed_section_title);
         sectionTitle.setText(R.string.feed_new_releases);
@@ -130,7 +131,7 @@ public class UserFeedFragment extends Fragment {
 
         View eventsView = mUserFeed.findViewById(R.id.feed_events_near_me);
 
-        setMoreButtonClickListener(eventsView, "event", getResources().getString(R.string.feed_upcoming_events));
+        setMoreButtonClickListener(eventsView, ArtistsActivity.class, getResources().getString(R.string.feed_upcoming_events));
 
         TextView sectionTitle = (TextView) eventsView.findViewById(R.id.feed_section_title);
         sectionTitle.setText(R.string.feed_upcoming_events);
@@ -159,15 +160,13 @@ public class UserFeedFragment extends Fragment {
         eventsGrid.setNumColumns(1);
     }
 
-    private void setMoreButtonClickListener(View v, String type, String title) {
+    private void setMoreButtonClickListener(View v, Class<?> cls, String title) {
         final Button moreButton = (Button) v.findViewById(R.id.action_button);
-        final String gridType = type;
         final String activityTitle = title;
+        final Class<?> gridClass = cls;
         moreButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GridActivity.class);
-
-                intent.putExtra("type", gridType);
+                Intent intent = new Intent(getActivity(), gridClass);
                 intent.putExtra("title", activityTitle);
                 getActivity().startActivity(intent);
             }

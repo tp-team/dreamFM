@@ -19,12 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.dreamteam.androidproject.activities.MainActivity;
+import com.dreamteam.androidproject.activities.UserProfileActivity;
 import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.components.EntryAdapter;
 import com.dreamteam.androidproject.components.EntryItem;

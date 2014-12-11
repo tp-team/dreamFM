@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -6,6 +6,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
+
+import com.dreamteam.androidproject.R;
 
 import java.util.List;
 

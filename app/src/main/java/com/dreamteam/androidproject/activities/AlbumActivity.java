@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dreamteam.androidproject.R;
 import com.dreamteam.androidproject.components.Album;
 import com.dreamteam.androidproject.components.Musician;
 

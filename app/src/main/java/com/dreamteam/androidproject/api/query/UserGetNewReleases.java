@@ -41,7 +41,6 @@ public class UserGetNewReleases extends Common {
             list = releases.getJSONArray("album");
         } catch (JSONException e) {
             list = new JSONArray();
-            Log.d("NEW RELEASES", "ZZZ");
             list.put(0, releases.getJSONObject("album"));
         }
         JSONArray image;

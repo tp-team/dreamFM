@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.app.Fragment;
 import android.content.Intent;

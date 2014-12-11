@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,15 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dreamteam.androidproject.R;
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
-import com.dreamteam.androidproject.api.query.Auth;
-import com.dreamteam.androidproject.api.query.UserInfo;
 import com.dreamteam.androidproject.handlers.AuthorizationHandler;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
-
-import java.net.Authenticator;
 
 
 public class AuthorizationActivity extends BaseActivity {

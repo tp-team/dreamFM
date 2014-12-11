@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dreamteam.androidproject.AlbumActivity;
+import com.dreamteam.androidproject.activities.AlbumActivity;
 import com.dreamteam.androidproject.R;
 
 public class AlbumAdapter extends ArrayAdapter<Album> {

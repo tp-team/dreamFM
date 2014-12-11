@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dreamteam.androidproject.R;
 import com.dreamteam.androidproject.components.Album;
 import com.dreamteam.androidproject.components.AlbumAdapter;
 import com.dreamteam.androidproject.components.Event;
@@ -25,17 +26,15 @@ import com.dreamteam.androidproject.customViews.NotifyingScrollView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class GridActivity extends Activity {
+public class GridActivity extends BaseActivity {
 
-    private String mType;
-    private GridView mGridView;
+    protected GridView mGridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        mType = intent.getStringExtra("type");
         String title = intent.getStringExtra("title");
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(title);
@@ -43,54 +42,10 @@ public class GridActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_grid);
-
         mGridView = (GridView) findViewById(R.id.grid_page);
-
-        setGrid();
-
     }
 
-    private void setGrid() {
-        if (mType.equals("musician")) {
-            setMusiciansGrid();
-        }
-        if (mType.equals("event")) {
-            setEventsGrid();
-        }
-        if (mType.equals("album")) {
-            setAlbumsGrid();
-        }
-        if (mType.equals("track")) {
-            setTracksGrid();
-        }
-    }
-
-    private void setMusiciansGrid() {
-        ArrayList<Musician> items = new ArrayList<Musician>();
-
-        Musician child1 = new Musician("Nigthwish", R.drawable.nightwish, null);
-        Musician child2 = new Musician("Epica", R.drawable.epica, null);
-        ArrayList<Musician> children = new ArrayList<Musician>();
-        children.add(child1);
-        children.add(child2);
-        Musician parent = new Musician("Evanescence", R.drawable.evanescence, children);
-        ArrayList<Musician> children2 = new ArrayList<Musician>();
-        children2.add(parent);
-        children2.add(child1);
-        Musician parent2 = new Musician("Epica", R.drawable.epica, children2);
-
-        items.add(parent);
-        items.add(parent2);
-        items.add(parent2);
-        items.add(parent);
-        items.add(parent);
-        items.add(parent2);
-        items.add(parent2);
-        items.add(parent);
-
-        MusicianAdapter adapter = new MusicianAdapter(getActionBar().getThemedContext(), items);
-        //musicList = items;
-        mGridView.setAdapter(adapter);
+    protected void setGrid() {
     }
 
     private void setEventsGrid() {

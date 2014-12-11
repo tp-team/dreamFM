@@ -12,7 +12,7 @@
         android:icon="@drawable/img_login_logo"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".AuthorizationActivity"
+            android:name=".activities.AuthorizationActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -22,39 +22,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:logo="@drawable/ic_app_logo_big"
             android:label="@string/app_name"
             android:configChanges="orientation|screenSize">
         </activity>
         <activity
-            android:name=".MusicianActivity"
+            android:name=".activities.MusicianActivity"
             android:theme="@style/AppTheme.ActionBar.Overlay"
             android:logo="@drawable/ic_app_logo_small"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".activities.UserProfileActivity"
             android:theme="@style/AppTheme.ActionBar.Overlay"
             android:logo="@drawable/ic_app_logo_small"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".AlbumActivity"
+            android:name=".activities.AlbumActivity"
             android:logo="@drawable/ic_app_logo_small"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".GridActivity"
+            android:name=".activities.GridActivity"
             android:logo="@drawable/ic_app_logo_small"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".PreferencesActivity"
+            android:name=".activities.gridActivities.ArtistsActivity"
+            android:logo="@drawable/ic_app_logo_small"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".activities.PreferencesActivity"
             android:logo="@drawable/ic_app_logo_big"
             android:label="@string/app_name" >
         </activity>

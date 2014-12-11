@@ -1,21 +1,17 @@
 package com.dreamteam.androidproject.components;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dreamteam.androidproject.MainActivity;
-import com.dreamteam.androidproject.MusicianActivity;
+import com.dreamteam.androidproject.activities.MusicianActivity;
 import com.dreamteam.androidproject.R;
 
 public class MusicianAdapter extends ArrayAdapter<Musician> {

@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.app.ActionBar;
 import android.app.FragmentManager;
@@ -18,6 +18,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.Toast;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 
+import com.dreamteam.androidproject.NavigationDrawerFragment;
+import com.dreamteam.androidproject.R;
+import com.dreamteam.androidproject.UserFeedFragment;
 import com.dreamteam.androidproject.api.answer.AuthAnswer;
 import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.api.answer.UserInfoAnswer;
@@ -28,7 +31,6 @@ import com.dreamteam.androidproject.storages.PreferencesSystem;
 import com.dreamteam.androidproject.storages.database.querys.NewReleasesQuery;
 import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

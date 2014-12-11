@@ -1,4 +1,4 @@
-package com.dreamteam.androidproject;
+package com.dreamteam.androidproject.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dreamteam.androidproject.R;
 import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.components.Event;
 import com.dreamteam.androidproject.components.EventAdapter;
