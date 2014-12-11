@@ -2,18 +2,15 @@ package com.dreamteam.androidproject.storages.database.querys;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-
 import com.dreamteam.androidproject.storages.database.DataBase;
 import com.dreamteam.androidproject.storages.database.InfoDB;
 
 
-public class RecommendedArtistsQuery extends InfoDB {
-
+public class SimilarQuery extends InfoDB {
     private DataBase table;
     private final Context ctx;
 
-    public RecommendedArtistsQuery(Context ctx) {
+    public SimilarQuery(Context ctx) {
         this.ctx = ctx;
         table = new DataBase(this.ctx, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -26,16 +23,12 @@ public class RecommendedArtistsQuery extends InfoDB {
         if (table != null) table.close();
     }
 
-    public void insert(String name, String urlImg, String streamable) {
+    public long insert(long idArtist, long idSimilar) {
         ContentValues cv = new ContentValues();
-        cv.put(DataBase.RECOMMEND_COLUMN_NAME, name);
-        cv.put(DataBase.RECOMMEND_COLUMN_URL_IMG, urlImg);
-        cv.put(DataBase.RECOMMEND_COLUMN_STREAMABLE, streamable);
-        db.insert(DataBase.RECOMMEND_NAME_TABLE, null, cv);
+        cv.put(DataBase.SIMILAR_COLUMN_ID_ARTIST, idArtist);
+        cv.put(DataBase.SIMILAR_COLUMN_ID_SIMILAR, idSimilar);
+        return db.insert(DataBase.ARTISTS_NAME_TABLE, null, cv);
     }
 
-    public Cursor getTable() {
-        return db.query(DataBase.RECOMMEND_NAME_TABLE, null, null, null, null, null, null);
-    }
 
 }

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.dreamteam.androidproject.R;
 import com.dreamteam.androidproject.storages.database.DataBase;
-import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
 
 public class MusicianCursorAdapter extends CursorAdapter {
@@ -33,7 +32,7 @@ public class MusicianCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         //ImageView musicianImage = (ImageView) view.findViewById(R.id.musician_card_image);
-        new DownloadImageTask((ImageView) view.findViewById(R.id.musician_card_image)).execute(cursor.getString(cursor.getColumnIndex(DataBase.RECOMMEND_COLUMN_URL_IMG)));
+        new DownloadImageTask((ImageView) view.findViewById(R.id.musician_card_image)).execute(cursor.getString(cursor.getColumnIndex(DataBase.ARTISTS_COLUMN_URL_IMG)));
         //musicianImage.setImageResource(si.getMusicianImageRes());
 
         TextView musicianName = (TextView) view.findViewById(R.id.musician_card_name);

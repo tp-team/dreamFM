@@ -17,12 +17,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.dreamteam.androidproject.components.Album;
-import com.dreamteam.androidproject.components.AlbumAdapter;
 import com.dreamteam.androidproject.components.DownloadImageTask;
 import com.dreamteam.androidproject.components.Event;
 import com.dreamteam.androidproject.components.EventAdapter;
 import com.dreamteam.androidproject.components.Musician;
-import com.dreamteam.androidproject.components.MusicianAdapter;
 import com.dreamteam.androidproject.customViews.ExpandableHeightGridView;
 import com.dreamteam.androidproject.storages.database.DataBase;
 
@@ -65,7 +63,7 @@ public class UserFeedFragment extends Fragment {
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
-        String[] from = new String[] { DataBase.RECOMMEND_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
+        String[] from = new String[] { DataBase.ARTISTS_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
         int[] to = new int[] { R.id.musician_card_image, R.id.musician_card_name };
 
         if (mActivity.getCursorAdapter("artists") == null) {
