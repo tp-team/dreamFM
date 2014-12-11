@@ -14,8 +14,7 @@ import com.dreamteam.androidproject.api.answer.UserGetRecommendedArtistsAnswer;
 import com.dreamteam.androidproject.api.query.UserGetRecommendedArtists;
 import com.dreamteam.androidproject.api.template.ObjectList;
 
-import com.dreamteam.androidproject.storages.database.DataBase;
-import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
+import com.dreamteam.androidproject.storages.database.querys.ArtistsQuery;
 
 public class RecommendedArtistsHandler extends BaseCommand {
     private String key;
@@ -47,7 +46,7 @@ public class RecommendedArtistsHandler extends BaseCommand {
 
 
     public void setInDataBase(ObjectList<ArtistGetInfoAnswer> list, Context context) {
-        RecommendedArtistsQuery queryDB = new RecommendedArtistsQuery(context);
+        ArtistsQuery queryDB = new ArtistsQuery(context);
         queryDB.open();
 
         for (int i = 0; i < list.getLength(); ++i) {
@@ -55,8 +54,7 @@ public class RecommendedArtistsHandler extends BaseCommand {
             Log.d("TAAG_IIII", Integer.toString(i));
             Log.d("TAG_DATABASE", info.getName());
             Log.d("TAG_DATABASE", info.getImagelarge());
-            queryDB.insert(info.getName(), info.getImagelarge(), info.getStreamable());
-
+            queryDB.insert(info.getName(), info.getImagelarge(), info.getStreamable(), true, null, null, null);
         }
         queryDB.close();
 

@@ -66,7 +66,7 @@ public class UserFeedFragment extends Fragment {
 
         ExpandableHeightGridView musiciansGrid = (ExpandableHeightGridView) musicView.findViewById(R.id.feed_grid);
 
-        String[] from = new String[] { DataBase.RECOMMEND_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
+        String[] from = new String[] { DataBase.ARTISTS_COLUMN_URL_IMG, DataBase.RECOMMEND_COLUMN_NAME };
         int[] to = new int[] { R.id.musician_card_image, R.id.musician_card_name };
 
         if (mActivity.getCursorAdapter("artists") == null) {

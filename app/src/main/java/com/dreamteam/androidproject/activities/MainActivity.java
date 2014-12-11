@@ -28,8 +28,8 @@ import com.dreamteam.androidproject.api.template.Common;
 import com.dreamteam.androidproject.components.User;
 import com.dreamteam.androidproject.handlers.BaseCommand;
 import com.dreamteam.androidproject.storages.PreferencesSystem;
+import com.dreamteam.androidproject.storages.database.querys.ArtistsQuery;
 import com.dreamteam.androidproject.storages.database.querys.NewReleasesQuery;
-import com.dreamteam.androidproject.storages.database.querys.RecommendedArtistsQuery;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     static String userFeedTag = "USER_FEED_TAG";
     private SharedPreferences mSharedPreferences;
-    RecommendedArtistsQuery artistsDB;
+    ArtistsQuery artistsDB;
     NewReleasesQuery releasesDB;
     private Map<String, SimpleCursorAdapter> mAdapters;
 
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Log.d("ADDRESS", mSharedPreferences.getString("address", ""));
 
-        artistsDB = new RecommendedArtistsQuery(this);
+        artistsDB = new ArtistsQuery(this);
         artistsDB.open();
         releasesDB = new NewReleasesQuery(this);
         releasesDB.open();
@@ -261,9 +261,9 @@ public class MainActivity extends BaseActivity
 
     static class ArtistsCursorLoader extends CursorLoader {
 
-        RecommendedArtistsQuery db;
+        ArtistsQuery db;
 
-        public ArtistsCursorLoader(Context context, RecommendedArtistsQuery db) {
+        public ArtistsCursorLoader(Context context, ArtistsQuery db) {
             super(context);
             this.db = db;
         }
