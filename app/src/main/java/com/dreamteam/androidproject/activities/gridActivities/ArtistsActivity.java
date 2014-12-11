@@ -34,15 +34,19 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
     private ArtistsQuery artistsDB;
     private SimpleCursorAdapter mAdapter;
     private PreferencesSystem mPrefSystem;
+    private String mKey;
     private int myLastVisiblePos;
+    private int mElementsCount = -1;
+    private int mPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPrefSystem = new PreferencesSystem(getApplicationContext());
-        String key = mPrefSystem.getText(AuthAnswer.KEY);
+        mKey = mPrefSystem.getText(AuthAnswer.KEY);
 
-        recommendArtistId = getServiceHelper().getRecommendedArtists("1", "10", key);
+        recommendArtistId = getServiceHelper().getRecommendedArtists(Integer.toString(mPage), "10", mKey);
+        mPage++;
         artistsDB = new ArtistsQuery(this);
         artistsDB.open();
 
@@ -63,6 +67,7 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
                 @Override
                 public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                     if (view.getId() == R.id.musician_card_image) {
+                        
                         ImageView v = (ImageView) view;
                         new DownloadImageTask(v).execute(cursor.getString(columnIndex));
                         return true;
@@ -79,14 +84,11 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
-                int currentFirstVisPos = view.getFirstVisiblePosition();
-                if(currentFirstVisPos > myLastVisiblePos) {
-                    Log.d("ARTISTS ACTIVITY", "SCROLL DOWN");
+                int currentLastVisPos = view.getLastVisiblePosition();
+                if (mElementsCount != -1 && currentLastVisPos == mElementsCount - 1) {
+                    recommendArtistId = getServiceHelper().getRecommendedArtists(Integer.toString(mPage), "10", mKey);
+                    mPage++;
                 }
-                if(currentFirstVisPos < myLastVisiblePos) {
-                    Log.d("ARTISTS ACTIVITY", "SCROLL UP");
-                }
-                myLastVisiblePos = currentFirstVisPos;
             }
 
             @Override
@@ -111,6 +113,9 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
             case BaseCommand.RESPONSE_SUCCESS: {
                 String status = resultData.getString(UserGetRecommendedArtistsAnswer.STATUS_RECOMMENDED_ARTISTS);
                 if (status.equals(Common.STATUS_OK)) {
+//                    if (mAdapter != null) {
+//                        mAdapter.notifyDataSetChanged();
+//                    }
                     setGrid();
                 }
                 else {
@@ -133,6 +138,7 @@ public class ArtistsActivity extends GridActivity implements LoaderManager.Loade
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        mElementsCount = cursor.getCount();
         mAdapter.swapCursor(cursor);
     }
 
