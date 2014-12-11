@@ -54,6 +54,7 @@ public class DataBase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ARTISTS_CREATE);
+        db.execSQL(SIMILAR_CREATE);
         db.execSQL(NEW_RELEASES_CREATE);
     }
 

@@ -28,7 +28,7 @@ public class ArtistsQuery extends InfoDB {
     public long insert(String name, String urlImg, String streamable, boolean recommFlag,
                        String published, String summary, String content) {
         ContentValues cv = new ContentValues();
-        cv.put(DataBase.ARTISTS_COLUMN_CONTENT, name);
+        cv.put(DataBase.ARTISTS_COLUMN_NAME, name);
         cv.put(DataBase.ARTISTS_COLUMN_URL_IMG, urlImg);
         cv.put(DataBase.ARTISTS_COLUMN_STREAMABLE, streamable);
         cv.put(DataBase.ARTISTS_RECOMMENDED_FLAG, recommFlag);
@@ -39,10 +39,11 @@ public class ArtistsQuery extends InfoDB {
     }
 
     public Cursor getRecommended() {
-        String [] columns = {DataBase.ARTISTS_COLUMN_NAME, DataBase.ARTISTS_COLUMN_URL_IMG};
-        String where = DataBase.ARTISTS_RECOMMENDED_FLAG + " = true";
+        String[] columns = {DataBase.COLUMN_ID, DataBase.ARTISTS_COLUMN_NAME, DataBase.ARTISTS_COLUMN_URL_IMG};
+        String where = DataBase.ARTISTS_RECOMMENDED_FLAG + " = ?";
+        String[] selection_args = {"TRUE"};
 
-        return db.query(DataBase.ARTISTS_NAME_TABLE, columns, where, null, null, null, null);
+        return db.query(DataBase.ARTISTS_NAME_TABLE, columns, where, selection_args, null, null, null);
     }
 
 }
