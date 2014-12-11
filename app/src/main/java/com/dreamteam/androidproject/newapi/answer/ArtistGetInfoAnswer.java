@@ -2,8 +2,6 @@ package com.dreamteam.androidproject.newapi.answer;
 
 import com.dreamteam.androidproject.newapi.template.ObjectList;
 
-import java.util.ArrayList;
-
 /**
  * Created by nap on 12/4/2014.
  */
